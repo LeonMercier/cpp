@@ -6,13 +6,14 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:56:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/15 16:17:36 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:53:47 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>
 
 std::string	find_and_replace(std::string line, std::string to_find,
 							 std::string replacement)
@@ -32,13 +33,33 @@ std::string	find_and_replace(std::string line, std::string to_find,
 	return (line);
 }
 
-// TODO: handle replacing null terminator
+void	open_files(std::string filename, std::ifstream &instream,
+				std::ofstream &outstream)
+{
+	instream.open(filename.c_str());
+	if (!instream.is_open())
+	{
+		std::cout << "Error: could not open ";
+		std::cout << "'" << filename << "'" << std::endl;
+		std::exit(1);
+	}
+	outstream.open((filename + ".replace").c_str());
+	if (!outstream.is_open())
+	{
+		std::cout << "Error: could not open ";
+		std::cout << "'" << filename << ".replace" << "'" << std::endl;
+		std::exit(1);
+	}
+}
+
 int	main(int argc, char **argv)
 {
-	std::string	filename;
-	std::string	line;
+	std::string		filename;
+	std::string		line;
 	std::ifstream	instream;
 	std::ofstream	outstream;
+	std::string		to_find;
+	std::string		replacement;
 
 	if (argc != 4)
 	{
@@ -46,23 +67,16 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	filename = argv[1];
-	instream.open(filename.c_str());
-	if (!instream.is_open())
+	to_find = argv[2];
+	replacement = argv[3];
+	open_files(filename, instream, outstream);
+	if (to_find.length() == 0)
 	{
-		std::cout << "Error: could not open ";
-		std::cout << "'" << filename << "'" << std::endl;
-		return (1);
-	}
-	outstream.open((filename + ".replace").c_str());
-	if (!outstream.is_open())
-	{
-		std::cout << "Error: could not open ";
-		std::cout << "'" << filename << ".replace" << "'" << std::endl;
-		return (1);
+		return (0);
 	}
 	while (getline(instream, line))
 	{
-		outstream << find_and_replace(line, argv[2], argv[3]);
+		outstream << find_and_replace(line, to_find, replacement);
 		outstream << '\n';
 	}
 }
