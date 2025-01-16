@@ -6,13 +6,12 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/13 18:54:39 by lemercie         ###   ########.fr        #
+#    Updated: 2025/01/16 16:25:10 by leon             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX 		= c++
-CXXFLAGS 	= -Wall -Wextra -Werror
-DEBUGFLAGS 	= -g
+CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
 
 SRCS		= main.cpp Contact.cpp PhoneBook.cpp
 OBJS		= $(SRCS:.cpp=.o)

@@ -6,13 +6,12 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/15 16:22:45 by lemercie         ###   ########.fr        #
+#    Updated: 2025/01/16 16:28:45 by leon             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX 		= c++
-CXXFLAGS 	= -Wall -Wextra -Werror -std=c++98 -g
-DEBUGFLAGS 	= -g
+CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
 
 SRCS		= main.cpp
 HEADERS		= 
