@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:50:07 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/15 14:43:24 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:45:13 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ private:
 	Weapon		*_wpn;
 public:
 	HumanB(std::string name);
-	void	setWeapon(Weapon &wpn);
-	void	attack(void);
+	void	SetWeapon(Weapon &wpn);
+	void	Attack(void);
 };
 #endif

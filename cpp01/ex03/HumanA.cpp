@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 12:30:12 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/15 14:29:43 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:48:08 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 // constructor initializer list has to be used when member is a reference
 HumanA::HumanA(std::string name, Weapon &wpn) : _wpn(wpn), _name(name) {}
 
-void HumanA::attack(void)
+void HumanA::Attack(void)
 {
 	std::cout << _name << " attacks with their ";
-	std::cout << _wpn.get_type() << std::endl;
+	std::cout << _wpn.GetType() << std::endl;
 }

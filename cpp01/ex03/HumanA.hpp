@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 12:30:38 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/15 14:19:19 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:45:56 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ private:
 	std::string _name;
 public:
 	HumanA(std::string name, Weapon &wpn);
-	void attack(void);
+	void Attack(void);
 };
 #endif

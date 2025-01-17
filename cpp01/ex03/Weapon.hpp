@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 12:19:40 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/15 13:54:17 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:46:40 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ private:
 public:
 	Weapon();
 	Weapon(std::string name);
-	const std::string	&get_type(void);
-	void		setType(std::string type);
+	const std::string	&GetType(void);
+	void		SetType(std::string type);
 };
 #endif
