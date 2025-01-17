@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 09:24:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/14 14:53:25 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:24:24 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ Account::~Account( void )
 {
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";";
-	std::cout << "p_amount:" << _amount << ";";
+	std::cout << "amount:" << _amount << ";";
 	std::cout << "closed" << std::endl;
 }
 
@@ -91,6 +91,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 		_amount -= withdrawal;
 		_totalAmount -= withdrawal;
 		_nbWithdrawals++;
+		_totalNbWithdrawals++;
 		std::cout << "amount:" << _amount << ";";
 		std::cout << "nb_withdrawals:" << _nbWithdrawals << std::endl;
 		return true;
