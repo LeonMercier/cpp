@@ -6,18 +6,18 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:22:47 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/14 15:39:12 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/17 14:27:10 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie* newZombie( std::string name );
-void randomChump( std::string name );
+Zombie* new_zombie( std::string name );
+void random_chump( std::string name );
 
 int	main(void)
 {
-	Zombie	*liz = newZombie("Liz");
-	randomChump("Bob");
+	Zombie	*liz = new_zombie("Liz");
+	random_chump("Bob");
 	delete liz;
 }
