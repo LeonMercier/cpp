@@ -6,7 +6,7 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/16 16:29:13 by leon             ###   ########.fr        #
+#    Updated: 2025/01/17 14:21:51 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,10 @@ $(NAME): $(OBJS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean: 
-	rm $(OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
