@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:16:48 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/15 14:34:32 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:51:09 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ private:
 public:
 	Zombie(void);
 	Zombie(std::string name);
-	void	announce(void);
-	void	set_name(std::string name);
+	void	Announce(void);
+	void	SetName(std::string name);
 	~Zombie(void);
 };
 #endif
