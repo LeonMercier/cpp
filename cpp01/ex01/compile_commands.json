@@ -1,0 +1,47 @@
+[
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "main.cpp",
+   "-o",
+   "main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "Zombie.cpp",
+   "-o",
+   "Zombie.o"
+  ],
+  "file": "Zombie.cpp"
+ },
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "zombieHorde.cpp",
+   "-o",
+   "zombieHorde.o"
+  ],
+  "file": "zombieHorde.cpp"
+ }
+]

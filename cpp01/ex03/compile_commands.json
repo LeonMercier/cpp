@@ -1,0 +1,62 @@
+[
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "main.cpp",
+   "-o",
+   "main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "Weapon.cpp",
+   "-o",
+   "Weapon.o"
+  ],
+  "file": "Weapon.cpp"
+ },
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "HumanA.cpp",
+   "-o",
+   "HumanA.o"
+  ],
+  "file": "HumanA.cpp"
+ },
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "HumanB.cpp",
+   "-o",
+   "HumanB.o"
+  ],
+  "file": "HumanB.cpp"
+ }
+]

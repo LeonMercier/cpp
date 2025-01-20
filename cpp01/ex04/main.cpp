@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:56:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/15 16:53:47 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:00:46 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <string>
 #include <cstdlib>
 
-std::string	find_and_replace(std::string line, std::string to_find,
+std::string	findAndReplace(std::string line, std::string to_find,
 							 std::string replacement)
 {
 	size_t	pos = 0;
@@ -33,7 +33,7 @@ std::string	find_and_replace(std::string line, std::string to_find,
 	return (line);
 }
 
-void	open_files(std::string filename, std::ifstream &instream,
+void	openFiles(std::string filename, std::ifstream &instream,
 				std::ofstream &outstream)
 {
 	instream.open(filename.c_str());
@@ -69,14 +69,14 @@ int	main(int argc, char **argv)
 	filename = argv[1];
 	to_find = argv[2];
 	replacement = argv[3];
-	open_files(filename, instream, outstream);
+	openFiles(filename, instream, outstream);
 	if (to_find.length() == 0)
 	{
 		return (0);
 	}
 	while (getline(instream, line))
 	{
-		outstream << find_and_replace(line, to_find, replacement);
+		outstream << findAndReplace(line, to_find, replacement);
 		outstream << '\n';
 	}
 }

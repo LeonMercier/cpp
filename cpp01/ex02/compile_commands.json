@@ -1,0 +1,17 @@
+[
+ {
+  "directory": "/home/lemercie/projects/cpp/repo/cpp01/ex02",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "main.cpp",
+   "-o",
+   "main.o"
+  ],
+  "file": "main.cpp"
+ }
+]

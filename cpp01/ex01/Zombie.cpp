@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:16:15 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/17 16:51:23 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/20 10:52:00 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ Zombie::~Zombie(void)
 	std::cout << "Destroying " << _name << std::endl;
 }
 
-void	Zombie::Announce(void)
+void	Zombie::announce(void)
 {
 	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-void	Zombie::SetName(std::string name)
+void	Zombie::setName(std::string name)
 {
 	_name = name;
 }
