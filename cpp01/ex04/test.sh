@@ -6,11 +6,66 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 12:06:19 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/20 12:12:21 by lemercie         ###   ########.fr        #
+#    Updated: 2025/01/20 15:20:50 by leon             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/bash
 
-./seddy file.txt A B
-sed 's/A/B/g' file.txt > real_sed.txt
+infile=./file.txt
+outfile1=file.txt.replace
+outfile2=sed_out.txt
+
+# replaces chars just like sed
+printf "TEST 1\n"
+./seddy $infile a B
+sed 's/a/B/g' $infile > $outfile2
+if cmp -s $outfile1 $outfile2; then
+	printf "yay\n"
+else
+	printf "nay\n"
+fi
+rm -f $outfile1 $outfile2
+
+# if string1 is an empty string, do nothing
+printf "TEST 2\n"
+./seddy $infile "" B
+if [ -e $outfile1 ]; then
+	printf "nay\n"
+else
+	printf "yay\n"
+fi
+rm -f $outfile1 $outfile2
+
+# replace with nothing
+printf "TEST 3\n"
+./seddy $infile "a" ""
+sed 's/a//g' $infile > $outfile2
+if cmp -s $outfile1 $outfile2; then
+	printf "yay\n"
+else
+	printf "nay\n"
+fi
+rm -f $outfile1 $outfile2
+
+# replace with a string containing space
+printf "TEST 4\n"
+./seddy $infile a "Baba yaya"
+sed 's/a/Baba yaya/g' $infile > $outfile2
+if cmp -s $outfile1 $outfile2; then
+	printf "yay\n"
+else
+	printf "nay\n"
+fi
+rm -f $outfile1 $outfile2
+
+# replace with space
+printf "TEST 5\n"
+./seddy $infile asd " "
+sed 's/asd/ /g' $infile > $outfile2
+if cmp -s $outfile1 $outfile2; then
+	printf "yay\n"
+else
+	printf "nay\n"
+fi
+rm -f $outfile1 $outfile2

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:56:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/20 11:00:46 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:23:48 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ int	main(int argc, char **argv)
 	filename = argv[1];
 	to_find = argv[2];
 	replacement = argv[3];
-	openFiles(filename, instream, outstream);
 	if (to_find.length() == 0)
 	{
+		std::cout << "nothing to replace" << std::endl;
 		return (0);
 	}
+	openFiles(filename, instream, outstream);
 	while (getline(instream, line))
 	{
 		outstream << findAndReplace(line, to_find, replacement);
