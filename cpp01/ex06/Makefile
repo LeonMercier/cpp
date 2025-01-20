@@ -6,12 +6,12 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/17 14:03:58 by lemercie         ###   ########.fr        #
+#    Updated: 2025/01/20 17:07:12 by leon             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX 		= c++
-CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
+CXXFLAGS 	= -Wall -Wextra -Werror -std=c++17
 
 SRCS		= main.cpp Harl.cpp
 HEADERS		= Harl.hpp

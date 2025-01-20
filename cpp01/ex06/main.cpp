@@ -6,11 +6,23 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:29:09 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/16 15:08:27 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:13:12 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
+
+int	getLevelIndex(Harl hrl, std::string str)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (str == hrl.lvl_names[i])
+		{
+			return (i);
+		}
+	}
+	return (-1);
+}
 
 int	main(int argc, char **argv)
 {
@@ -21,36 +33,22 @@ int	main(int argc, char **argv)
 	}
 
 	Harl harlie;
-	int	level = -1;
-	for (int i = 0; i < 4; i++)
-	{
-		if (std::stoi(argv[1]) == i)
-		{
-			level = i;
-		}
-	}
-	switch (level)
+	switch (getLevelIndex(harlie, argv[1]))
 	{
 		case 0:
 		{
 			harlie.complain("DEBUG");
-			harlie.complain("INFO");
-			harlie.complain("WARNING");
-			harlie.complain("ERROR");
-			break ;
+				[[fallthrough]];
 		}
 		case 1:
 		{
 			harlie.complain("INFO");
-			harlie.complain("WARNING");
-			harlie.complain("ERROR");
-			break ;
+				[[fallthrough]];
 		}
 		case 2:
 		{
 			harlie.complain("WARNING");
-			harlie.complain("ERROR");
-			break ;
+				[[fallthrough]];
 		}
 		case 3:
 		{
@@ -59,7 +57,8 @@ int	main(int argc, char **argv)
 		}
 		default:
 		{
-			std::cout << "Error: invalid level" << std::endl;
+			std::cout << "[ Probably complaining about insignificant problems ]";
+			std::cout << std::endl;
 		}
 	}
 }
