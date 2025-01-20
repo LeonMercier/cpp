@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:29:09 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/20 17:13:12 by leon             ###   ########.fr       */
+/*   Updated: 2025/01/20 17:18:24 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,30 @@ int	main(int argc, char **argv)
 	{
 		case 0:
 		{
+			std::cout << "[ DEBUG ]" << std::endl;
 			harlie.complain("DEBUG");
+			std::cout << std::endl;
 				[[fallthrough]];
 		}
 		case 1:
 		{
+			std::cout << "[ INFO ]" << std::endl;
 			harlie.complain("INFO");
+			std::cout << std::endl;
 				[[fallthrough]];
 		}
 		case 2:
 		{
+			std::cout << "[ WARNING ]" << std::endl;
 			harlie.complain("WARNING");
+			std::cout << std::endl;
 				[[fallthrough]];
 		}
 		case 3:
 		{
+			std::cout << "[ ERROR ]" << std::endl;
 			harlie.complain("ERROR");
+			std::cout << std::endl;
 			break ;
 		}
 		default:
