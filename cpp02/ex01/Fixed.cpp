@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/21 15:15:31 by leon             ###   ########.fr       */
+/*   Updated: 2025/01/22 16:13:25 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,26 @@ Fixed::Fixed()
 }
 
 Fixed::Fixed(const int num)
-{}
+{
+	if (num == 0)
+	{
+		_num = 0;
+	}
+	else if (num > 0)
+	{
+		//shift left as many time as there are fractional bits
+	}
+	else
+	{
+		//take twos complement
+	}
+}
 
 Fixed::Fixed(const float num)
-{}
+{
+	void (num);
+	_num = 0;
+}
 
 Fixed::~Fixed()
 {
@@ -63,7 +79,11 @@ void	Fixed::setRawBits(int const raw)
 }
 
 float	Fixed::toFloat(void) const
-{}
+{
+	return (0);
+}
 
 int		Fixed::toInt(void) const
-{}
+{
+	return (0);
+}
