@@ -6,7 +6,7 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/20 17:07:12 by leon             ###   ########.fr        #
+#    Updated: 2025/01/23 17:54:18 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXXFLAGS 	= -Wall -Wextra -Werror -std=c++17
 SRCS		= main.cpp Harl.cpp
 HEADERS		= Harl.hpp
 OBJS		= $(SRCS:.cpp=.o)
-NAME		= harlfilter
+NAME		= harlFilter
 
 all: $(NAME)
 
