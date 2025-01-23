@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:28:39 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/20 10:56:56 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:32:14 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void randomChump( std::string name )
 {
 	Zombie	zom = Zombie(name);
-	zom.Announce();
+	zom.announce();
 }
