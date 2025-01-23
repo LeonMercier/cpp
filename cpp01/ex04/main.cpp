@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:56:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/20 14:23:48 by leon             ###   ########.fr       */
+/*   Updated: 2025/01/23 17:52:39 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	openFiles(filename, instream, outstream);
-	while (getline(instream, line))
+	while (std::getline(instream, line))
 	{
 		outstream << findAndReplace(line, to_find, replacement);
-		outstream << '\n';
+		if (!instream.eof())
+		{
+			outstream << '\n';
+		}
 	}
 }
