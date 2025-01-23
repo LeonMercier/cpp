@@ -6,7 +6,7 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/21 14:52:47 by leon             ###   ########.fr        #
+#    Updated: 2025/01/23 15:09:06 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ HEADERS		= Fixed.hpp
 OBJS		= $(SRCS:.cpp=.o)
 NAME		= test
 
-all: $(NAME)
+all: $(NAME) $(HEADERS)
+
 
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@ 

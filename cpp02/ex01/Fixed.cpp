@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/22 16:13:25 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:16:51 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@ Fixed::Fixed(const int num)
 	}
 	else if (num > 0)
 	{
+		_num = num << _FRACTIONAL_BITS;
 		//shift left as many time as there are fractional bits
 	}
 	else
 	{
+		_num = 0;
 		//take twos complement
 	}
 }
 
 Fixed::Fixed(const float num)
 {
-	void (num);
-	_num = 0;
+	_num = (int) num;
 }
 
 Fixed::~Fixed()
@@ -61,12 +62,6 @@ Fixed& Fixed::operator=(const Fixed& source)
 	return (*this);
 }
 
-std::ostream&	Fixed::operator<<(std::ostream &ostm) const
-{
-	ostm << _num;
-	return (ostm);
-}
-
 int	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
@@ -87,3 +82,11 @@ int		Fixed::toInt(void) const
 {
 	return (0);
 }
+
+std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
+{
+	ostm << fixed.toFloat();
+	return (ostm);
+}
+
+

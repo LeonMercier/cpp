@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/21 15:15:08 by leon             ###   ########.fr       */
+/*   Updated: 2025/01/23 15:16:00 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 class	Fixed
 {
+
+
 private:
 	int	_num;
-	const static int FRACTIONAL_BITS = 8;
+	const static int _FRACTIONAL_BITS = 8;
 public:
 	Fixed();
 	Fixed(const int num);
@@ -29,5 +31,6 @@ public:
 	void	setRawBits(int const raw);
 	float	toFloat(void) const;
 	int		toInt(void) const;
-	std::ostream&	operator<<(std::ostream &ostm) const;
 };
+
+std::ostream	&operator<<(std::ostream &ostm, const Fixed &fixed);
