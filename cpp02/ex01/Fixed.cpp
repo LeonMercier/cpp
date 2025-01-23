@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/23 15:16:51 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:13:51 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ Fixed::Fixed(const int num)
 	else if (num > 0)
 	{
 		_num = num << _FRACTIONAL_BITS;
-		//shift left as many time as there are fractional bits
 	}
 	else
 	{
@@ -38,7 +37,7 @@ Fixed::Fixed(const int num)
 
 Fixed::Fixed(const float num)
 {
-	_num = (int) num;
+	_num = (int) num << _FRACTIONAL_BITS;
 }
 
 Fixed::~Fixed()
@@ -75,12 +74,16 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return (0);
+	// maybe extract fractional part by bitwise and with 00000011111111
+	// where 1's are for fractional
+	// but mask then depends on _fractional_bits
+	// take 0xFFFFFF and shift it left _fractional bits times, then invert it
+	return ((float) (_num >> _FRACTIONAL_BITS));
 }
 
 int		Fixed::toInt(void) const
 {
-	return (0);
+	return (_num >> _FRACTIONAL_BITS);
 }
 
 std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
