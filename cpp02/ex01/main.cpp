@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leon </var/spool/mail/leon>                +#+  +:+       +#+        */
+/*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 14:50:46 by leon              #+#    #+#             */
-/*   Updated: 2025/01/24 12:17:41 by lemercie         ###   ########.fr       */
+/*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
+/*   Updated: 2025/01/24 16:44:03 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main( void ) {
 	Fixed const c( 42.42f );
 	Fixed const d( b );
 	a = Fixed( 1234.4321f );
+	Fixed const e( 42.501f );
 
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
@@ -28,9 +29,11 @@ int	main( void ) {
 	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	std::cout << "e is " << e.toInt() << " as integer" << std::endl;
 	std::cout << "a is " << a.toFloat() << " as float" << std::endl;
 	std::cout << "b is " << b.toFloat() << " as float" << std::endl;
 	std::cout << "c is " << c.toFloat() << " as float" << std::endl;
 	std::cout << "d is " << d.toFloat() << " as float" << std::endl;
+	std::cout << "e is " << e.toFloat() << " as float" << std::endl;
 	return 0;
 }
