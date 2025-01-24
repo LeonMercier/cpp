@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/23 18:13:51 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:58:33 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ Fixed::Fixed(const int num)
 	}
 }
 
-Fixed::Fixed(const float num)
+Fixed::Fixed(const float flo)
 {
-	_num = (int) num << _FRACTIONAL_BITS;
+	_num = (int) flo << _FRACTIONAL_BITS;
+	_num += (flo - (_num >> _FRACTIONAL_BITS)) * (1 << _FRACTIONAL_BITS);
 }
 
 Fixed::~Fixed()
@@ -74,11 +75,18 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
+	int	int_part;
+	int	frac_part;
+	float	ret;
+
+	int_part = _num >> _FRACTIONAL_BITS;
+	frac_part = _num - (int_part << _FRACTIONAL_BITS);
+	ret = ((float) int_part) +  (((float) frac_part) / (1 << _FRACTIONAL_BITS));
 	// maybe extract fractional part by bitwise and with 00000011111111
 	// where 1's are for fractional
 	// but mask then depends on _fractional_bits
 	// take 0xFFFFFF and shift it left _fractional bits times, then invert it
-	return ((float) (_num >> _FRACTIONAL_BITS));
+	return (ret);
 }
 
 int		Fixed::toInt(void) const

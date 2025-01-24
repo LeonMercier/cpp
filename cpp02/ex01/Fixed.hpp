@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/23 15:16:00 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:45:19 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ private:
 public:
 	Fixed();
 	Fixed(const int num);
-	Fixed(const float num);
+	Fixed(const float flo);
 	~Fixed();
 	Fixed(const Fixed &source);
 	Fixed& operator=(const Fixed &source);
