@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/27 12:45:27 by leon             ###   ########.fr       */
+/*   Updated: 2025/01/27 15:50:32 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,136 @@ int		Fixed::toInt(void) const
 	return (int_part);
 }
 
+// prefix increment
+Fixed	&Fixed::operator++()
+{
+	this->_num++;
+	return (*this);
+}
+
+//postfix increment
+Fixed	Fixed::operator++(int)
+{
+	Fixed	tmp;
+	tmp = *this;
+	operator++();
+	return (tmp);
+}
+
+// prefix decrement
+Fixed	&Fixed::operator--()
+{
+	this->_num--;
+	return (*this);
+}
+
+// postfix decrement
+Fixed	Fixed::operator--(int)
+{
+	Fixed	tmp;
+	tmp = *this;
+	operator--();
+	return (tmp);
+}
+
+// For static member functions only use static in header, not here!
+Fixed	&Fixed::min(Fixed &lhs, Fixed &rhs)
+{
+	if (lhs <= rhs)
+	{
+		return (lhs);
+	}
+	return (rhs);
+}
+
+const Fixed	&Fixed::min(const Fixed &lhs, const Fixed &rhs)
+{
+	if (lhs <= rhs)
+	{
+		return (lhs);
+	}
+	return (rhs);
+}
+
+Fixed	&Fixed::max(Fixed &lhs, Fixed &rhs)
+{
+	if (lhs >= rhs)
+	{
+		return (lhs);
+	}
+	return (rhs);
+}
+
+const Fixed	&Fixed::max(const Fixed &lhs, const Fixed &rhs)
+{
+	if (lhs >= rhs)
+	{
+		return (lhs);
+	}
+	return (rhs);
+}
+
 std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
 {
 	ostm << fixed.toFloat();
 	return (ostm);
 }
 
+Fixed	operator+(const Fixed &lhs, const Fixed &rhs)
+{
+	Fixed	ret;
+	ret = lhs.toFloat() + rhs.toFloat();
+	return (ret);
+}
+
+Fixed	operator-(const Fixed &lhs, const Fixed &rhs)
+{
+	Fixed	ret;
+	ret = lhs.toFloat() - rhs.toFloat();
+	return (ret);
+}
+
+Fixed	operator*(const Fixed &lhs, const Fixed &rhs)
+{
+	Fixed	ret;
+	ret = lhs.toFloat() * rhs.toFloat();
+	return (ret);
+}
+
+Fixed	operator/(const Fixed &lhs, const Fixed &rhs)
+{
+	Fixed	ret;
+	ret = lhs.toFloat() / rhs.toFloat();
+	return (ret);
+}
+
+bool	operator>(const Fixed &lhs, const Fixed &rhs)
+{
+	return (lhs.getRawBits() > rhs.getRawBits());
+}
+
+bool	operator<(const Fixed &lhs, const Fixed &rhs)
+{
+	return (rhs > lhs);
+}
+
+bool	operator>=(const Fixed &lhs, const Fixed &rhs)
+{
+	return (lhs == rhs || lhs > rhs);
+}
+
+bool	operator<=(const Fixed &lhs, const Fixed &rhs)
+{
+	return (lhs == rhs || lhs < rhs);
+}
+
+bool	operator==(const Fixed &lhs, const Fixed &rhs)
+{
+	return (lhs.getRawBits() == rhs.getRawBits());
+}
+
+bool	operator!=(const Fixed &lhs, const Fixed &rhs)
+{
+	return (!(lhs == rhs));
+}
 

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/27 13:24:23 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:33:56 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ public:
 	Fixed	&operator--();
 	// postfix decrement
 	Fixed	operator--(int);
+
+	static Fixed		&min(Fixed &lhs, Fixed &rhs);
+	static const Fixed	&min(const Fixed &lhs, const Fixed &rhs);
+	static Fixed		&max(Fixed &lhs, Fixed &rhs);
+	static const Fixed	&max(const Fixed &lhs, const Fixed &rhs);
 
 
 };
