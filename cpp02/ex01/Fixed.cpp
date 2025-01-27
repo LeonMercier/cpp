@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/24 16:50:02 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:45:27 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,19 @@ Fixed::Fixed()
 
 Fixed::Fixed(const int num)
 {
-	if (num == 0)
-	{
-		_num = 0;
-	}
-	else if (num > 0)
-	{
-		_num = num << _FRACTIONAL_BITS;
-	}
-	else
-	{
-		_num = 0;
-		//take twos complement
-	}
+	std::cout << "Int constructor called" << std::endl;
+	_num = num << _FRACTIONAL_BITS;
 }
 
 Fixed::Fixed(const float flo)
 {
+	std::cout << "Float constructor called" << std::endl;
 	int	int_part;
 	int	frac_part;
-	// TODO: use roundf() here to only take _fractional bits decimals
 	int_part = (int) flo;
 	// remove the integer part from the float
 	// then shift the fractional part so it becomes integer
-	frac_part = (int) ((flo - int_part) * (1 << _FRACTIONAL_BITS));
+	frac_part = (int) std::roundf(((flo - int_part) * (1 << _FRACTIONAL_BITS)));
 	_num = int_part << _FRACTIONAL_BITS;
 	_num += frac_part;
 }
