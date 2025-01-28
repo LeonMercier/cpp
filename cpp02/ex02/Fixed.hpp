@@ -6,9 +6,12 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/27 15:33:56 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:48:16 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 #include <iostream>
 #include <cmath>
@@ -61,3 +64,4 @@ bool	operator>=(const Fixed &lhs, const Fixed &rhs);
 bool	operator<=(const Fixed &lhs, const Fixed &rhs);
 bool	operator==(const Fixed &lhs, const Fixed &rhs);
 bool	operator!=(const Fixed &lhs, const Fixed &rhs);
+#endif

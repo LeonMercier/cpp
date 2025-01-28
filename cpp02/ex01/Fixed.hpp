@@ -6,9 +6,12 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/27 12:52:08 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:49:09 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 #include <iostream>
 #include <cmath>
@@ -33,3 +36,5 @@ public:
 };
 
 std::ostream	&operator<<(std::ostream &ostm, const Fixed &fixed);
+
+#endif

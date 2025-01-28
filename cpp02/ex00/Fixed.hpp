@@ -6,9 +6,12 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/21 14:47:48 by leon             ###   ########.fr       */
+/*   Updated: 2025/01/28 11:49:39 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 #include <iostream>
 
@@ -26,3 +29,5 @@ public:
 	int	getRawBits(void) const;
 	void	setRawBits(int const raw);
 };
+
+#endif
