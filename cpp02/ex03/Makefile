@@ -6,14 +6,14 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/28 12:06:59 by lemercie         ###   ########.fr        #
+#    Updated: 2025/01/28 13:50:51 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX 		= c++
 CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
 
-SRCS		= main.cpp Fixed.cpp Point.cpp
+SRCS		= main.cpp Fixed.cpp Point.cpp bsp.cpp
 HEADERS		= Fixed.hpp Point.hpp
 OBJS		= $(SRCS:.cpp=.o)
 NAME		= test

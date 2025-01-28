@@ -6,28 +6,28 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/27 15:54:37 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:45:56 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "Point.hpp"
 #include <iostream>
 
+bool bsp( Point const a, Point const b, Point const c, Point const point);
+
 int main( void ) {
-	Fixed		a;
-	Fixed const	b( Fixed( 5.05f ) * Fixed( 2 ) );
-	Fixed const	c( Fixed( 5.05f ) / Fixed( 2 ) );
+	Point a(0,0);
+	Point b(0, 100);
+	Point c(100, 0);
+	Point d(5, 5);
 
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
-	std::cout << Fixed::max( c, b ) << std::endl;
-	std::cout << Fixed::min( a, b ) << std::endl;
-	std::cout << Fixed::min( c, b ) << std::endl;
-
+	if (bsp(a, b, c, d))
+	{		
+		std::cout << "inside" << std::endl;
+	}
+	else
+	{
+		std::cout << "outside" << std::endl;
+	}
 	return 0;
 }

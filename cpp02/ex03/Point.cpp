@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:45:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/28 12:46:36 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:15:33 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,13 @@ Point &Point::operator=(const Point &source)
 }
 
 Point::~Point() {}
+	
+const Fixed	&Point::getX() const
+{
+	return (x);
+}
+
+const Fixed	&Point::getY() const
+{
+	return (y);
+}
