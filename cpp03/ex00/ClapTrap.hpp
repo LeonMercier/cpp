@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:53:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/29 12:03:14 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:28:59 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 class	ClapTrap {
 private:
 	std::string	_name;
-	int			_hitpts;
-	int			_energypts;
-	int			_attackdmg;
+	unsigned int			_hitpts;
+	unsigned int			_energypts;
+	unsigned int			_attackdmg;
 public:
 	ClapTrap(std::string name);
 	ClapTrap(const ClapTrap &source);
