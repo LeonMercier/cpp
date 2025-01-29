@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:13:36 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/29 14:41:50 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:35:50 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ public:
 	~ScavTrap();
 
 	void attack(const std::string& target);
+	void	guardGate();
 };
 #endif
 
