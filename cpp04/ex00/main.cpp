@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:17:25 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:23:23 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ int main()
 	WrongCat bad_kitty;
 	bad_kitty.makeSound();
 
+	delete meta;
+	delete i;
+	delete j;
 	return 0;
 }
