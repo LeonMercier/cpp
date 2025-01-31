@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:03:32 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:13:13 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongAnimal.hpp"
 
 
-Dog::Dog() : type("Dog")
+WrongAnimal::WrongAnimal() : type("Default animal")
 {
-	std::cout << "Dog constructor called" << std::endl;
+	std::cout << "WrongAnimal constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &source) : type(source.type)
+WrongAnimal::WrongAnimal(const WrongAnimal &source) : type(source.type)
 {
-	std::cout << "Dog copy constructor called" << std::endl;
+	std::cout << "WrongAnimal copy constructor called" << std::endl;
 }
 
-Dog	&Dog::operator=(const Dog &source)
+WrongAnimal	&WrongAnimal::operator=(const WrongAnimal &source)
 {
-	std::cout << "Dog copy assignement override called" << std::endl;
+	std::cout << "WrongAnimal copy assignement override called" << std::endl;
 	if (this != &source)
 	{
 		type = source.type;
@@ -33,17 +33,18 @@ Dog	&Dog::operator=(const Dog &source)
 	return (*this);
 }
 
-Dog::~Dog()
+WrongAnimal::~WrongAnimal()
 {
-	std::cout << "Dog destructor called" << std::endl;
+	std::cout << "WrongAnimal destructor called" << std::endl;
 }
 
-void	Dog::makeSound(void) const
+void	WrongAnimal::makeSound(void) const
 {
-	std::cout << "Bark bark!" << std::endl;
+	std::cout << "Default animal sound" << std::endl;
 }
 
-std::string	Dog::getType(void) const
+std::string		WrongAnimal::getType(void) const
 {
 	return (type);
 }
+

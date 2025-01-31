@@ -6,13 +6,20 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 13:57:51 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:17:25 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "Animal.hpp"
+#include "WrongCat.hpp"
+
+Dog	func(Dog dog)
+{
+	dog.makeSound();
+	return (dog);
+}
 
 int main()
 {
@@ -23,11 +30,21 @@ int main()
 	std::cout << i->getType() << " " << std::endl;
 	Cat *kitty = (Cat*) i;
 	std::cout << kitty->getType() << " " << std::endl;
-	Dog *doggy = (Dog*) j;
-	std::cout << doggy->getType() << " " << std::endl;
-
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
 	meta->makeSound();
+
+	Dog *doggy = (Dog*) j;
+	std::cout << doggy->getType() << " " << std::endl;
+
+	Dog john;
+	Dog bob;
+	john = bob;
+	Dog liz = func(john);
+
+	std::cout << "============ Wrong stuff ===================" << std::endl;
+	WrongCat bad_kitty;
+	bad_kitty.makeSound();
+
 	return 0;
 }

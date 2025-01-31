@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:03:32 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:19:11 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongCat.hpp"
 
 
-Dog::Dog() : type("Dog")
+WrongCat::WrongCat() : type("WrongCat")
 {
-	std::cout << "Dog constructor called" << std::endl;
+	std::cout << "WrongCat constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &source) : type(source.type)
+WrongCat::WrongCat(const WrongCat &source) : type(source.type)
 {
-	std::cout << "Dog copy constructor called" << std::endl;
+	std::cout << "WrongCat copy constructor called" << std::endl;
 }
 
-Dog	&Dog::operator=(const Dog &source)
+WrongCat	&WrongCat::operator=(const WrongCat &source)
 {
-	std::cout << "Dog copy assignement override called" << std::endl;
+	std::cout << "WrongCat copy assignement override called" << std::endl;
 	if (this != &source)
 	{
 		type = source.type;
@@ -33,17 +33,17 @@ Dog	&Dog::operator=(const Dog &source)
 	return (*this);
 }
 
-Dog::~Dog()
+WrongCat::~WrongCat()
 {
-	std::cout << "Dog destructor called" << std::endl;
+	std::cout << "WrongCat destructor called" << std::endl;
 }
 
-void	Dog::makeSound(void) const
-{
-	std::cout << "Bark bark!" << std::endl;
-}
+// void	WrongCat::makeSound(void) const
+// {
+// 	std::cout << "Meow meow!" << std::endl;
+// }
 
-std::string	Dog::getType(void) const
+std::string		WrongCat::getType(void) const
 {
 	return (type);
 }

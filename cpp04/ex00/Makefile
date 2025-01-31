@@ -6,17 +6,15 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/31 13:35:59 by lemercie         ###   ########.fr        #
+#    Updated: 2025/01/31 15:17:56 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX 		= c++
 CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
 
-#SRCS		= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
-#HEADERS		= Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
-SRCS		= main.cpp Animal.cpp Dog.cpp Cat.cpp 
-HEADERS		= Animal.hpp Dog.hpp Cat.hpp 
+SRCS		= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+HEADERS		= Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
 OBJS		= $(SRCS:.cpp=.o)
 NAME		= test
 
