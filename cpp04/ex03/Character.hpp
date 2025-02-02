@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:10:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/02 13:15:07 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:46:34 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@
 
 class Character : public ICharacter
 {
+private:
+	std::string _name;
+	AMateria *_inventory[4];
 public:
-	virtual ~Character() {}
-	virtual std::string const & getName() const = 0;
-	virtual void equip(AMateria* m) = 0;
-	virtual void unequip(int idx) = 0;
-	virtual void use(int idx, Character& target) = 0;
+	Character(std::string name);
+	 ~Character();
+	 std::string const & getName() const;
+	 void equip(AMateria* m);
+	 void unequip(int idx);
+	 void use(int idx, ICharacter& target);
 };
 
 #endif
