@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 16:59:19 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/02 13:38:03 by lemercie         ###   ########.fr       */
+/*   Created: 2025/02/02 13:10:41 by lemercie          #+#    #+#             */
+/*   Updated: 2025/02/02 13:15:07 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AMATERIA_HPP
-#define AMATERIA_HPP
+#ifndef CHARACTER_HPP
+#define CHARACTER_HPP
 
+# include "AMateria.hpp"
+# include "ICharacter.hpp"
 # include <string>
 
-class ICharacter;
-class AMateria
+class Character : public ICharacter
 {
-protected:
-	std::string	_type;
 public:
-	AMateria(std::string const & type);
-	std::string const & getType() const; //Returns the materia type
-	virtual AMateria* clone() const = 0;
-	virtual void use(ICharacter& target);
+	virtual ~Character() {}
+	virtual std::string const & getName() const = 0;
+	virtual void equip(AMateria* m) = 0;
+	virtual void unequip(int idx) = 0;
+	virtual void use(int idx, Character& target) = 0;
 };
+
 #endif
