@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 15:19:30 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/02 16:34:04 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:24:03 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,51 @@ MateriaSource::MateriaSource()
 	}
 }
 
+MateriaSource::MateriaSource(const MateriaSource &source)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (source._memory[i] != nullptr)
+		{
+			_memory[i] = source._memory[i]->clone();
+		}
+		else
+		{
+			_memory[i] = nullptr;
+		}
+	}
+}
+
 MateriaSource::~MateriaSource() {}
+
+MateriaSource & MateriaSource::operator=(const MateriaSource &source)
+{
+	if (this == &source)
+	{
+		return (*this);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (source._memory[i] != nullptr)
+		{
+			_memory[i] = source._memory[i]->clone();
+		}
+	}
+	return (*this);
+}
 
 void MateriaSource::learnMateria(AMateria* materia)
 {
+	if (materia == nullptr)
+	{
+		return ;
+	}
 	for (int i = 0; i < 4; i++)
 	{
 		if (_memory[i] == nullptr)
 		{
 			_memory[i] = materia->clone();
+			return ;
 		}
 	}
 }

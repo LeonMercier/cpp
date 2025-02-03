@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:39:56 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/02 16:38:36 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:17:32 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ class Cure : public AMateria
 {
 public:
 	Cure();
+	Cure(const Cure &source);
+	~Cure();
+
+	Cure & operator=(const Cure &source);
 	AMateria* clone() const;
 	void use(ICharacter& target);
 };
 
 #endif
-

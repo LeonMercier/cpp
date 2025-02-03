@@ -6,13 +6,27 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:41:38 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/02 15:55:38 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:12:11 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
 Ice::Ice() : AMateria("ice") {}
+
+Ice::Ice(const Ice & source) : AMateria(source)
+{}
+
+Ice::~Ice() {}
+
+Ice & Ice::operator=(const Ice & source)
+{
+	if (this != &source)
+	{
+		AMateria::operator=(source);
+	}
+	return (*this);
+}
 
 AMateria* Ice::clone() const
 {

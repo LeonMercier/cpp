@@ -6,14 +6,26 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:41:38 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/02 16:52:21 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:15:51 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
 Cure::Cure() : AMateria("cure")
+{}
+
+Cure::Cure(const Cure & source) : AMateria(source) {}
+
+Cure::~Cure() {}
+
+Cure & Cure::operator=(const Cure & source)
 {
+	if (this != &source)
+	{
+		AMateria::operator=(source);
+	}
+	return (*this);
 }
 
 AMateria* Cure::clone() const
