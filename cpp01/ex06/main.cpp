@@ -6,24 +6,11 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:23:11 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/06 12:23:13 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:57:40 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "Harl.hpp"
-
-int	getLevelIndex(Harl hrl, std::string str)
-{
-	for (int i = 0; i < 4; i++)
-	{
-		if (str == hrl.lvl_names[i])
-		{
-			return (i);
-		}
-	}
-	return (-1);
-}
 
 int	main(int argc, char **argv)
 {
@@ -33,8 +20,19 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
+	int	level;
+	try
+	{
+		level = std::stoi(argv[1]);
+	}
+	catch (...)
+	{
+		level = -1;
+	}
+
 	Harl harlie;
-	switch (getLevelIndex(harlie, argv[1]))
+//	switch (getLevelIndex(harlie, argv[1]))
+	switch (level)
 	{
 		case 0:
 		{
