@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:22:47 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/23 17:40:34 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:08:24 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(void)
 	}	
 	
 	std::cout << "Test 3: " << std::endl;
-	Zombie	*zombies3 = zombieHorde(100, "Bob");
+	Zombie	*zombies3 = zombieHorde(100, "Jork");
 	if (zombies3 != nullptr)
 	{
 		for (int i = 0; i < 100; i++)
