@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 14:56:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/23 17:52:39 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:57:41 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	openFiles(std::string filename, std::ifstream &instream,
 	{
 		std::cout << "Error: could not open ";
 		std::cout << "'" << filename << ".replace" << "'" << std::endl;
+		instream.close();
 		std::exit(1);
 	}
 }
@@ -83,4 +84,6 @@ int	main(int argc, char **argv)
 			outstream << '\n';
 		}
 	}
+	instream.close();
+	outstream.close();
 }
