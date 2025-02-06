@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 12:19:18 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/20 10:59:17 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:19:31 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 Weapon::Weapon(){}
 
-Weapon::Weapon(std::string name)
+Weapon::Weapon(std::string name) : type(name) {}
+
+const std::string	&Weapon::getType(void) const
 {
-	_type = name;
+	return (this->type);
 }
 
-const std::string	&Weapon::getType(void)
+void	Weapon::setType(const std::string type)
 {
-	const std::string &ret = _type;
-	return (ret);
-}
-
-void	Weapon::setType(std::string type)
-{
-	_type = type;
+	this->type = type;
 }
