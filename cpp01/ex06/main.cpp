@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:23:11 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/06 15:57:40 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:01:25 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int argc, char **argv)
 	}
 
 	Harl harlie;
-//	switch (getLevelIndex(harlie, argv[1]))
 	switch (level)
 	{
 		case 0:
