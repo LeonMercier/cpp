@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/16 16:28:45 by leon             ###   ########.fr        #
+#    Created: 2025/02/06 12:25:33 by lemercie          #+#    #+#              #
+#    Updated: 2025/02/06 12:25:35 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 CXX 		= c++
 CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
