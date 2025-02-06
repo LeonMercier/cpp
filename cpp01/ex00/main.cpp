@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:22:47 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/20 10:56:52 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:44:47 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int	main(void)
 {
 	Zombie	*liz = newZombie("Liz");
 	randomChump("Bob");
+	liz->announce();
 	delete liz;
 }
