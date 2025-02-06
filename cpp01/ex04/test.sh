@@ -6,7 +6,7 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/06 12:25:49 by lemercie          #+#    #+#              #
-#    Updated: 2025/02/06 12:25:51 by lemercie         ###   ########.fr        #
+#    Updated: 2025/02/06 15:19:13 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,3 +70,29 @@ else
 	printf "nay\n"
 fi
 rm -f $outfile1 $outfile2
+
+# no read from infile
+printf "TEST 6\n"
+chmod -r $infile
+./seddy $infile a B
+if [ -e $outfile1 ]; then
+	printf "nay\n"
+else
+	printf "yay\n"
+fi
+rm -f $outfile1 $outfile2
+chmod +r $infile
+
+# no write to outfile
+printf "TEST 7\n"
+touch $outfile1
+chmod -w $outfile1
+./seddy $infile a B
+if [ -s $outfile1 ]; then
+	printf "nay\n"
+else
+	printf "yay\n"
+fi
+rm -f $outfile1 $outfile2
+chmod +r $infile
+
