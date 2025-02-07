@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 15:15:49 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:55:17 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ public:
 	static Fixed		&max(Fixed &lhs, Fixed &rhs);
 	static const Fixed	&max(const Fixed &lhs, const Fixed &rhs);
 
+	static int		getFracBits(void);
 
 };
 
@@ -65,4 +66,7 @@ bool	operator>=(const Fixed &lhs, const Fixed &rhs);
 bool	operator<=(const Fixed &lhs, const Fixed &rhs);
 bool	operator==(const Fixed &lhs, const Fixed &rhs);
 bool	operator!=(const Fixed &lhs, const Fixed &rhs);
+
+int		getFracBits(void);
+
 #endif

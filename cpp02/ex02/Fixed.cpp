@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 15:16:46 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:29:37 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	int	int_part;
-	int	frac_part;
+	int		int_part;
+	int		frac_part;
 	float	ret;
 
 	int_part = _num >> FRACTIONAL_BITS;
@@ -170,16 +170,16 @@ std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
 
 Fixed	operator+(const Fixed &lhs, const Fixed &rhs)
 {
-	Fixed	ret;
-	ret = lhs.toFloat() + rhs.toFloat();
-	return (ret);
+	Fixed temp;
+	temp.setRawBits(lhs.getRawBits() + rhs.getRawBits());
+	return (temp);
 }
 
 Fixed	operator-(const Fixed &lhs, const Fixed &rhs)
 {
-	Fixed	ret;
-	ret = lhs.toFloat() - rhs.toFloat();
-	return (ret);
+	Fixed	temp;
+	temp.setRawBits(lhs.getRawBits() - rhs.getRawBits());
+	return (temp);
 }
 
 Fixed	operator*(const Fixed &lhs, const Fixed &rhs)
@@ -226,3 +226,12 @@ bool	operator!=(const Fixed &lhs, const Fixed &rhs)
 	return (!(lhs == rhs));
 }
 
+int	Fixed::getFracBits()
+{
+	return (FRACTIONAL_BITS);
+}
+
+int		getFracBits(void)
+{
+	return Fixed::getFracBits();
+}
