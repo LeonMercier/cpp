@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:49:09 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/28 15:58:22 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:37:33 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ Fixed	dotProd(Point p_a, Point p_b, Point p_c)
 }
 
 // idea: if the point lies to the same side of each edge of the triangle, 
-// then it is inside.
-// This is tested by checking if all dot products have the same sign 
+// then it is inside. This is tested by checking if all dot products have the
+// same sign 
 bool bsp( Point const a, Point const b, Point const c, Point const point)
 {
 	Fixed	prod_a = dotProd(point, a, b);

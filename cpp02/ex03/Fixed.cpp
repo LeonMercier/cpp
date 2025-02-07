@@ -6,22 +6,21 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/27 15:50:32 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:43:17 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : _num(0)
 {
 	std::cout << "Default constructor called" << std::endl;
-	_num = 0;
 }
 
 Fixed::Fixed(const int num)
 {
 	std::cout << "Int constructor called" << std::endl;
-	_num = num << _FRACTIONAL_BITS;
+	_num = num << FRACTIONAL_BITS;
 }
 
 Fixed::Fixed(const float flo)
@@ -32,9 +31,14 @@ Fixed::Fixed(const float flo)
 	int_part = (int) flo;
 	// remove the integer part from the float
 	// then shift the fractional part so it becomes integer
-	frac_part = (int) std::roundf(((flo - int_part) * (1 << _FRACTIONAL_BITS)));
-	_num = int_part << _FRACTIONAL_BITS;
+	frac_part = (int) std::roundf(((flo - int_part) * (1 << FRACTIONAL_BITS)));
+	_num = int_part << FRACTIONAL_BITS;
 	_num += frac_part;
+}
+
+Fixed::Fixed(const Fixed &source) : _num(source._num)
+{
+	std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
@@ -42,13 +46,7 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &source)
-{
-	_num = source._num;
-	std::cout << "Copy constructor called" << std::endl;
-}
-
-Fixed& Fixed::operator=(const Fixed& source)
+Fixed&	Fixed::operator=(const Fixed& source)
 {
 	std::cout << "Copy assignement operator called" << std::endl;
 	if (this != &source)
@@ -71,13 +69,13 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	int	int_part;
-	int	frac_part;
+	int		int_part;
+	int		frac_part;
 	float	ret;
 
-	int_part = _num >> _FRACTIONAL_BITS;
-	frac_part = _num - (int_part << _FRACTIONAL_BITS);
-	ret = ((float) int_part) +  (((float) frac_part) / (1 << _FRACTIONAL_BITS));
+	int_part = _num >> FRACTIONAL_BITS;
+	frac_part = _num - (int_part << FRACTIONAL_BITS);
+	ret = ((float) int_part) +  (((float) frac_part) / (1 << FRACTIONAL_BITS));
 	return (ret);
 }
 
@@ -86,9 +84,9 @@ int		Fixed::toInt(void) const
 	int	int_part;
 	int	frac_part;
 
-	int_part = _num >> _FRACTIONAL_BITS;
-	frac_part = _num - (int_part << _FRACTIONAL_BITS);
-	if (frac_part > (1 << _FRACTIONAL_BITS) /2 -1) // frac_part > 127
+	int_part = _num >> FRACTIONAL_BITS;
+	frac_part = _num - (int_part << FRACTIONAL_BITS);
+	if (frac_part > (1 << FRACTIONAL_BITS) /2 -1) // frac_part > 127
 	{
 		int_part++; // rounding up
 	}
@@ -172,30 +170,33 @@ std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
 
 Fixed	operator+(const Fixed &lhs, const Fixed &rhs)
 {
-	Fixed	ret;
-	ret = lhs.toFloat() + rhs.toFloat();
-	return (ret);
+	Fixed temp;
+	temp.setRawBits(lhs.getRawBits() + rhs.getRawBits());
+	return (temp);
 }
 
 Fixed	operator-(const Fixed &lhs, const Fixed &rhs)
 {
-	Fixed	ret;
-	ret = lhs.toFloat() - rhs.toFloat();
-	return (ret);
+	Fixed	temp;
+	temp.setRawBits(lhs.getRawBits() - rhs.getRawBits());
+	return (temp);
 }
 
 Fixed	operator*(const Fixed &lhs, const Fixed &rhs)
 {
-	Fixed	ret;
-	ret = lhs.toFloat() * rhs.toFloat();
-	return (ret);
+	Fixed temp;
+	temp.setRawBits((lhs.getRawBits() * rhs.getRawBits()) >> getFracBits());
+	return (temp);
 }
 
 Fixed	operator/(const Fixed &lhs, const Fixed &rhs)
 {
-	Fixed	ret;
-	ret = lhs.toFloat() / rhs.toFloat();
-	return (ret);
+	Fixed temp;
+	// int	left = lhs.getRawBits() << 2;
+	// int	right = rhs.getRawBits() ;
+	// temp.setRawBits((left / right) << (getFracBits() - 2 ));
+	temp.setRawBits((lhs.getRawBits() / rhs.getRawBits()) << getFracBits());
+	return (temp);
 }
 
 bool	operator>(const Fixed &lhs, const Fixed &rhs)
@@ -228,3 +229,12 @@ bool	operator!=(const Fixed &lhs, const Fixed &rhs)
 	return (!(lhs == rhs));
 }
 
+int	Fixed::getFracBits()
+{
+	return (FRACTIONAL_BITS);
+}
+
+int		getFracBits(void)
+{
+	return Fixed::getFracBits();
+}

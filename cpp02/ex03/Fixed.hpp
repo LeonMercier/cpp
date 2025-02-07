@@ -6,28 +6,29 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/28 11:47:17 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:55:17 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
-# include <iostream>
-# include <cmath>
+#include <iostream>
+#include <cmath>
 
 class	Fixed
 {
 private:
-	int	_num;
-	const static int _FRACTIONAL_BITS = 8;
+	int					_num;
+	const static int	FRACTIONAL_BITS = 8;
 public:
 	Fixed();
 	Fixed(const int num);
 	Fixed(const float flo);
-	~Fixed();
 	Fixed(const Fixed &source);
-	Fixed& operator=(const Fixed &source);
+	~Fixed();
+
+	Fixed&	operator=(const Fixed &source);
 
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
@@ -48,6 +49,7 @@ public:
 	static Fixed		&max(Fixed &lhs, Fixed &rhs);
 	static const Fixed	&max(const Fixed &lhs, const Fixed &rhs);
 
+	static int		getFracBits(void);
 
 };
 
@@ -64,5 +66,7 @@ bool	operator>=(const Fixed &lhs, const Fixed &rhs);
 bool	operator<=(const Fixed &lhs, const Fixed &rhs);
 bool	operator==(const Fixed &lhs, const Fixed &rhs);
 bool	operator!=(const Fixed &lhs, const Fixed &rhs);
+
+int		getFracBits(void);
 
 #endif
