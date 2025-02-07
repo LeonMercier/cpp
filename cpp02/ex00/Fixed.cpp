@@ -6,28 +6,25 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:22:34 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 14:22:41 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:42:28 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : _num(0)
 {
 	std::cout << "Default constructor called" << std::endl;
-	_num = 0;
 }
 
+Fixed::Fixed(const Fixed &source) : _num(source._num)
+{
+	std::cout << "Copy constructor called" << std::endl;
+}
 
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
-}
-
-Fixed::Fixed(const Fixed &source)
-{
-	_num = source._num;
-	std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed& Fixed::operator=(const Fixed& source)
