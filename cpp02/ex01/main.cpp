@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/27 12:56:12 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:58:56 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	main( void ) {
 	Fixed	a;
-	Fixed const b( -10 );
-	Fixed const c( -42.001f );
+	Fixed const b( 10 );
+	Fixed const c( 42.42f );
 	Fixed const d( b );
-	a = Fixed( -1234.4321f );
+	a = Fixed( 1234.4321f );
 	Fixed const e( -42.49f );
 	Fixed const f( 0 );
 	Fixed const g( 0.0f );
