@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 16:30:38 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:32:25 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ int main( void ) {
 	std::cout << Fixed::min( a, b ) << std::endl;
 	std::cout << Fixed::min( c, b ) << std::endl;
 
-	Fixed d(4.1f);
+	Fixed d(14.1f);
 	Fixed e(5.3f);
 	std::cout << "Addition: " << d + e << std::endl;
 	std::cout << "Substraction: " << d - e << std::endl;
+	std::cout << "Multiplication: " << d * e << std::endl;
+	std::cout << "Division: " << d / e << std::endl;
 
 	std::cout << e.toFloat() << std::endl;
 	return 0;
