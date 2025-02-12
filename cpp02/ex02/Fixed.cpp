@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/12 12:53:21 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:22:43 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,16 +184,19 @@ Fixed	operator-(const Fixed &lhs, const Fixed &rhs)
 
 Fixed	operator*(const Fixed &lhs, const Fixed &rhs)
 {
-	Fixed temp;
-	temp.setRawBits((lhs.getRawBits() * rhs.getRawBits()) >> getFracBits());
-	return (temp);
+	long long left = lhs.getRawBits();
+	long long right = rhs.getRawBits();
+	long long temp = left * right;
+	Fixed ret;
+	ret.setRawBits(temp >> getFracBits());
+	return (ret);
 }
 
 Fixed	operator/(const Fixed &lhs, const Fixed &rhs)
 {
 	Fixed temp;
 
-	int	left = lhs.getRawBits();
+	long long left = lhs.getRawBits();
 	int	right = rhs.getRawBits() ;
 	temp.setRawBits((left << getFracBits()) / right );
 	return (temp);
