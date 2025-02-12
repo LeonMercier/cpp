@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/12 12:48:53 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:43:12 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,20 @@ public:
 
 	static int		getFracBits(void);
 
+	Fixed	operator+(const Fixed &other) const;
+	Fixed	operator-(const Fixed &other) const;
+	Fixed	operator*(const Fixed &other) const;
+	Fixed	operator/(const Fixed &other) const;
+
+	bool	operator>(const Fixed &other) const;
+	bool	operator<(const Fixed &other) const;
+	bool	operator>=(const Fixed &other) const;
+	bool	operator<=(const Fixed &other) const;
+	bool	operator==(const Fixed &other) const;
+	bool	operator!=(const Fixed &other) const;
 };
 
 std::ostream	&operator<<(std::ostream &ostm, const Fixed &fixed);
-
-//TODO these have to be member functions
-Fixed	operator+(const Fixed &lhs, const Fixed &rhs);
-Fixed	operator-(const Fixed &lhs, const Fixed &rhs);
-Fixed	operator*(const Fixed &lhs, const Fixed &rhs);
-Fixed	operator/(const Fixed &lhs, const Fixed &rhs);
-
-bool	operator>(const Fixed &lhs, const Fixed &rhs);
-bool	operator<(const Fixed &lhs, const Fixed &rhs);
-bool	operator>=(const Fixed &lhs, const Fixed &rhs);
-bool	operator<=(const Fixed &lhs, const Fixed &rhs);
-bool	operator==(const Fixed &lhs, const Fixed &rhs);
-bool	operator!=(const Fixed &lhs, const Fixed &rhs);
 
 int		getFracBits(void);
 

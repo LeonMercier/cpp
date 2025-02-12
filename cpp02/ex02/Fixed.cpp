@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/12 15:22:43 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:44:07 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,74 +162,74 @@ const Fixed	&Fixed::max(const Fixed &lhs, const Fixed &rhs)
 	return (rhs);
 }
 
-std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
-{
-	ostm << fixed.toFloat();
-	return (ostm);
-}
-
-Fixed	operator+(const Fixed &lhs, const Fixed &rhs)
+Fixed	Fixed::operator+(const Fixed &other) const
 {
 	Fixed temp;
-	temp.setRawBits(lhs.getRawBits() + rhs.getRawBits());
+	temp.setRawBits(this->getRawBits() + other.getRawBits());
 	return (temp);
 }
 
-Fixed	operator-(const Fixed &lhs, const Fixed &rhs)
+Fixed	Fixed::operator-(const Fixed &other) const
 {
 	Fixed	temp;
-	temp.setRawBits(lhs.getRawBits() - rhs.getRawBits());
+	temp.setRawBits(this->getRawBits() - other.getRawBits());
 	return (temp);
 }
 
-Fixed	operator*(const Fixed &lhs, const Fixed &rhs)
+Fixed	Fixed::operator*(const Fixed &other) const
 {
-	long long left = lhs.getRawBits();
-	long long right = rhs.getRawBits();
+	long long left = this->getRawBits();
+	long long right = other.getRawBits();
 	long long temp = left * right;
 	Fixed ret;
 	ret.setRawBits(temp >> getFracBits());
 	return (ret);
 }
 
-Fixed	operator/(const Fixed &lhs, const Fixed &rhs)
+Fixed	Fixed::operator/(const Fixed &other) const
 {
 	Fixed temp;
 
-	long long left = lhs.getRawBits();
-	int	right = rhs.getRawBits() ;
+	long long left = this->getRawBits();
+	int	right = other.getRawBits() ;
 	temp.setRawBits((left << getFracBits()) / right );
 	return (temp);
 }
 
-bool	operator>(const Fixed &lhs, const Fixed &rhs)
+bool	Fixed::operator>(const Fixed &other) const
 {
-	return (lhs.getRawBits() > rhs.getRawBits());
+	return (this->getRawBits() > other.getRawBits());
 }
 
-bool	operator<(const Fixed &lhs, const Fixed &rhs)
+bool	Fixed::operator<(const Fixed &other) const
 {
-	return (rhs > lhs);
+	return (*this > other);
 }
 
-bool	operator>=(const Fixed &lhs, const Fixed &rhs)
+bool	Fixed::operator>=(const Fixed &other) const
 {
-	return (lhs == rhs || lhs > rhs);
+	return (*this == other || *this > other);
 }
 
-bool	operator<=(const Fixed &lhs, const Fixed &rhs)
+bool	Fixed::operator<=(const Fixed &other) const
 {
-	return (lhs == rhs || lhs < rhs);
+	return (*this == other || *this < other);
 }
 
-bool	operator==(const Fixed &lhs, const Fixed &rhs)
+bool	Fixed::operator==(const Fixed &other) const
 {
-	return (lhs.getRawBits() == rhs.getRawBits());
+	return (this->getRawBits() == other.getRawBits());
 }
 
-bool	operator!=(const Fixed &lhs, const Fixed &rhs)
+bool	Fixed::operator!=(const Fixed &other) const
 {
-	return (!(lhs == rhs));
+	return (!(*this == other));
+}
+
+std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
+{
+	ostm << fixed.toFloat();
+	return (ostm);
 }
 
 int	Fixed::getFracBits()
