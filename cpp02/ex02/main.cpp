@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 17:32:25 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:52:17 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,10 @@ int main( void ) {
 	std::cout << "Division: " << d / e << std::endl;
 
 	std::cout << e.toFloat() << std::endl;
+
+	Fixed f(1);
+	Fixed g(3);
+	std::cout << "Division: " << f / g << std::endl;
+
 	return 0;
 }

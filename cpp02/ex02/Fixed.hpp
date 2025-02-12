@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:15:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 15:55:17 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:48:53 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ public:
 
 std::ostream	&operator<<(std::ostream &ostm, const Fixed &fixed);
 
+//TODO these have to be member functions
 Fixed	operator+(const Fixed &lhs, const Fixed &rhs);
 Fixed	operator-(const Fixed &lhs, const Fixed &rhs);
 Fixed	operator*(const Fixed &lhs, const Fixed &rhs);
