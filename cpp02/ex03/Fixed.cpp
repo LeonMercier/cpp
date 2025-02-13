@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:27:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 17:43:17 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:09:05 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 Fixed::Fixed() : _num(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int num)
 {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	_num = num << FRACTIONAL_BITS;
 }
 
 Fixed::Fixed(const float flo)
 {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 	int	int_part;
 	int	frac_part;
 	int_part = (int) flo;
@@ -38,17 +38,17 @@ Fixed::Fixed(const float flo)
 
 Fixed::Fixed(const Fixed &source) : _num(source._num)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 Fixed&	Fixed::operator=(const Fixed& source)
 {
-	std::cout << "Copy assignement operator called" << std::endl;
+	// std::cout << "Copy assignement operator called" << std::endl;
 	if (this != &source)
 	{
 		_num = source._num;
@@ -58,7 +58,7 @@ Fixed&	Fixed::operator=(const Fixed& source)
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (_num);
 }
 

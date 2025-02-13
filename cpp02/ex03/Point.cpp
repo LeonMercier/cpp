@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:45:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 18:43:12 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:05:44 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,10 @@ const Fixed	&Point::getX() const
 const Fixed	&Point::getY() const
 {
 	return (y);
+}
+
+std::ostream&	operator<<(std::ostream &ostm, const Point &point)
+{
+	ostm << point.getX() << "," << point.getY();
+	return (ostm);
 }

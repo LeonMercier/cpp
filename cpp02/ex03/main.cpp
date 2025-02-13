@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/13 12:25:48 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:14:15 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,29 @@ bool bsp( Point const a, Point const b, Point const c, Point const point)
 	return (false);
 }
 
-int main( void ) {
-	Point a(0,0);
-	Point b(0, 100);
-	Point c(100, 0);
-	Point d(0, 5);
-
-	if (bsp(a, b, c, d))
-	{		
-		std::cout << "inside" << std::endl;
+void	test( Point const a, Point const b, Point const c, Point const point)
+{
+	std::cout << "Point " << point << " is";
+	if (bsp(a, b, c, point))
+	{
+		std::cout << " inside of";
 	}
 	else
 	{
-		std::cout << "outside or on edge" << std::endl;
+		std::cout << " outside or on the edge of";
 	}
+	std::cout << " triangle " << a << "; " << b << "; " << c << std::endl;
+}
+
+int main( void )
+{
+	Point a(0,0);
+	Point b(0, 100);
+	Point c(100, 0);
+
+	test(a, b, c, Point(0, 5));
+	test(a, b, c, Point(1, 5));
+	test(a, b, c, Point(-1, 5));
+	test(a, b, c, Point(101, 101));
 	return 0;
 }
