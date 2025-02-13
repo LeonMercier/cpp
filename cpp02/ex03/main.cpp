@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/13 13:23:26 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:30:17 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,9 @@ int main( void )
 	test(a, b, c, Point(1, 5));
 	test(a, b, c, Point(-1, 5));
 	test(a, b, c, Point(101, 101));
+	test(a, b, c, Point(-1, 0));
+	test(a, b, c, Point(0, -1));
+	test(a, b, c, Point(50, 0));
+	test(a, b, c, Point(0, 50));
 	return 0;
 }
