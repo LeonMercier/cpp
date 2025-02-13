@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:37:26 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/13 13:14:15 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:23:26 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Fixed	dotProd(Point p_a, Point p_b, Point p_c)
 {
 	return ((p_c.getY() - p_b.getY()) * (p_a.getX() - p_b.getX()) + 
-			(-1 * p_c.getX() + p_b.getX()) * (p_a.getY() - p_b.getY()));
+			(p_b.getX() - p_c.getX()) * (p_a.getY() - p_b.getY()));
 }
 
 // idea: if the point lies to the same side of each edge of the triangle, 
