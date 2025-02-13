@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:49:15 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/07 14:56:03 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:54:02 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,3 @@ std::ostream&	operator<<(std::ostream &ostm, const Fixed &fixed)
 	ostm << fixed.toFloat();
 	return (ostm);
 }
-
-
