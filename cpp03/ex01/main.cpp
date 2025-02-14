@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/29 16:40:28 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:14:47 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 	kronk.beRepaired(10);
 
 	ScavTrap	jor("Jornathan");
+	jor.beRepaired(3);
 	jor.attack("Kronk");
 	jor.guardGate();
 	for (int i = 0; i < 11; i++)
