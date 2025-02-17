@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/30 12:08:22 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:25:51 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,8 @@ int	main(void)
 
 	FragTrap	ger("Germina");
 	ger.highFivesGuys();
+	FragTrap	ber("Bernardo");
+	ber.highFivesGuys();
+	ber = ger;
+	ber.highFivesGuys();
 }
