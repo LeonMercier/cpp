@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:46:59 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:19:49 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ Cat	&Cat::operator=(const Cat &source)
 	std::cout << "Cat copy assignement override called" << std::endl;
 	if (this != &source)
 	{
-		type = source.type;
+		// type = source.type;
+		this->~Cat();
+		new(this) Cat(source);
 	}
 	return (*this);
 }
