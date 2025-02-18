@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/17 18:07:09 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:46:34 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Dog	func(Dog dog)
 
 int main()
 {
-/* 	const Animal* meta = new Animal();
+	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	std::cout << j->getType() << " " << std::endl;
@@ -48,34 +48,41 @@ int main()
 
 	delete meta;
 	delete i;
-	delete j; */
+	delete j;
 
+	std::cout << "============ BRAIN stuff ===================" << std::endl;
 	Animal	*zoo[10];
 	for (int i = 0; i < 5; i++)
 	{
 		zoo[i] = new Dog;
-		zoo[i]->putThougth("Bark", 2);
 	}
 	for (int i = 5; i < 10; i++)
 	{
 		zoo[i] = new Cat;
-		zoo[i]->putThougth("Meow", 3);
 	}
 	zoo[4]->makeSound();
-	std::cout << zoo[4]->getThougth(2) << std::endl;
 	zoo[5]->makeSound();
-	std::cout << zoo[5]->getThougth(3) << std::endl;
-
-	Cat kitty;
-	Cat demon;
-	kitty.putThougth("Skree", 4);
-	demon = kitty;
-	std::cout << demon.getThougth(4) << std::endl;
-	std::cout << kitty.getThougth(4) << std::endl;
-
 	for (int i = 0; i < 10; i++)
 	{
 		delete zoo[i];
 	}
+
+
+	Cat kiki;
+	Cat demon;
+	for (int i = 0; i < 100; i++)
+	{
+		kiki.putThougth("Skree", i);
+	}
+	for (int i = 0; i < 100; i++)
+	{
+		demon.putThougth("demonic idea", i);
+	}
+	demon = kiki;
+	std::cout << demon.getThougth(99) << std::endl;
+	std::cout << kiki.getThougth(99) << std::endl;
+	std::cout << kiki.getType() << std::endl;
+	std::cout << demon.getType() << std::endl;
+ 
 	return 0;
 }

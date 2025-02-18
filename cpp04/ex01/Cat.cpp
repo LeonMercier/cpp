@@ -6,21 +6,22 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/17 18:19:49 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:50:10 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-
-Cat::Cat() : type("Cat")
+Cat::Cat() : type("Cat"), brain(new Brain)
 {
 	std::cout << "Cat constructor called" << std::endl;
 }
 
+// why does deleting brain here lead to double free?
 Cat::Cat(const Cat &source) : type(source.type)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
+	this->brain = new Brain(*source.brain);
 }
 
 Cat	&Cat::operator=(const Cat &source)
@@ -28,9 +29,9 @@ Cat	&Cat::operator=(const Cat &source)
 	std::cout << "Cat copy assignement override called" << std::endl;
 	if (this != &source)
 	{
-		// type = source.type;
 		this->~Cat();
 		new(this) Cat(source);
+		this->brain = new Brain(*source.brain);
 	}
 	return (*this);
 }
@@ -38,6 +39,7 @@ Cat	&Cat::operator=(const Cat &source)
 Cat::~Cat()
 {
 	std::cout << "Cat destructor called" << std::endl;
+	delete this->brain;
 }
 
 void	Cat::makeSound(void) const
@@ -48,4 +50,14 @@ void	Cat::makeSound(void) const
 std::string		Cat::getType(void) const
 {
 	return (type);
+}
+
+void	Cat::putThougth(std::string t, int index)
+{
+	brain->ideas[index] = t;
+}
+
+std::string	Cat::getThougth(int index)
+{
+	return (brain->ideas[index]);
 }

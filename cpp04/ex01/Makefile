@@ -6,12 +6,12 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/01/31 15:53:28 by lemercie         ###   ########.fr        #
+#    Updated: 2025/02/18 17:24:01 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX 		= c++
-CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
+CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11 -g
 
 SRCS		= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp \
 			  Brain.cpp
