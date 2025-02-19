@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 16:44:00 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:09:48 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int main()
 	}
 
 	// These lines should fail to compile
-	// Animal impossible;
-	// impossible.getType();
+	 // Animal impossible;
+	 // impossible.getType();
 	return 0;
 }
