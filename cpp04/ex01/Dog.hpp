@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/18 17:48:11 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:49:25 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <string>
 # include <iostream>
-#include "Animal.hpp"
+# include "Animal.hpp"
+# include "Brain.hpp"
 
 class	Dog : public Animal {
 private:

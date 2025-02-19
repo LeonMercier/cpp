@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 13:52:28 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:49:34 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <string>
 # include <iostream>
-# include "Brain.hpp"
 
 class	Animal {
 protected:

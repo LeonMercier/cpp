@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/18 17:48:03 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:48:55 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <string>
 # include <iostream>
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 // TODO: why does this need a type?
 class	Cat : public Animal {
