@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 13:48:21 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:22:34 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ Cat::Cat() : type("Cat"), brain(new Brain)
 	std::cout << "Cat constructor called" << std::endl;
 }
 
-// why does deleting brain here lead to double free?
 Cat::Cat(const Cat &source) : Animal(source), type(source.type)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
@@ -29,8 +28,8 @@ Cat	&Cat::operator=(const Cat &source)
 	std::cout << "Cat copy assignement override called" << std::endl;
 	if (this != &source)
 	{
-		this->~Cat();
-		new(this) Cat(source);
+		delete this->brain;
+		Animal::operator=(source);
 		this->brain = new Brain(*source.brain);
 	}
 	return (*this);

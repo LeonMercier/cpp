@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 13:49:29 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:08:56 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main()
 	j->makeSound();
 	meta->makeSound();
 
-	Dog *doggy = (Dog*) j;
+/* 	Dog *doggy = (Dog*) j;
 	std::cout << doggy->getType() << " " << std::endl;
 
 	Dog john;
@@ -45,7 +45,7 @@ int main()
 
 	std::cout << "============ Wrong stuff ===================" << std::endl;
 	WrongCat bad_kitty;
-	bad_kitty.makeSound();
+	bad_kitty.makeSound(); */
 
 	delete meta;
 	delete i;

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/18 17:27:19 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:29:00 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ Animal	&Animal::operator=(const Animal &source)
 	if (this != &source)
 	{
 		this->type = source.type;
-		// this->~Animal();
-		// new(this) Animal(source);
-		// delete this->brain;
-		// this->brain = new Brain(*source.brain);
 	}
 	return (*this);
 }

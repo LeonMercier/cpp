@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 13:47:39 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:17:30 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ Dog	&Dog::operator=(const Dog &source)
 	std::cout << "Dog copy assignement override called" << std::endl;
 	if (this != &source)
 	{
-		this->~Dog();
-		new(this) Dog(source);
+		delete this->brain;
+		Animal::operator=(source);
 		this->brain = new Brain(*source.brain);
 	}
 	return (*this);
