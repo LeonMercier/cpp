@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/18 17:50:10 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:48:21 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Cat::Cat() : type("Cat"), brain(new Brain)
 }
 
 // why does deleting brain here lead to double free?
-Cat::Cat(const Cat &source) : type(source.type)
+Cat::Cat(const Cat &source) : Animal(source), type(source.type)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
 	this->brain = new Brain(*source.brain);

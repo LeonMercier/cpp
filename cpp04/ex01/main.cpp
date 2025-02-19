@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/18 17:46:34 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:49:29 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int main()
 	Dog bob;
 	john = bob;
 	Dog liz = func(john);
+	std::cout << "TYPE after copy: " << liz.getType() << std::endl;
 
 	std::cout << "============ Wrong stuff ===================" << std::endl;
 	WrongCat bad_kitty;

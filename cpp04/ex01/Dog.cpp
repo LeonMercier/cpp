@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/18 17:37:21 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:47:39 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Dog::Dog() : type("Dog"), brain(new Brain)
 	std::cout << "Dog constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &source) : type(source.type)
+Dog::Dog(const Dog &source) : Animal(source), type(source.type)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
 	this->brain = new Brain(*source.brain);
