@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:23:23 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:56:42 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int main()
 	std::cout << "============ Wrong stuff ===================" << std::endl;
 	WrongCat bad_kitty;
 	bad_kitty.makeSound();
+	std::cout << bad_kitty.getType() << std::endl;
 
 	delete meta;
 	delete i;

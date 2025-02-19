@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:19:11 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:54:33 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ WrongCat::WrongCat() : type("WrongCat")
 	std::cout << "WrongCat constructor called" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &source) : type(source.type)
+WrongCat::WrongCat(const WrongCat &source) : WrongAnimal(source),
+	type(source.type)
 {
 	std::cout << "WrongCat copy constructor called" << std::endl;
 }
