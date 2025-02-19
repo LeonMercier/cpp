@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 13:52:27 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:48:03 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # include <iostream>
 # include "Animal.hpp"
 
+// TODO: why does this need a type?
 class	Cat : public Animal {
-protected:
+private:
 	std::string	type;
+	Brain	*brain;
 public:
 	Cat();
 	Cat(const Cat &source);
@@ -27,5 +29,7 @@ public:
 	~Cat();
 	void	makeSound(void) const;
 	std::string		getType(void) const;
+	void			putThougth(std::string t, int index);
+	std::string		getThougth(int index);
 };
 #endif

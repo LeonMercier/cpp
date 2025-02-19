@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:19:01 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:53:05 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <string>
 # include <iostream>
-# include "Animal.hpp"
+# include "WrongAnimal.hpp"
 
-class	WrongCat : public Animal {
+class	WrongCat : public WrongAnimal {
 protected:
 	std::string	type;
 public:

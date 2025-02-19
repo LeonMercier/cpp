@@ -6,14 +6,14 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:13:13 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:55:45 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
 
-WrongAnimal::WrongAnimal() : type("Default animal")
+WrongAnimal::WrongAnimal() : type("Default wrong animal")
 {
 	std::cout << "WrongAnimal constructor called" << std::endl;
 }
@@ -40,7 +40,7 @@ WrongAnimal::~WrongAnimal()
 
 void	WrongAnimal::makeSound(void) const
 {
-	std::cout << "Default animal sound" << std::endl;
+	std::cout << "Default wrong animal sound" << std::endl;
 }
 
 std::string		WrongAnimal::getType(void) const
