@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 15:19:30 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/03 17:24:03 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:57:09 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,18 @@ MateriaSource::MateriaSource(const MateriaSource &source)
 	}
 }
 
-MateriaSource::~MateriaSource() {}
+// learnMateria() calls clone() which uses new. Therefore all materias learned
+// are on the heap
+MateriaSource::~MateriaSource()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (_memory[i] != nullptr)
+		{
+			delete _memory[i];
+		}
+	}
+}
 
 MateriaSource & MateriaSource::operator=(const MateriaSource &source)
 {

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:57:34 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/20 14:24:50 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:53:00 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ Character::Character(std::string name) : _name(name)
 	}
 }
 
+// Why would we delete stuff during a copy? Probably the assignement means
+// copy assignement
 Character::Character(const Character &source) : _name(source._name)
 {
 	for (int i = 0; i < 4; i++)
@@ -36,7 +38,16 @@ Character::Character(const Character &source) : _name(source._name)
 	}
 }
 
-Character::~Character() {}
+Character::~Character()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (_inventory[i] != nullptr)
+		{
+			delete _inventory[i];
+		}
+	}
+}
 
 Character & Character::operator=(const Character &source)
 {
@@ -45,6 +56,10 @@ Character & Character::operator=(const Character &source)
 		_name = source._name;
 		for (int i = 0; i < 4; i++)
 		{
+			if (_inventory[i] != nullptr)
+			{
+				delete _inventory[i];
+			}
 			_inventory[i] = source._inventory[i];
 		}
 	}

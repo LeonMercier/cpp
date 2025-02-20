@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:31:30 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/03 17:31:11 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:48:37 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
-
+//TODO: confirm deep copy of Character
 
 	return (0);
 }
