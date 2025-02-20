@@ -6,11 +6,19 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:57:34 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/03 16:57:01 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:24:50 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
+
+Character::Character() : _name("Default name")
+{
+	for (int i = 0; i < 4; i++)
+	{
+		_inventory[i] = nullptr;
+	}
+}
 
 Character::Character(std::string name) : _name(name)
 {

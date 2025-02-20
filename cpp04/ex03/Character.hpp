@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:10:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/03 16:50:26 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:23:41 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ private:
 	std::string _name;
 	AMateria *_inventory[4];
 public:
+	Character();
 	Character(std::string name);
 	Character(const Character &source);
 	 ~Character();
