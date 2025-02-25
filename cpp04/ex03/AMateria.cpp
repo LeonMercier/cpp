@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:37:31 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/03 16:44:30 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:44 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ std::string const & AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-	(void) target;
+	std::cout << "default action at " << target.getName() << std::endl;
 }
