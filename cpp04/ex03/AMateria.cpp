@@ -6,12 +6,14 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:37:31 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/25 15:34:44 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:39:04 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:15:45 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
 
+AMateria::AMateria() : _type("default materia") {}
 AMateria::AMateria(std::string const & type) : _type(type) {}
 AMateria::AMateria(const AMateria &source) : _type(source._type){}
 AMateria::~AMateria(){}
