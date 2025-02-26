@@ -6,19 +6,20 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 13:53:47 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:16:54 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
 
-Cat::Cat() : type("Cat")
+Cat::Cat()
 {
+	type = "Cat";
 	std::cout << "Cat constructor called" << std::endl;
 }
 
-Cat::Cat(const Cat &source) : Animal(source), type(source.type)
+Cat::Cat(const Cat &source) : Animal(source)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
 }

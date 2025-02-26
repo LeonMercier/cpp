@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 13:56:42 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:22:36 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int main()
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+	std::cout << "j: " << j->getType() << " " << std::endl;
+	std::cout << "i: " << i->getType() << " " << std::endl;
 	Cat *kitty = (Cat*) i;
 	std::cout << kitty->getType() << " " << std::endl;
 	i->makeSound(); //will output the cat sound!
@@ -41,6 +41,7 @@ int main()
 	Dog bob;
 	john = bob;
 	Dog liz = func(john);
+	std::cout << liz.getType() << " " << std::endl;
 
 	std::cout << "============ Wrong stuff ===================" << std::endl;
 	WrongCat bad_kitty;

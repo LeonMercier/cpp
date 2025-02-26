@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 13:56:53 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:21:37 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 #include "Animal.hpp"
 
 class	Dog : public Animal {
-protected:
-	std::string	type;
 public:
 	Dog();
 	Dog(const Dog &source);
