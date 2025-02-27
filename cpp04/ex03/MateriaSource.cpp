@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 15:19:30 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/20 15:57:09 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:58:32 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void MateriaSource::learnMateria(AMateria* materia)
 	{
 		if (_memory[i] == nullptr)
 		{
-			_memory[i] = materia->clone();
+			_memory[i] = materia;
 			return ;
 		}
 	}

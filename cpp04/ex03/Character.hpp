@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:10:41 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/20 14:23:41 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:47:19 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ public:
 	Character(const Character &source);
 	 ~Character();
 	Character & operator=(const Character &source);
-	 std::string const & getName() const;
-	 void equip(AMateria* m);
-	 void unequip(int idx);
-	 void use(int idx, ICharacter& target);
+
+	std::string const & getName() const;
+	void equip(AMateria* m);
+	void unequip(int idx);
+	void use(int idx, ICharacter& target);
 };
 
 #endif

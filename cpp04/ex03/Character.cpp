@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:57:34 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/20 15:53:00 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:53:27 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Character::Character(const Character &source) : _name(source._name)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		_inventory[i] = source._inventory[i];
+		_inventory[i] = source._inventory[i]->clone();
 	}
 }
 
@@ -60,7 +60,7 @@ Character & Character::operator=(const Character &source)
 			{
 				delete _inventory[i];
 			}
-			_inventory[i] = source._inventory[i];
+			_inventory[i] = source._inventory[i]->clone();
 		}
 	}
 	return (*this);

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:37:31 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/25 15:39:04 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:45:13 by lemercie         ###   ########.fr       */
 /*   Updated: 2025/02/20 14:15:45 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -20,17 +20,12 @@ AMateria::~AMateria(){}
 
 AMateria & AMateria::operator=(const AMateria &source)
 {
-	if (this != &source)
-	{
-		_type = source._type;
-	}
+	(void) source;
 	return (*this);
 }
 
 std::string const & AMateria::getType() const
 {
-	// std::string *asd = new std::string("asd");
-	// return (*asd);
 	return (_type);
 }
 
