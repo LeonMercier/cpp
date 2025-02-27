@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 15:49:34 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:52:38 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ public:
 	Animal	&operator=(const Animal &source);
 	virtual ~Animal();
 	virtual void	makeSound(void) const;
-	std::string		getType(void) const;
+	virtual std::string		getType(void) const;
 };
 #endif

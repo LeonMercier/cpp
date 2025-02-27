@@ -6,18 +6,19 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 15:22:34 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:52:00 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : type("Cat"), brain(new Brain)
+Cat::Cat() : brain(new Brain)
 {
 	std::cout << "Cat constructor called" << std::endl;
+	type = "Cat";
 }
 
-Cat::Cat(const Cat &source) : Animal(source), type(source.type)
+Cat::Cat(const Cat &source) : Animal(source)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
 	this->brain = new Brain(*source.brain);

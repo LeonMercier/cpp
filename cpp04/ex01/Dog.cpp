@@ -6,19 +6,19 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 15:17:30 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:44:41 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-
-Dog::Dog() : type("Dog"), brain(new Brain)
+Dog::Dog() : brain(new Brain)
 {
 	std::cout << "Dog constructor called" << std::endl;
+	type = "Dog";
 }
 
-Dog::Dog(const Dog &source) : Animal(source), type(source.type)
+Dog::Dog(const Dog &source) : Animal(source)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
 	this->brain = new Brain(*source.brain);

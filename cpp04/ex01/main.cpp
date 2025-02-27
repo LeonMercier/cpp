@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 15:08:56 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:46:01 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int main()
 	{
 		demon.putThougth("demonic idea", i);
 	}
-	demon = kiki;
+	demon = kiki; //deep copy
 	std::cout << demon.getThougth(99) << std::endl;
 	std::cout << kiki.getThougth(99) << std::endl;
 	std::cout << kiki.getType() << std::endl;
