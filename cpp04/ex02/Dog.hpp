@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 15:50:19 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:24:47 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 class	Dog : public Animal {
 private:
-	std::string	type;
 	Brain	*brain;
 public:
 	Dog();
