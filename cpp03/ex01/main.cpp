@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/14 12:14:47 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:50:32 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 int	main(void)
 {
+	ClapTrap	cla("Clappy");
+	cla.takeDamage(10);
+	cla.attack("someone");
+
 	ScavTrap	kronk("Kronk");
 	kronk.attack("Krink");
 	kronk.takeDamage(5);
@@ -23,6 +27,8 @@ int	main(void)
 	kronk.takeDamage(10);
 	kronk.attack("Krink");
 	kronk.beRepaired(10);
+	kronk.takeDamage(95);
+	kronk.attack("Krink");
 
 	ScavTrap	jor("Jornathan");
 	jor.beRepaired(3);

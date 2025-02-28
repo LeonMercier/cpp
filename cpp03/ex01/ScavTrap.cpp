@@ -6,18 +6,20 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:18:03 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/28 12:17:08 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:51:21 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap("default name", 100, 50, 20)
+ScavTrap::ScavTrap() : 
+	ClapTrap("default name", INIT_HITPTS, INIT_ENERGYPTS, INIT_ATTCKDMG)
 {
 	std::cout << "ScavTrap default constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
+ScavTrap::ScavTrap(std::string name) : 
+	ClapTrap(name, INIT_HITPTS, INIT_ENERGYPTS, INIT_ATTCKDMG)
 {
 	std::cout << "ScavTrap constructor called" << std::endl;
 }

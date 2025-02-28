@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:03:31 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/28 12:15:43 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:24:16 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap() :
 	_name("default name"),
-	_hitpts(10),
+	_hitpts(INIT_HITPTS),
 	_energypts(10),
 	_attackdmg(0)
 {
@@ -23,7 +23,7 @@ ClapTrap::ClapTrap() :
 
 ClapTrap::ClapTrap(std::string name) :
 	_name(name),
-	_hitpts(10),
+	_hitpts(INIT_HITPTS),
 	_energypts(10),
 	_attackdmg(0)
 {

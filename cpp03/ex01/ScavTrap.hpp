@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:13:36 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/28 12:16:29 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:44:17 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 class	ScavTrap : public ClapTrap {
 public:
+	const static unsigned int INIT_HITPTS = 100;
+	const static unsigned int INIT_ENERGYPTS = 50;
+	const static unsigned int INIT_ATTCKDMG = 20;
+
 	ScavTrap();
 	ScavTrap(std::string name);
 	ScavTrap(const ScavTrap &source);

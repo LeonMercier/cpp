@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:53:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/28 12:15:06 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:23:21 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ protected:
 	unsigned int			_energypts;
 	unsigned int			_attackdmg;
 public:
+	const static unsigned int INIT_HITPTS = 10;
+	const static unsigned int INIT_ENERGYPTS = 10;
+	const static unsigned int INIT_ATTCKDMG = 0;
+
 	ClapTrap();
 	ClapTrap(std::string name);
 	ClapTrap(std::string name, unsigned int hitpts, unsigned int energypts,
