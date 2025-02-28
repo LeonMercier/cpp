@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:13:36 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/29 16:35:50 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:16:29 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include "ClapTrap.hpp"
 
 class	ScavTrap : public ClapTrap {
-private:
-	
 public:
+	ScavTrap();
 	ScavTrap(std::string name);
 	ScavTrap(const ScavTrap &source);
 	ScavTrap &operator=(const ScavTrap &source);

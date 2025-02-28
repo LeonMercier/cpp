@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:52:45 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/30 11:59:05 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:19:32 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "ClapTrap.hpp"
 
 class FragTrap : public ClapTrap {
-private:
 public:
+	FragTrap();
 	FragTrap(std::string name);
 	FragTrap(const FragTrap &source);
 	FragTrap	&operator=(const FragTrap &source);

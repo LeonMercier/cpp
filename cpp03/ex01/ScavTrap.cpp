@@ -6,17 +6,21 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:18:03 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/29 16:41:39 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:17:08 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap() : ClapTrap("default name", 100, 50, 20)
+{
+	std::cout << "ScavTrap default constructor called" << std::endl;
+}
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20)
 {
 	std::cout << "ScavTrap constructor called" << std::endl;
 }
-
 
 ScavTrap::ScavTrap(const ScavTrap &source) : ClapTrap(source)
 {

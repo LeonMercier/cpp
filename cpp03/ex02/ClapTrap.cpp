@@ -6,11 +6,20 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:03:31 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/29 16:39:45 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:18:36 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+
+ClapTrap::ClapTrap() :
+	_name("default name"),
+	_hitpts(10),
+	_energypts(10),
+	_attackdmg(0)
+{
+	std::cout << "ClapTrap default constructor called" << std::endl;
+}
 
 ClapTrap::ClapTrap(std::string name) :
 	_name(name),

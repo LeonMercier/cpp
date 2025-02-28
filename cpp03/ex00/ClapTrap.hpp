@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:53:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/14 11:53:42 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:13:11 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ private:
 	unsigned int	_attackdmg;
 
 public:
+	ClapTrap();
 	ClapTrap(std::string name);
 	ClapTrap(const ClapTrap &source);
 	ClapTrap &operator=(const ClapTrap &source);
