@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:59:19 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/20 15:51:30 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:00:16 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ public:
 	AMateria(std::string const & type);
 	AMateria(const AMateria &source);
 	virtual ~AMateria();
+
 	AMateria & operator=(const AMateria &source);
 	std::string const & getType() const; //Returns the materia type
 	virtual AMateria* clone() const = 0;

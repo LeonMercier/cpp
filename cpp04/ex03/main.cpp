@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:31:30 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/27 16:08:31 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:52:02 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-void	copyTest(Character cha, Character tar)
+void	copyTest(Character cha, Character target)
 {
-	std::cout << "is it a deep copy?" << std::endl;
-	cha.use(0, tar);
+	cha.use(0, target);
 }
 
 int main()
@@ -47,27 +46,38 @@ int main()
 	AMateria* mat = new Ice();
 	AMateria* mat2 = new Cure();
 	AMateria* mat3 = new Cure();
-	AMateria* mat4 = new Cure();
-	AMateria* mat5 = new Cure();
 	std::cout << john.getName() << std::endl;
 	std::cout << dave.getName() << std::endl;
+	dave.unequip(0);
+	dave.unequip(1);
+	dave.unequip(2);
+	dave.unequip(3);
 	dave.equip(mat);
 	dave.equip(mat2);
 	dave.use(0, bork);
 	dave.use(1, bork);
+	dave.unequip(1);
+	std::cout << "do nothing" << std::endl;
+	dave.use(1, bork);
+	dave.equip(mat2); // equip it again so it can be destroyed by ~Character 
+
 	john = dave;
 	std::cout << john.getName() << std::endl;
 	std::cout << dave.getName() << std::endl;
 	dave.use(0, bork);
 	dave.use(1, bork);
 
+	std::cout << "deep copy constructor" << std::endl;
 	copyTest(dave, bork);
 
-	dave.equip(mat3);
-	dave.equip(mat4);
+	// deep copy assignement
+	{
+		Character temp("temp");
+		temp.equip(mat3);
+		dave = temp;
+	}
+	std::cout << "deep copy assigement" << std::endl;
 	dave.use(0, bork);
-	dave.equip(mat5);
-	dave.use(0, bork); // old materia stays and is not overwritten
 
 	delete bob;
 	delete me;

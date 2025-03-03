@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 15:19:30 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/27 12:58:32 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:55:30 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,5 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 			return (_memory[i]->clone());
 		}
 	}
-	std::cout << "createMateria(): couldnt" << std::endl;
 	return (0);
 }
