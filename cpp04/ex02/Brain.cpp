@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/31 15:42:47 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:51:47 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,14 @@ Brain::~Brain()
 {
 	std::cout << "Brain destructor called" << std::endl;
 }
+	
+void		Brain::putIdea(int index, std::string idea)
+{
+	ideas[index] = idea;
+}
+
+std::string	Brain::getIdea(int index) const
+{
+	return (ideas[index]);
+}
+

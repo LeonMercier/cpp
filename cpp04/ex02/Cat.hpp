@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:14:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/27 12:23:49 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:54:00 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ public:
 	Cat(const Cat &source);
 	Cat	&operator=(const Cat &source);
 	~Cat();
+
 	void	makeSound(void) const;
 	std::string		getType(void) const;
-	void			putThougth(std::string t, int index);
-	std::string		getThougth(int index);
+	void			putIdea(int index, std::string idea);
+	std::string		getIdea(int index) const;
 };
 #endif
