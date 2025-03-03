@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/03 16:04:00 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:12:18 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ int main()
 	const Animal* i = new Cat();
 	std::cout << "j: " << j->getType() << " " << std::endl;
 	std::cout << "i: " << i->getType() << " " << std::endl;
-	Cat *kitty = (Cat*) i;
-	std::cout << kitty->getType() << " " << std::endl;
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
 	meta->makeSound();
+
+	// Convert Animal pointer back to Cat pointer
+	Cat *kitty = (Cat*) i;
+	std::cout << kitty->getType() << " " << std::endl;
 
 	// Convert Animal pointer back to Dog pointer
 	Dog *doggy = (Dog*) j;
@@ -53,5 +55,7 @@ int main()
 	delete meta;
 	delete i;
 	delete j;
+	delete waa;
+	delete wca;
 	return 0;
 }
