@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 13:54:33 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:01:32 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ WrongCat::~WrongCat()
 	std::cout << "WrongCat destructor called" << std::endl;
 }
 
-// void	WrongCat::makeSound(void) const
-// {
-// 	std::cout << "Meow meow!" << std::endl;
-// }
+void	WrongCat::makeSound(void) const
+{
+	std::cout << "Meow meow!" << std::endl;
+}
 
 std::string		WrongCat::getType(void) const
 {
