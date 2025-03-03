@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/19 16:09:48 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:34:01 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,6 @@ Dog	func(Dog dog)
 
 int main()
 {
-/* 	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	Cat *kitty = (Cat*) i;
-	std::cout << kitty->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
-
-	Dog *doggy = (Dog*) j;
-	std::cout << doggy->getType() << " " << std::endl;
-
-	Dog john;
-	Dog bob;
-	john = bob;
-	Dog liz = func(john);
-
-	std::cout << "============ Wrong stuff ===================" << std::endl;
-	WrongCat bad_kitty;
-	bad_kitty.makeSound();
-
-	delete meta;
-	delete i;
-	delete j; */
-
 	Animal	*zoo[10];
 	for (int i = 0; i < 5; i++)
 	{
@@ -66,8 +39,35 @@ int main()
 		delete zoo[i];
 	}
 
-	// These lines should fail to compile
-	 // Animal impossible;
-	 // impossible.getType();
+
+	Cat kiki;
+	Cat demon;
+	for (int i = 0; i < 100; i++)
+	{
+		kiki.putIdea(i, "Skree");
+	}
+	for (int i = 0; i < 100; i++)
+	{
+		demon.putIdea(i, "demonic idea");
+	}
+	demon = kiki; //deep copy
+	std::cout << demon.getIdea(99) << std::endl;
+	std::cout << kiki.getIdea(99) << std::endl;
+	std::cout << kiki.getType() << std::endl;
+	std::cout << demon.getType() << std::endl;
+ 
+	Cat	asd;
+	asd.putIdea(5, "asd idea");
+	{
+		Cat fgh;
+		fgh.putIdea(5, "fgh idea");
+		asd = fgh;
+	} // fgh falls out of scope and is destroyed here
+	std::cout << "Deep copy? " << asd.getIdea(5) << std::endl;
+//	std::cout << "Deep copy? " << fgh.getIdea(5) << std::endl;
+
+	// Abstract class
+	// this line needs to fail to compile
+//	Animal a;
 	return 0;
 }
