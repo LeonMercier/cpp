@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/27 11:46:01 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:57:46 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ int main()
 	Cat demon;
 	for (int i = 0; i < 100; i++)
 	{
-		kiki.putThougth("Skree", i);
+		kiki.putIdea(i, "Skree");
 	}
 	for (int i = 0; i < 100; i++)
 	{
-		demon.putThougth("demonic idea", i);
+		demon.putIdea(i, "demonic idea");
 	}
 	demon = kiki; //deep copy
-	std::cout << demon.getThougth(99) << std::endl;
-	std::cout << kiki.getThougth(99) << std::endl;
+	std::cout << demon.getIdea(99) << std::endl;
+	std::cout << kiki.getIdea(99) << std::endl;
 	std::cout << kiki.getType() << std::endl;
 	std::cout << demon.getType() << std::endl;
  

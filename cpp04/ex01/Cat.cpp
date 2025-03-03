@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/27 11:52:00 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:55:33 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ std::string		Cat::getType(void) const
 	return (type);
 }
 
-void	Cat::putThougth(std::string t, int index)
+void	Cat::putIdea(int index, std::string idea)
 {
-	brain->ideas[index] = t;
+	brain->putIdea(index, idea);
 }
 
-std::string	Cat::getThougth(int index)
+std::string	Cat::getIdea(int index) const
 {
-	return (brain->ideas[index]);
+	return (brain->getIdea(index));
 }

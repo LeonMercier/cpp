@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:20:23 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/27 11:44:41 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:56:13 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,14 @@ void	Dog::makeSound(void) const
 std::string	Dog::getType(void) const
 {
 	return (type);
+}
+
+void	Dog::putIdea(int index, std::string idea)
+{
+	brain->putIdea(index, idea);
+}
+
+std::string	Dog::getIdea(int index) const
+{
+	return (brain->getIdea(index));
 }
