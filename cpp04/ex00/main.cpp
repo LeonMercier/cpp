@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:31:10 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/26 11:22:36 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:04:00 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,21 @@ int main()
 	j->makeSound();
 	meta->makeSound();
 
+	// Convert Animal pointer back to Dog pointer
 	Dog *doggy = (Dog*) j;
 	std::cout << doggy->getType() << " " << std::endl;
 
 	Dog john;
 	Dog bob;
-	john = bob;
-	Dog liz = func(john);
+	john = bob; // assignement operator
+	Dog liz = func(john); // copy constructor
 	std::cout << liz.getType() << " " << std::endl;
 
 	std::cout << "============ Wrong stuff ===================" << std::endl;
-	WrongCat bad_kitty;
-	bad_kitty.makeSound();
-	std::cout << bad_kitty.getType() << std::endl;
+	WrongAnimal *waa = new WrongCat();
+	WrongCat 	*wca = new WrongCat();
+	waa->makeSound(); // see above how Animal pointer can still make cat sound
+	wca->makeSound();
 
 	delete meta;
 	delete i;
