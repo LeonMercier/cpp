@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:03:31 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/28 13:24:16 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:07:10 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 ClapTrap::ClapTrap() :
 	_name("default name"),
 	_hitpts(INIT_HITPTS),
-	_energypts(10),
-	_attackdmg(0)
+	_energypts(INIT_ENERGYPTS),
+	_attackdmg(INIT_ATTCKDMG)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
@@ -24,20 +24,20 @@ ClapTrap::ClapTrap() :
 ClapTrap::ClapTrap(std::string name) :
 	_name(name),
 	_hitpts(INIT_HITPTS),
-	_energypts(10),
-	_attackdmg(0)
+	_energypts(INIT_ENERGYPTS),
+	_attackdmg(INIT_ATTCKDMG)
 {
 	std::cout << "ClapTrap constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name, unsigned int hitpts,
-				   unsigned int energypts, unsigned int attackdmg)
+				   unsigned int energypts, unsigned int attackdmg) : 
+	_name(name),
+	_hitpts(hitpts),
+	_energypts(energypts),
+	_attackdmg(attackdmg)
 {
 	std::cout << "ClapTrap constructor called" << std::endl;
-	_name = name;
-	_hitpts = hitpts;
-	_energypts = energypts;
-	_attackdmg = attackdmg;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &source) :
