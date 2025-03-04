@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:18:07 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/30 14:35:19 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:37:49 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 class	DiamondTrap : public ScavTrap, public FragTrap {
 private:
 	std::string	_name;
-	using FragTrap::_hitpts;
 public:
+	DiamondTrap();
 	DiamondTrap(std::string name);
 	DiamondTrap(const DiamondTrap &source);
 	DiamondTrap		&operator=(const DiamondTrap &source);

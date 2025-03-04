@@ -6,30 +6,34 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:28:12 by lemercie          #+#    #+#             */
-/*   Updated: 2025/01/30 16:40:38 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:49:07 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-// It does not seem possible to inherit the data members as the spirit of the 
-// assignement would suggest
+DiamondTrap::DiamondTrap() :
+	ClapTrap("default_name_clap_name"),
+	_name("default_name")
+{
+	std::cout << "DiamondTrap constructor called" <<std::endl;
+	_hitpts = FragTrap::INIT_HITPTS;
+	_energypts = ScavTrap::INIT_ENERGYPTS;
+	_attackdmg = FragTrap::INIT_ATTCKDMG;
+}
+
 DiamondTrap::DiamondTrap(std::string name) :
 	ClapTrap(name + "_clap_name"),
-	ScavTrap(name),
-	FragTrap(name),
 	_name(name)
 {
 	std::cout << "DiamondTrap constructor called" <<std::endl;
-	_hitpts = 100;
-	_energypts = 50;
-	_attackdmg = 30;
+	_hitpts = FragTrap::INIT_HITPTS;
+	_energypts = ScavTrap::INIT_ENERGYPTS;
+	_attackdmg = FragTrap::INIT_ATTCKDMG;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &source) :
 	ClapTrap(source),
-	ScavTrap(source),
-	FragTrap(source),
 	_name(source._name)
 {
 	std::cout << "DiamondTrap copy constructor called" << std::endl;
@@ -41,8 +45,7 @@ DiamondTrap		&DiamondTrap::operator=(const DiamondTrap &source)
 	if (this != &source)
 	{
 		_name = source._name;
-		this->ScavTrap::operator=(source);
-		this->FragTrap::operator=(source);
+		this->ClapTrap::operator=(source);
 	}
 	return (*this);
 }

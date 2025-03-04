@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/17 15:33:13 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:13:55 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,27 @@ int	main(void)
 		ger.takeDamage(10);
 	} */
 
+	// energy points
+	DiamondTrap	bobo("Bobo");
+	for (int i = 0; i < 51; i++)
+	{
+		bobo.attack("a swarm of bees");
+	}
+
+	// hitpoints
+	DiamondTrap	yoyo("Yoyo");
+	yoyo.takeDamage(99);
+	yoyo.takeDamage(1);
+	yoyo.takeDamage(1);
+
+
 	DiamondTrap	bla("Blarney");
 	bla.highFivesGuys();
 	bla.whoAmI();
-	for (int i = 0; i < 1; i++)
-	{
-		bla.takeDamage(10);
-	}
 
 	DiamondTrap	blo("Bloberto");
 	blo.whoAmI();
-//	blo = bla;
+	blo = bla;
 	blo.whoAmI();
 	blo.attack("a small fly");
 }

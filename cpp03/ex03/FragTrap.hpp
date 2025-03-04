@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 11:52:45 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/28 12:22:17 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:33:53 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 class FragTrap : virtual public ClapTrap {
 public:
+	const static unsigned int INIT_HITPTS = 100;
+	const static unsigned int INIT_ENERGYPTS = 100;
+	const static unsigned int INIT_ATTCKDMG = 30;
+
 	FragTrap();
 	FragTrap(std::string name);
 	FragTrap(const FragTrap &source);
