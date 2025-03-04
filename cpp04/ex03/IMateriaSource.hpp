@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:24:15 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/02 15:50:59 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:19:02 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 class IMateriaSource
 {
 public:
-	virtual ~IMateriaSource() = default;
+	virtual ~IMateriaSource() {}
 	virtual void learnMateria(AMateria*) = 0;
 	virtual AMateria* createMateria(std::string const & type) = 0;
 };
