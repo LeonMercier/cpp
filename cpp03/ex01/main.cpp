@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/28 14:50:32 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:20:42 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(void)
 	kronk.takeDamage(10);
 	kronk.attack("Krink");
 	kronk.beRepaired(10);
-	kronk.takeDamage(95);
+	kronk.takeDamage(96);
 	kronk.attack("Krink");
 
 	ScavTrap	jor("Jornathan");
@@ -43,4 +43,17 @@ int	main(void)
 
 	jor = kronk;
 	jor.attack("somethin");
+
+	// energy points
+	ScavTrap	bobo("Bobo");
+	for (int i = 0; i < 51; i++)
+	{
+		bobo.attack("a swarm of bees");
+	}
+
+	// hitpoints
+	ScavTrap	yoyo("Yoyo");
+	yoyo.takeDamage(99);
+	yoyo.takeDamage(1);
+	yoyo.takeDamage(1);
 }
