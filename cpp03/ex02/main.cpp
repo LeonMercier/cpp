@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/02/17 15:25:51 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:28:43 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,18 @@ int	main(void)
 	ber.highFivesGuys();
 	ber = ger;
 	ber.highFivesGuys();
+
+	// energy points
+	FragTrap	bobo("Bobo");
+	for (int i = 0; i < 101; i++)
+	{
+		bobo.attack("a swarm of bees");
+	}
+
+	// hitpoints
+	FragTrap	yoyo("Yoyo");
+	yoyo.takeDamage(99);
+	yoyo.takeDamage(1);
+	yoyo.takeDamage(1);
+
 }
