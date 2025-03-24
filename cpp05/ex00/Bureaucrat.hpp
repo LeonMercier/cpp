@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:10:18 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/21 14:09:05 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:08:48 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,24 @@ public:
 
 	class	GradeTooHighException;
 	class	GradeTooLowException;
-
-	
-
 };
 
 std::ostream &operator<<(std::ostream &ostm, const Bureaucrat &src);
 
 class Bureaucrat::GradeTooHighException: public std::exception
 {
+private:
+	std::string	_msg;
+public:
+	GradeTooHighException();
 	const char *what() const throw();
 };
 
 class Bureaucrat::GradeTooLowException: public std::exception
 {
+private:
+	std::string	_msg;
+public:
+	GradeTooLowException();
 	const char *what() const throw();
 };

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/21 14:11:45 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:09:17 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,10 @@ int	Bureaucrat::getGrade()
 
 std::ostream &operator<<(std::ostream &ostm, const Bureaucrat &src)
 {}
+
+
+Bureaucrat::GradeTooHighException::GradeTooHighException() :
+	_msg("Grade too high") {}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException() :
+	_msg("Grade too low") {}
