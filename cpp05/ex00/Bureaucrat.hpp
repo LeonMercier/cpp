@@ -10,46 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
 #include <iostream>
+#include <string>
 
-class	Bureaucrat
-{
-private:
-	const std::string	_name;
-	int					_grade;
-public:
+class Bureaucrat {
+  private:
+	const std::string _name;
+	int				  _grade;
+
+  public:
 	Bureaucrat();
 	Bureaucrat(std::string name, int grade);
 	Bureaucrat(const Bureaucrat &source);
-	Bureaucrat	&operator=(const Bureaucrat &source);
+	Bureaucrat &operator=(const Bureaucrat &source);
 	~Bureaucrat();
 
-	std::string	getName() const;
+	std::string getName() const;
 	int			getGrade() const;
 	void		incGrade();
 	void		decGrade();
 
-	class	GradeTooHighException;
-	class	GradeTooLowException;
+	class GradeTooHighException;
+	class GradeTooLowException;
 };
 
 std::ostream &operator<<(std::ostream &ostm, const Bureaucrat &src);
 
-class Bureaucrat::GradeTooHighException: public std::exception
-{
-private:
-	const std::string	_msg;
-public:
+class Bureaucrat::GradeTooHighException : public std::exception {
+  private:
+	const std::string _msg;
+
+  public:
 	GradeTooHighException();
 	const char *what() const throw();
 };
 
-class Bureaucrat::GradeTooLowException: public std::exception
-{
-private:
-	std::string	_msg;
-public:
+class Bureaucrat::GradeTooLowException : public std::exception {
+  private:
+	std::string _msg;
+
+  public:
 	GradeTooLowException();
 	const char *what() const throw();
 };

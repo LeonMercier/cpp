@@ -12,82 +12,71 @@
 
 #include "Bureaucrat.hpp"
 
-int	main(void) {
+int main(void) {
 	try {
-		Bureaucrat	john("John", 0);
+		Bureaucrat john("John", 0);
 		std::cout << john;
-	}
-	catch (std::exception &e) {
+	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 	try {
-		Bureaucrat	baba("Baba", 151);
+		Bureaucrat baba("Baba", 151);
 		std::cout << baba;
-	}
-	catch (std::exception &e) {
+	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 	try {
-		Bureaucrat	bobo("Bobo", 50);
+		Bureaucrat bobo("Bobo", 50);
 		std::cout << bobo;
-	}
-	catch (std::exception &e) {
+	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 	try {
-		Bureaucrat	def;
+		Bureaucrat def;
 		std::cout << def;
-	}
-	catch (std::exception &e) {
+	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 	try {
-		Bureaucrat	liz("Liz", 1);
+		Bureaucrat liz("Liz", 1);
 		std::cout << liz;
 		try {
 			liz.incGrade();
 			std::cout << liz;
-		}
-		catch (std::exception &e) {
+		} catch (std::exception &e) {
 			std::cout << e.what() << std::endl;
 		}
 		try {
 			liz.decGrade();
 			std::cout << liz;
-		}
-		catch (std::exception &e) {
+		} catch (std::exception &e) {
 			std::cout << e.what() << std::endl;
 		}
-	}
-	catch (std::exception &e) {
+	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 	try {
-		Bureaucrat	minnie("Minnie", 150);
+		Bureaucrat minnie("Minnie", 150);
 		std::cout << minnie;
 		try {
 			minnie.incGrade();
 			std::cout << minnie;
-		}
-		catch (std::exception &e) {
+		} catch (std::exception &e) {
 			std::cout << e.what() << std::endl;
 		}
 		try {
 			minnie.decGrade();
 			std::cout << minnie;
-		}
-		catch (std::exception &e) {
+		} catch (std::exception &e) {
 			std::cout << e.what() << std::endl;
 		}
 		try {
 			minnie.decGrade();
 			std::cout << minnie;
-		}
-		catch (std::exception &e) {
+		} catch (std::exception &e) {
 			std::cout << e.what() << std::endl;
 		}
-	}
-	catch (std::exception &e) {
+	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 }
