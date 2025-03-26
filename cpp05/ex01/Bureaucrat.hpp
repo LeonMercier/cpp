@@ -6,21 +6,18 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:10:18 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/25 17:34:57 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:55:39 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include <iostream>
 #include <string>
 
+#include "Form.hpp"
 class Form;
-
 class Bureaucrat {
-  private:
-	const std::string _name;
-	int				  _grade;
-
-  public:
+public:
 	Bureaucrat();
 	Bureaucrat(std::string name, int grade);
 	Bureaucrat(const Bureaucrat &source);
@@ -36,6 +33,10 @@ class Bureaucrat {
 
 	class GradeTooHighException;
 	class GradeTooLowException;
+
+private:
+	const std::string _name;
+	int				  _grade;
 };
 
 std::ostream &operator<<(std::ostream &ostm, const Bureaucrat &src);

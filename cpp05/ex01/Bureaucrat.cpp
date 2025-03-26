@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/25 12:14:28 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:01:30 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,17 @@ void Bureaucrat::decGrade() {
 	} else {
 		throw GradeTooLowException();
 	}
+}
+
+void	Bureaucrat::signForm(Form &form) {
+	try {
+		form.beSigned(*this);
+	} catch (std::exception &e) {
+		std::cout << _name << " couldn't sign " << form.getName() << " because "
+			<< e.what() << std::endl;
+		return ;
+	}
+	std::cout << _name << " signed " << form.getName() << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &ostm, const Bureaucrat &src) {

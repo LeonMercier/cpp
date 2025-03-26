@@ -6,11 +6,11 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/03/25 17:54:55 by lemercie         ###   ########.fr        #
+#    Updated: 2025/03/26 14:09:20 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CXX 		= c++
+CXX 		= cc
 CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
 
 SRCS		= main.cpp Bureaucrat.cpp Form.cpp

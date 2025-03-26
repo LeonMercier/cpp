@@ -6,26 +6,29 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:50:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/25 17:37:52 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:52:50 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include <string>
-#include "Bureaucrat.hpp"
+#include <iostream>
 
+#include "Bureaucrat.hpp"
+class Bureaucrat;
 class	Form {
 public:
 	Form();
-	Form(std::string name, int gradeToSign, int gradeToExecute);
+	Form(std::string name, bool sig, int gradeToSign, int gradeToExecute);
 	Form(const Form &source);
 	Form &operator=(const Form &source);
 	~Form();
 
-	std::string	getName();
-	bool		getSigned();
-	int			getGradeToSign();
-	int			getGradeToExecute();
-	void		beSigned(Bureaucrat bur) const;
+	std::string	getName() const;
+	bool		getSigned() const;
+	int			getGradeToSign() const;
+	int			getGradeToExecute() const;
+	void		beSigned(Bureaucrat &bur);
 	
 	class GradeTooHighException;
 	class GradeTooLowException;
