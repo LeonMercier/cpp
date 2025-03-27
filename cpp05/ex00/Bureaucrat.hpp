@@ -6,9 +6,11 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:10:18 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/24 14:04:12 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:42:16 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #include <iostream>
 #include <string>
