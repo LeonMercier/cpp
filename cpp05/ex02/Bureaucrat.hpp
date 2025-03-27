@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:10:18 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/26 15:24:23 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:14:16 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ public:
 	void		decGrade();
 
 	void		signForm(AForm &form);
+	void		executeForm(AForm const &form);
 
 	class GradeTooHighException;
 	class GradeTooLowException;

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:23:54 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/26 15:24:46 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:15:49 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ void	Bureaucrat::signForm(AForm &form) {
 		return ;
 	}
 	std::cout << _name << " signed " << form.getName() << std::endl;
+}
+
+void		Bureaucrat::executeForm(AForm const &form) {
+	try {
+		form.execute(*this);
+	} catch (std::exception &e) {
+		std::cout << "Bureaucrat " << this->getName()
+			<< " failed to execute " << form.getName()
+			<< " because " << e.what() << std::endl;
+		return ;
+	}
+	std::cout << this->getName() << " exeuted " << form.getName() << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &ostm, const Bureaucrat &src) {

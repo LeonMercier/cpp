@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:24:59 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/26 16:44:07 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:06:18 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) :
 	std::cout << "Shr constructor with nameattribute" << target << std::endl;
 }
 
+// srand() has to be called for initialization before calling rand()
 void	RobotomyRequestForm::formAction() const {
-	std::cout << "Robotomized: " << this->getTarget() << std::endl;
+	std::srand(std::time(NULL));
+	int	test = std::rand() % 2;
+	std::cout << "* wild drilling noises *" << std::endl;
+	if (test == 0) {
+		std::cout << this->getTarget() << " has been robotomized successfully!"
+			<< std::endl;
+	} else {
+		std::cout << "Robotomy of " << this->getTarget() << " failed..."
+			<< std::endl;
+	}
 }

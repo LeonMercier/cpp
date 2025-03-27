@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/26 16:48:53 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:16:43 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,13 @@ int main(void) {
 	try {
 		fgh.execute(erm);
 	} catch (...) {}
+	
+	ShrubberyCreationForm jkl("tree");
+	try {
+		jkl.execute(erm);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+
+		erm.executeForm(jkl);
 }
