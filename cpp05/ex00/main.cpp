@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/25 12:25:23 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 10:42:35 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int main(void) {
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
+
 	try {
 		Bureaucrat liz("Liz", 1);
 		std::cout << liz;
@@ -55,9 +56,12 @@ int main(void) {
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
+
 	try {
 		Bureaucrat minnie("Minnie", 150);
 		std::cout << minnie;
+		std::cout << "name: " << minnie.getName()
+				  << " grade: " << minnie.getGrade() << std::endl;
 		try {
 			minnie.incGrade();
 			std::cout << minnie;
