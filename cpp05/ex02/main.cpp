@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/28 13:09:44 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:41:39 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int main(void) {
 	Bureaucrat	erm("Ermando", 1);
-	Bureaucrat	orm("Ormando", 50);
+	Bureaucrat	orm("Ormando", 150);
 /* 	Form		fofo("Fofo", false, 50, 50);
 	erm.signForm(fofo);
 	orm.signForm(fofo); */
@@ -39,7 +39,28 @@ int main(void) {
 		std::cout << e.what() << std::endl;
 	}
 
+	erm.executeForm(asd);
+	erm.signForm(asd);
+	erm.executeForm(asd);
+
+	erm.executeForm(fgh);
+	erm.signForm(fgh);
+	erm.executeForm(fgh);
+
+	erm.executeForm(jkl);
 	erm.signForm(jkl);
 	erm.executeForm(jkl);
+
+	orm.executeForm(asd);
+	orm.signForm(asd);
+	orm.executeForm(asd);
+
+	orm.executeForm(fgh);
+	orm.signForm(fgh);
+	orm.executeForm(fgh);
+
+	orm.executeForm(jkl);
+	orm.signForm(jkl);
+	orm.executeForm(jkl);
 
 }

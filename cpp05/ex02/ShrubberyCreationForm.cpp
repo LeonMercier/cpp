@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:24:59 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/28 14:41:57 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:04:13 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ const std::string ShrubberyCreationForm::TREE =
 +.:.:..:..:..=-+*+...::..:-+=:=.-:.:=:+=*=:*-+.+-+-..-+=---+--*.**..++*=-+*=*\n\
 .=*..::-**--=*#:=:+:--=--..-=**#+*==*%=.=%**=#.*+:.#+++#+#==--+=*++**+#==+-+*";
 
-
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
 	: AForm("Shrubbery form", false, 145, 137, target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &source) 	: AForm(source) {
-}
+ShrubberyCreationForm::ShrubberyCreationForm(
+	const ShrubberyCreationForm &source)
+	: AForm(source) {}
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &source) {
+ShrubberyCreationForm &
+ShrubberyCreationForm::operator=(const ShrubberyCreationForm &source) {
 	if (this != &source) {
 		AForm::operator=(source);
 	}
@@ -66,8 +67,8 @@ const char *ShrubberyCreationForm::FileOpenFailException::what() const throw() {
 	return (_msg.c_str());
 }
 
-void	ShrubberyCreationForm::formAction() const {
-	std::string	filename = getTarget() + "_shrubbery";
+void ShrubberyCreationForm::formAction() const {
+	std::string	  filename = getTarget() + "_shrubbery";
 	std::ofstream file(filename.c_str());
 	if (!file) {
 		throw FileOpenFailException();

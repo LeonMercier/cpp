@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:50:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/28 13:42:09 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:22:56 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ public:
 	
 	class GradeTooHighException;
 	class GradeTooLowException;
+	class FormNotSignedException;
 private:
 	const std::string	_name;
 	bool				_signed;
@@ -62,5 +63,14 @@ class AForm::GradeTooLowException : public std::exception {
 
   public:
 	GradeTooLowException();
+	const char *what() const throw();
+};
+
+class AForm::FormNotSignedException : public std::exception {
+  private:
+	std::string _msg;
+
+  public:
+	FormNotSignedException();
 	const char *what() const throw();
 };
