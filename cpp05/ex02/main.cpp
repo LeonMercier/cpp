@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/27 12:16:43 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:09:44 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ int main(void) {
 		std::cout << e.what() << std::endl;
 	}
 
-		erm.executeForm(jkl);
+	erm.signForm(jkl);
+	erm.executeForm(jkl);
+
 }

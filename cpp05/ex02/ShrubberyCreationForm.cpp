@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:24:59 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/27 11:46:27 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:41:57 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,20 @@ const std::string ShrubberyCreationForm::TREE =
 .=*..::-**--=*#:=:+:--=--..-=**#+*==*%=.=%**=#.*+:.#+++#+#==--+=*++**+#==+-+*";
 
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : 
-	AForm("Shrubbery form", false, 145, 137, target)
-{
-	std::cout << "Shr constructor with nameattribute" << target << std::endl;
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+	: AForm("Shrubbery form", false, 145, 137, target) {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &source) 	: AForm(source) {
 }
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &source) {
+	if (this != &source) {
+		AForm::operator=(source);
+	}
+	return *this;
+}
+
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 ShrubberyCreationForm::FileOpenFailException::FileOpenFailException()
 	: _msg("Cannot open file") {}

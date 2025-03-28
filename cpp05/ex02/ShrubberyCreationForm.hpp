@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:22:36 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/27 11:41:09 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:29:45 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ public:
 	// default constructor is a constructor where all arguments have default 
 	// values (indicated with = sign)
 	ShrubberyCreationForm(std::string target = "Default target");
+	ShrubberyCreationForm(const ShrubberyCreationForm &source);
+	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &source);
+	~ShrubberyCreationForm();
 	
 	void	formAction() const;
 
