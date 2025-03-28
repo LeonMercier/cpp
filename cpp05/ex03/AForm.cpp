@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:38:20 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/26 16:43:50 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:24:37 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ AForm::AForm(const AForm &source) :
 	_name(source._name),
 	_signed(source._signed),
 	_gradeToSign(source._gradeToSign),
-	_gradeToExecute(source._gradeToExecute) {}
+	_gradeToExecute(source._gradeToExecute),
+	_target(source._target) {}
 
 // TODO: delete this?
 AForm &AForm::operator=(const AForm &source) {
@@ -82,6 +83,9 @@ void		AForm::execute(Bureaucrat const &executor) const {
 	if (executor.getGrade() > _gradeToExecute) {
 		throw GradeTooLowException();
 	}
+	if (!_signed) {
+		throw FormNotSignedException();
+	}
 	this->formAction();
 }
 
@@ -100,10 +104,17 @@ AForm::GradeTooHighException::GradeTooHighException()
 AForm::GradeTooLowException::GradeTooLowException()
 	: _msg("Grade too low") {}
 
+AForm::FormNotSignedException::FormNotSignedException()
+	: _msg("Form not signed") {}
+
 const char *AForm::GradeTooHighException::what() const throw() {
 	return (_msg.c_str());
 }
 
 const char *AForm::GradeTooLowException::what() const throw() {
+	return (_msg.c_str());
+}
+
+const char *AForm::FormNotSignedException::what () const throw() {
 	return (_msg.c_str());
 }
