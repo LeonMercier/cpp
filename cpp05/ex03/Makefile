@@ -6,7 +6,7 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/03/27 16:06:36 by lemercie         ###   ########.fr        #
+#    Updated: 2025/03/28 16:33:09 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ $(NAME): $(OBJS) $(HEADERS)
 
 clean: 
 	rm -f $(OBJS)
+	rm  *shrubbery
 
 fclean: clean
 	rm -f $(NAME)
