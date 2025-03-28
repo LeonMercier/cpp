@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:50:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/26 13:52:50 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:32:36 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ class Form {
 std::ostream &operator<<(std::ostream &ostm, const Form &src);
 
 class Form::GradeTooHighException : public std::exception {
-  private:
-	const std::string _msg;
-
   public:
 	GradeTooHighException();
 	const char *what() const throw();
+
+  private:
+	const std::string _msg;
 };
 
 class Form::GradeTooLowException : public std::exception {
-  private:
-	std::string _msg;
-
   public:
 	GradeTooLowException();
 	const char *what() const throw();
+
+  private:
+	const std::string _msg;
 };
