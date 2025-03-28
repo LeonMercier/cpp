@@ -17,7 +17,7 @@
 #include "Form.hpp"
 class Form;
 class Bureaucrat {
-public:
+  public:
 	Bureaucrat();
 	Bureaucrat(std::string name, int grade);
 	Bureaucrat(const Bureaucrat &source);
@@ -29,12 +29,12 @@ public:
 	void		incGrade();
 	void		decGrade();
 
-	void		signForm(Form &form);
+	void signForm(Form &form);
 
 	class GradeTooHighException;
 	class GradeTooLowException;
 
-private:
+  private:
 	const std::string _name;
 	int				  _grade;
 };

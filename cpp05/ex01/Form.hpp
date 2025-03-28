@@ -11,32 +11,33 @@
 /* ************************************************************************** */
 
 #pragma once
-#include <string>
 #include <iostream>
+#include <string>
 
 #include "Bureaucrat.hpp"
 class Bureaucrat;
-class	Form {
-public:
+class Form {
+  public:
 	Form();
 	Form(std::string name, bool sig, int gradeToSign, int gradeToExecute);
 	Form(const Form &source);
 	Form &operator=(const Form &source);
 	~Form();
 
-	std::string	getName() const;
+	std::string getName() const;
 	bool		getSigned() const;
 	int			getGradeToSign() const;
 	int			getGradeToExecute() const;
 	void		beSigned(Bureaucrat &bur);
-	
+
 	class GradeTooHighException;
 	class GradeTooLowException;
-private:
-	const std::string	_name;
-	bool				_signed;
-	const int			_gradeToSign;
-	const int			_gradeToExecute;
+
+  private:
+	const std::string _name;
+	bool			  _signed;
+	const int		  _gradeToSign;
+	const int		  _gradeToExecute;
 };
 
 std::ostream &operator<<(std::ostream &ostm, const Form &src);
