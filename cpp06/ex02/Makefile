@@ -6,7 +6,7 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/04/15 17:03:26 by lemercie         ###   ########.fr        #
+#    Updated: 2025/04/15 18:04:51 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CXX 		= c++
 CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
 
 SRCS		= main.cpp Base.cpp
-HEADERS		= Base.hpp
+HEADERS		= Base.hpp A.hpp B.hpp C.hpp
 OBJS		= $(SRCS:.cpp=.o)
 NAME		= test
 
