@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:24:11 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/15 16:39:39 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:53:35 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ int	main(void) {
 		std::cout << "Failure" << std::endl;
 	}
 	std::cout << result->name << ": " << result->value << std::endl;
+	delete one;
 }
