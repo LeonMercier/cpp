@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:54:04 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/14 18:58:14 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:46:05 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void stripTrailingZeroes(std::string &str) {
 		str = str.substr(0, str.find_last_not_of('0') + 2);
 	}
 }
-
+// TODO: convert char to int and other numrics
 void ScalarConverter::convert(std::string input) {
 	char_result = "impossible";
 	if (input.length() == 1) {
@@ -72,6 +72,7 @@ void ScalarConverter::convert(std::string input) {
 		double_result = "impossible";
 	}
 
+	// TODO: impossibleF
 	std::cout << "char: " << char_result << std::endl;
 	std::cout << "int: " << int_result << std::endl;
 	std::cout << "float: " << float_result << "f" << std::endl;
