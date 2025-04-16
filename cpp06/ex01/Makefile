@@ -6,7 +6,7 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/04/15 12:03:58 by lemercie         ###   ########.fr        #
+#    Updated: 2025/04/16 17:19:29 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CXX 		= c++
 CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
 
 SRCS		= main.cpp Serializer.cpp
-HEADERS		= Serializer.hpp
+HEADERS		= Serializer.hpp Data.hpp
 OBJS		= $(SRCS:.cpp=.o)
 NAME		= test
 
