@@ -6,13 +6,14 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/28 10:42:35 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:04:58 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 int main(void) {
+	std::cout << "### Creating impossible bureaucrats" << std::endl;
 	try {
 		Bureaucrat john("John", 0);
 		std::cout << john;
@@ -25,12 +26,16 @@ int main(void) {
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
+
+	std::cout << std::endl << "### Create normal bureaucrat" << std::endl;
 	try {
 		Bureaucrat bobo("Bobo", 50);
 		std::cout << bobo;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
+
+	std::cout << std::endl << "### Default constructor" << std::endl;
 	try {
 		Bureaucrat def;
 		std::cout << def;
@@ -38,6 +43,7 @@ int main(void) {
 		std::cout << e.what() << std::endl;
 	}
 
+	std::cout << std::endl << "### Increment and decrement grade" << std::endl;
 	try {
 		Bureaucrat liz("Liz", 1);
 		std::cout << liz;
@@ -57,6 +63,7 @@ int main(void) {
 		std::cout << e.what() << std::endl;
 	}
 
+	std::cout << std::endl << "### Stream overload" << std::endl;
 	try {
 		Bureaucrat minnie("Minnie", 150);
 		std::cout << minnie;
