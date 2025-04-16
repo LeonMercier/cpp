@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:50:21 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/28 15:22:56 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:50:09 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ public:
 	   std::string target);
 	AForm(const AForm &source);
 	AForm &operator=(const AForm &source);
-	~AForm();
+	virtual ~AForm();
 
 	std::string		getName() const;
 	bool			getSigned() const;
