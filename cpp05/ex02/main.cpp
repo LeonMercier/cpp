@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/28 15:41:39 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 11:55:06 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
-
+// TODO: put everyhing in tests in a try/catch
 int main(void) {
 	Bureaucrat	erm("Ermando", 1);
 	Bureaucrat	orm("Ormando", 150);
