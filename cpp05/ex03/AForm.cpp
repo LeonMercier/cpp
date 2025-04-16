@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:38:20 by lemercie          #+#    #+#             */
-/*   Updated: 2025/03/28 15:24:37 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:53:50 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ AForm::AForm(const AForm &source) :
 	_gradeToExecute(source._gradeToExecute),
 	_target(source._target) {}
 
-// TODO: delete this?
+// up to interpretation whether a class that has const data members should 
+// have this overload at all....
 AForm &AForm::operator=(const AForm &source) {
 	if (this != &source)
 	{

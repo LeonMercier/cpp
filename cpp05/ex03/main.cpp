@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/16 14:51:03 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:49:34 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,74 @@
 #include "Intern.hpp"
 
 int main(void) {
-	Bureaucrat	erm("Ermando", 1);
-	Bureaucrat	orm("Ormando", 50);
+	try {
 
-	Intern	dude;
-	AForm *shr = dude.makeForm("shrubbery creation", "my house");
-	AForm *rob = dude.makeForm("robotomy request", "my house");
-	AForm *pre = dude.makeForm("presidential pardon", "my house");
-	AForm *lol = dude.makeForm("useless form", "my house");
+		Bureaucrat erm("Ermando", 1);
+		Bureaucrat orm("Ormando", 50);
+		Intern	dude;
 
-	try {
-		shr->execute(erm);
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
-	try {
-		rob->execute(erm);
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
-	erm.signForm(*pre);
-	try {
-		pre->execute(erm);
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
-	try {
-		if (lol != nullptr) {
-			lol->execute(erm);
+		// non-existant form
+		try {
+			AForm *lol = dude.makeForm("useless form", "my house");
+			delete lol;
+		} catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
 		}
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+
+		// non-signed forms
+		try {
+			AForm *shr = dude.makeForm("shrubbery creation", "my house");
+			shr->execute(erm);
+			delete shr;
+		} catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		try {
+			AForm *rob = dude.makeForm("robotomy request", "my house");
+			rob->execute(erm);
+			delete rob;
+		} catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		try {
+			AForm *pre = dude.makeForm("presidential pardon", "my house");
+			pre->execute(erm);
+			delete pre;
+		} catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		// sign forms first
+		try {
+			AForm *shr = dude.makeForm("shrubbery creation", "my house");
+			erm.signForm(*shr);
+			shr->execute(erm);
+			delete shr;
+		} catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		try {
+			AForm *rob = dude.makeForm("robotomy request", "my house");
+			erm.signForm(*rob);
+			rob->execute(erm);
+			delete rob;
+		} catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		try {
+			AForm *pre = dude.makeForm("presidential pardon", "my house");
+			erm.signForm(*pre);
+			pre->execute(erm);
+			delete pre;
+		} catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+
+	} catch (...) {
+		std::cout << "Error: unhandled exception" << std::endl;
 	}
-	delete shr;
-	delete rob;
-	delete pre;
 }
