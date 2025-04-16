@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:54:04 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/15 12:46:05 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:00:03 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,28 @@ static void stripTrailingZeroes(std::string &str) {
 		str = str.substr(0, str.find_last_not_of('0') + 2);
 	}
 }
+
+static numType	detectType(std::string& input) {
+	if (input.length() == 1)					{ return CHAR; }
+	if (input == "nanf")						{ return FLOAT; }
+	if (input == "nan")							{ return DOUBLE; }
+	if (input.find('.') == std::string::npos)	{ return INT; }
+	return ERROR;
+}
+
+void ScalarConverter::convert(std::string input) {
+	numType detected_type = detectType(input);
+	switch (detected_type) {
+		case CHAR:
+
+	}
+
+}
+
+// TODO: use implicit casts only for promotion, othwerwise use static casts
+// TODO: handle nan and nanf inputs
 // TODO: convert char to int and other numrics
+// TODO: detect type of input and then cast into the other types
 void ScalarConverter::convert(std::string input) {
 	char_result = "impossible";
 	if (input.length() == 1) {
@@ -75,6 +96,10 @@ void ScalarConverter::convert(std::string input) {
 	// TODO: impossibleF
 	std::cout << "char: " << char_result << std::endl;
 	std::cout << "int: " << int_result << std::endl;
-	std::cout << "float: " << float_result << "f" << std::endl;
+	std::cout << "float: " << float_result;
+	if (float_result != "impossible") {
+		std::cout << "f";
+	}
+	std::cout << std::endl;
 	std::cout << "double: " << double_result << std::endl;
 }
