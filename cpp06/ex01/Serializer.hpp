@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:07:43 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/15 16:31:16 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:23:04 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string>
 #include <iostream>
 
+//TODO: make Data into a class
 typedef struct SData {
 	std::string	name;
 	int			value;
