@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:39:53 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/16 15:49:34 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:12:10 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 int main(void) {
 	try {
+		std::srand(std::time(NULL));
 
 		Bureaucrat erm("Ermando", 1);
 		Bureaucrat orm("Ormando", 50);
