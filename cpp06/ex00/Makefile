@@ -6,12 +6,12 @@
 #    By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/10 13:53:11 by lemercie          #+#    #+#              #
-#    Updated: 2025/04/14 10:45:48 by lemercie         ###   ########.fr        #
+#    Updated: 2025/04/17 16:00:40 by lemercie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX 		= c++
-CXXFLAGS 	= -Wall -Wextra -Werror -std=c++11
+CXXFLAGS 	= -Wall -Wextra -Werror -std=c++17
 
 SRCS		= main.cpp ScalarConverter.cpp
 HEADERS		= ScalarConverter.hpp
