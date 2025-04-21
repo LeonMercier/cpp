@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:46:03 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/17 16:43:02 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:49:43 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <iostream>
 #include <cctype> // isprint()
 #include <limits>
-#include <sstream>
-#include <iomanip>
 
 typedef enum {
 	CHAR,
