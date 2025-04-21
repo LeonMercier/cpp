@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:54:04 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/21 13:48:18 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/21 16:54:43 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static std::string getChar(int input) {
 			result = "Not displayable";
 		}
 	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 		return ScalarConverter::IMPOSSIBLE;
 	}
 	return result;
