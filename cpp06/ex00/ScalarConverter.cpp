@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:54:04 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/21 16:54:43 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:58:53 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static void stripTrailingZeroes(std::string &str) {
 
 static numType	detectType(std::string& input) {
 	if (input.length() == 1)					{ return CHAR; }
-	/* if (input == "nanf")						{ return FLOAT; }
-	if (input == "nan")							{ return DOUBLE; } */
 	if (input.find('.') == std::string::npos)	{ return INT; }
 	if (input[input.length() -1] == 'f')		{ return FLOAT; }
 	return DOUBLE;
@@ -76,8 +74,14 @@ static void	handlePseudoLiteral(std::string input) {
 			 flt_result, dbl_result);
 }
 
+static void	allImpossible() {
+	printResult(ScalarConverter::IMPOSSIBLE, ScalarConverter::IMPOSSIBLE,
+			 ScalarConverter::IMPOSSIBLE, ScalarConverter::IMPOSSIBLE);
+	exit(0);
+}
+
 // if a number has no '.', then it is an int. But if it's too large to fit into
-// an int, we cannot convert it into float/double either
+// an int, we will not convert it into float/double either
 void ScalarConverter::convert(std::string input) {
 	std::string	chr_result;
 	std::string	int_result;
@@ -117,10 +121,7 @@ void ScalarConverter::convert(std::string input) {
 				flt_result = std::to_string(static_cast<float>(test_int));
 				dbl_result = std::to_string(static_cast<double>(test_int));
 			} catch (std::exception &e) {
-				chr_result = IMPOSSIBLE;
-				int_result = IMPOSSIBLE;
-				flt_result = IMPOSSIBLE;
-				dbl_result = IMPOSSIBLE;
+				allImpossible();
 			}
 			break ;
 		case FLOAT: 
@@ -137,10 +138,7 @@ void ScalarConverter::convert(std::string input) {
 				}
 				dbl_result = std::to_string(static_cast<double>(test_float));
 			} catch (std::exception &e) {
-				chr_result = IMPOSSIBLE;
-				int_result = IMPOSSIBLE;
-				flt_result = IMPOSSIBLE;
-				dbl_result = IMPOSSIBLE;
+				allImpossible();
 			}
 			break ;
 		case DOUBLE:
@@ -156,17 +154,11 @@ void ScalarConverter::convert(std::string input) {
 				}
 				flt_result = std::to_string(static_cast<float>(test_double));
 			} catch (std::exception &e) {
-				chr_result = IMPOSSIBLE;
-				int_result = IMPOSSIBLE;
-				flt_result = IMPOSSIBLE;
-				dbl_result = IMPOSSIBLE;
+				allImpossible();
 			}
 			break ;
 		case ERROR:
-			chr_result = IMPOSSIBLE;
-			int_result = IMPOSSIBLE;
-			flt_result = IMPOSSIBLE;
-			dbl_result = IMPOSSIBLE;
+			allImpossible();
 	}
 	if (flt_result != IMPOSSIBLE) {
 		stripTrailingZeroes(flt_result);
