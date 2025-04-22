@@ -17,7 +17,9 @@ int main(int, char**)
     //SCOPE
     {
         Array<int> tmp = numbers;
+		std::cout << tmp[100] << " = " << numbers[100] << std::endl;
         Array<int> test(tmp);
+		std::cout << tmp[100] << " = " << test[100] << std::endl;
     }
 
     for (int i = 0; i < MAX_VAL; i++)
@@ -51,14 +53,15 @@ int main(int, char**)
     }
     delete [] mirror;//
 	
-	std::cout << "Array of one" << std::endl;
+	std::cout << std::endl;
+	std::cout << "### Array of one" << std::endl;
 	Array<int> one(1);
 	std::cout << one.size() << std::endl;
 	one[0] = 42;
 	std::cout << one[0] << std::endl;
 	std::cout << std::endl;
 	
-	std::cout << "Array of two" << std::endl;
+	std::cout << "### Array of two" << std::endl;
 	Array<int> two(2);
 	std::cout << two.size() << std::endl;
 	two[0] = 42;
@@ -66,15 +69,15 @@ int main(int, char**)
 	std::cout << two[0] << " ," << two[1] << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "Array of strings" << std::endl;
+	std::cout << "### Array of strings" << std::endl;
 	Array<std::string> strarr(5);
-	strarr[0] = "Hello";
+	strarr[0] = "Hello ";
 	strarr[1] = "there";
-	strarr[2] = ", this";
-	strarr[3] = "is";
+	strarr[2] = ", this ";
+	strarr[3] = "is ";
 	strarr[4] = "me.";
 	for (size_t i = 0; i < strarr.size(); i++) {
-		std::cout << strarr[i] << " ";
+		std::cout << strarr[i];
 	}
 	std::cout << std::endl;
 
