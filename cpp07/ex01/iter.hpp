@@ -6,9 +6,10 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:00:42 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/18 16:04:36 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:02:04 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#pragma once
 
 #include <iostream>
 
