@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:54:04 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/22 17:58:53 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:46:44 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,11 @@ static void	handlePseudoLiteral(std::string input) {
 			 flt_result, dbl_result);
 }
 
+// exiting from here seemed to cause a potential meory leak...
+// maybe because we come here from a caught exception?
 static void	allImpossible() {
 	printResult(ScalarConverter::IMPOSSIBLE, ScalarConverter::IMPOSSIBLE,
 			 ScalarConverter::IMPOSSIBLE, ScalarConverter::IMPOSSIBLE);
-	exit(0);
 }
 
 // if a number has no '.', then it is an int. But if it's too large to fit into
@@ -122,6 +123,7 @@ void ScalarConverter::convert(std::string input) {
 				dbl_result = std::to_string(static_cast<double>(test_int));
 			} catch (std::exception &e) {
 				allImpossible();
+				return ;
 			}
 			break ;
 		case FLOAT: 
@@ -139,6 +141,7 @@ void ScalarConverter::convert(std::string input) {
 				dbl_result = std::to_string(static_cast<double>(test_float));
 			} catch (std::exception &e) {
 				allImpossible();
+				return ;
 			}
 			break ;
 		case DOUBLE:
@@ -155,10 +158,12 @@ void ScalarConverter::convert(std::string input) {
 				flt_result = std::to_string(static_cast<float>(test_double));
 			} catch (std::exception &e) {
 				allImpossible();
+				return ;
 			}
 			break ;
 		case ERROR:
 			allImpossible();
+			return ;
 	}
 	if (flt_result != IMPOSSIBLE) {
 		stripTrailingZeroes(flt_result);
