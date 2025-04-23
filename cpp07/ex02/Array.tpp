@@ -9,6 +9,8 @@
 /*   Updated: 2025/04/22 16:39:57 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#pragma once
+
 #include "Array.hpp"
 
 template <typename T>
