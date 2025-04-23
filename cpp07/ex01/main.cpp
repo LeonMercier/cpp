@@ -6,12 +6,22 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:04:57 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/18 16:05:28 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:43:41 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "iter.hpp"
+
+template <typename T>
+void	testInc(T &param) {
+	param++;
+}
+
+template <typename T>
+void	testPrint(const T &param) {
+	std::cout << param << " ";
+}
 
 int	main(void) {
 
