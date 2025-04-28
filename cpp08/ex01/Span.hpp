@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:03 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/28 12:45:33 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/28 14:56:26 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <vector>
 #include <stdexcept>
 #include <limits>
+#include <array>
 
 class Span {
 public:
@@ -25,9 +26,13 @@ public:
 	void	addNumber(int num);
 	int		shortestSpan();
 	int		longestSpan();
-
-	//TODO: add many
-	//
+	
+	template <typename T>
+	void	superAdd(T start, T end) {
+		while (start != end) {
+			addNumber(*start++);
+		}
+	}
 private:
 	std::vector<int> 			_vec;
 	std::vector<int>::size_type _maxsize;

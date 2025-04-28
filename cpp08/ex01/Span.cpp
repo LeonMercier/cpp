@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:27:20 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/28 12:59:13 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/28 14:38:30 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ void	Span::addNumber(int num) {
 }
 
 int	Span::shortestSpan() {
+	if (_vec.size() <= 1) {
+		throw (std::runtime_error("no span found"));
+	}
 	int	shortest = std::numeric_limits<int>::max();
-	for (auto iter = _vec.begin(); iter < _vec.end() - _vec.size() / 2; iter++ ) {
-		for (auto inner = iter; inner < _vec.end(); inner++) {
+	for (auto iter = _vec.begin(); iter < _vec.end(); iter++ ) {
+		for (auto inner = iter + 1; inner < _vec.end(); inner++) {
 			shortest = std::min(std::abs(*iter - *inner), shortest);
 		}
 	}
@@ -46,6 +49,15 @@ int	Span::shortestSpan() {
 }
 
 int	Span::longestSpan() {
-	return 0;
+	if (_vec.size() <= 1) {
+		throw (std::runtime_error("no span found"));
+	}
+	int	longest = std::numeric_limits<int>::min();
+	for (auto iter = _vec.begin(); iter < _vec.end(); iter++ ) {
+		for (auto inner = iter + 1; inner < _vec.end(); inner++) {
+			longest = std::max(std::abs(*iter - *inner), longest);
+		}
+	}
+	return longest;
 }
 
