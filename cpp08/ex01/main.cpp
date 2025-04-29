@@ -6,12 +6,13 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:53:22 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/28 17:14:00 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:40:42 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <iostream>
+#include <cstdlib>
 
 int main(void) {
 	try {
@@ -51,11 +52,22 @@ int main(void) {
 		std::cout << std::endl;
 		
 		std::cout << "add elements using a range of iterators: " << std::endl;
-		std::vector<int> asd = {6, 3, 17, 9, 11};
+		std::vector<int> vec = {6, 3, 17, 9, 11};
 		Span super(5);
-		super.superAdd(asd.begin(), asd.end());
+		super.superAdd(vec.begin(), vec.end());
 		std::cout << super.shortestSpan() << std::endl;
 		std::cout << super.longestSpan() << std::endl;
+
+		std::cout << "add many elements using range of iterators:" << std::endl;
+		std::vector<int> bigvec;
+		std::srand(time(0));
+		for (int i = 0; i < 10000; i++) {
+			bigvec.push_back(std::rand());
+		}
+		Span mega(10000);
+		mega.superAdd(bigvec.begin(), bigvec.end());
+		std::cout << mega.shortestSpan() << std::endl;
+		std::cout << mega.longestSpan() << std::endl;
 
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;

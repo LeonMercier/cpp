@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:03 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/28 14:56:26 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:25:04 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ public:
 			addNumber(*start++);
 		}
 	}
+
 private:
 	std::vector<int> 			_vec;
 	std::vector<int>::size_type _maxsize;
