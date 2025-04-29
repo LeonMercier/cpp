@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:12:59 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/28 16:23:14 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:42:38 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,4 @@ public:
 
 	reverse_iterator		rend() { return this->c.rend(); };
 	const_reverse_iterator	crend() { return this->c.crend(); };
-
-
 };
