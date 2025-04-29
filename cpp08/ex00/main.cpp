@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:33:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/29 12:19:11 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:01:44 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(void) {
 		std::deque<int> deq = {1, 2, 3, 4, 5};
 		auto found2 = easyfind(deq, 1);
 		if (found2 != deq.end()) {
-			std::cout << *found1 << std::endl;
+			std::cout << *found2 << std::endl;
 		} else {
 			std::cout << "Not found" << std::endl;
 		}
