@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:33:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/28 12:33:27 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:19:11 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int	main(void) {
 	try {
 		std::cout << "Find element in vector" << std::endl;
-		std::vector<int> vec = {1, 2, 3, 4, 5};
+		const std::vector<int> vec = {1, 2, 3, 4, 5};
 		auto found1 = easyfind(vec, 3);
 		if (found1 != vec.end()) {
 			std::cout << *found1 << std::endl;
@@ -28,14 +28,14 @@ int	main(void) {
 			std::cout << "Not found" << std::endl;
 		}
 
-		std::cout << "we can alter the element using the returned iterator"
-			<< std::endl;
+		std::cout << "we cannot alter the element using the returned const";
+		std::cout << "iterator" << std::endl;
 		for (auto iter = vec.begin(); iter != vec.end(); iter++) {
 			std::cout << *iter << ", ";
 		}
 		std::cout << std::endl;
-
-		(*found1)++;
+		//this will not compile because of constness
+	//	(*found1)++;
 
 		for (auto iter = vec.begin(); iter != vec.end(); iter++) {
 			std::cout << *iter << ", ";
