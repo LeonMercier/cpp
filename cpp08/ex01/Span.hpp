@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:12:03 by lemercie          #+#    #+#             */
-/*   Updated: 2025/04/29 12:25:04 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:39:32 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <vector>
 #include <stdexcept>
 #include <limits>
-#include <array>
+#include <algorithm>
 
 class Span {
 public:
@@ -29,9 +29,7 @@ public:
 	
 	template <typename T>
 	void	superAdd(T start, T end) {
-		while (start != end) {
-			addNumber(*start++);
-		}
+		_vec.insert(_vec.end(), start, end);
 	}
 
 private:
