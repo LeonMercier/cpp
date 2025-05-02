@@ -14,12 +14,20 @@
 
 void readAccount(
 	std::map<timepoint, double> & db, std::string filename) {
+	(void) db;
 
 	std::ifstream file(filename);
+	if (!file.is_open()) {
+		throw (std::runtime_error("could not open file: " + filename));
+	}
 	std::string line;
+	std::string delim = ",";
 	while (getline(file, line)) {
-		
-		// do stuff
+		std::string date_str = line.substr(0, line.find(delim));
+		std::string val_str = line.erase(0, date_str.length() + delim.length());
+		std::cout << date_str << " * " << val_str << std::endl;
+		struct std::tm tm;
+		std::get_time(); // needs a string stream
 	}
 	file.close();
 }
