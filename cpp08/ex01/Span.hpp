@@ -15,6 +15,7 @@
 #include <stdexcept>
 #include <limits>
 #include <algorithm>
+#include <iostream>
 
 class Span {
 public:
@@ -28,7 +29,11 @@ public:
 	int		longestSpan();
 	
 	template <typename T>
-	void	superAdd(T start, T end) {
+	void	addRange(T start, T end) {
+		if (_vec.size() + std::distance(start, end) > _maxsize) {
+			throw (std::runtime_error(
+				"cannot add elements, insufficient space"));
+		}
 		_vec.insert(_vec.end(), start, end);
 	}
 

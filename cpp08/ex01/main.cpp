@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Span.hpp"
-#include <iostream>
 #include <cstdlib>
 
 int main(void) {
@@ -54,9 +53,10 @@ int main(void) {
 		std::cout << "add elements using a range of iterators: " << std::endl;
 		std::vector<int> vec = {6, 3, 17, 9, 11};
 		Span super(5);
-		super.superAdd(vec.begin(), vec.end());
+		super.addRange(vec.begin(), vec.end());
 		std::cout << super.shortestSpan() << std::endl;
 		std::cout << super.longestSpan() << std::endl;
+
 
 		std::cout << "add many elements using range of iterators:" << std::endl;
 		std::vector<int> bigvec;
@@ -65,7 +65,7 @@ int main(void) {
 			bigvec.push_back(std::rand());
 		}
 		Span mega(10000);
-		mega.superAdd(bigvec.begin(), bigvec.end());
+		mega.addRange(bigvec.begin(), bigvec.end());
 		std::cout << mega.shortestSpan() << std::endl;
 		std::cout << mega.longestSpan() << std::endl;
 
