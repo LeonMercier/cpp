@@ -14,10 +14,10 @@
 
 int	main(int argc, char **argv) {
 	try {
-		if (argc == 2) {
+		if (argc >= 2) {
 			btc(argv[1]);
 		} else {
-			std::cout << "Please give exactly one argument" << std::endl;
+			std::cout << "Error: could not open file" << std::endl;
 			return 1;
 		}
 	} catch (std::exception &e) {

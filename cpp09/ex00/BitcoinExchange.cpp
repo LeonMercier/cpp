@@ -24,10 +24,8 @@ bool isValidDate(std::tm date) {
 	if (test_date.tm_year != date.tm_year
 		|| test_date.tm_mon != date.tm_mon
 		|| test_date.tm_mday != date.tm_mday) {
-		// std::cout << "bad date validation"  << std::endl;
 		return false;
 	} 
-	// std::cout << "OK: " << std::put_time(&date, "%c") << std::endl;
 	return true;
 }
 
@@ -39,18 +37,19 @@ void readRates(
 	if (!file.is_open()) {
 		throw (std::runtime_error("could not open file: " + filename));
 	}
+
 	std::string line;
 	std::string delim = ",";
 	getline(file, line);
 	if (line != "date,exchange_rate") {
 		throw (std::runtime_error("wrong csv format"));
 	}
+
 	while (getline(file, line)) {
 		std::string date_str(line.substr(0, line.find(delim)));
 		std::string value_str(line.substr(
 			date_str.length() + delim.length(),
 			line.length() - date_str.length() ));
-		// std::cout << "val: " << value_str << std::endl;
 		// curly brances are needed to initialize std::tm
 		struct std::tm date{};
 		std::istringstream date_stream(date_str);
@@ -62,10 +61,8 @@ void readRates(
 			}
 			rates.insert({std::mktime(&date), rate});
 		} else {
-			throw (std::runtime_error("bad date in csv file for rates"));
+			throw (std::runtime_error("bad date in csv file"));
 		}
-		// map keys need to be comparable (with <) and std::tm is not, but
-		// std::time_t is
 	}
 	// for (auto iter = rates.begin(); iter != rates.end(); iter++) {
 	// 	std::cout << iter->first << ": " << iter->second << std::endl;
@@ -113,7 +110,6 @@ void	processAcc(std::map<std::time_t, double> &rates, std::string filename) {
 			std::cerr << "Error: bad input => " << date_str << std::endl;
 			continue ;
 		}
-	//	 std::cout << "val: " << value_str << std::endl;
 		// curly braces are needed to initialize std::tm
 		struct std::tm date{};
 		std::istringstream date_stream(date_str);
@@ -141,8 +137,8 @@ void	processAcc(std::map<std::time_t, double> &rates, std::string filename) {
 	}
 }
 
-// account: date | value
-// rates: date,value
+// map keys need to be comparable (with <) and std::tm is not, but
+// std::time_t is
 void	btc(std::string filename_account) {
 	std::map<std::time_t, double> rates;
 	readRates(rates, "data.csv");
