@@ -12,6 +12,7 @@
 
 #include "BitcoinExchange.hpp"
 
+// mktime() modifies its argument on succesful conversion
 void readAccount(
 	std::map<timepoint, double> & db, std::string filename) {
 	(void) db;
@@ -22,12 +23,22 @@ void readAccount(
 	}
 	std::string line;
 	std::string delim = ",";
+	getline(file, line);
 	while (getline(file, line)) {
-		std::string date_str = line.substr(0, line.find(delim));
-		std::string val_str = line.erase(0, date_str.length() + delim.length());
-		std::cout << date_str << " * " << val_str << std::endl;
-		struct std::tm tm;
-		std::get_time(); // needs a string stream
+		std::string date_str(line.substr(0, line.find(delim)));
+		std::tm date;
+		std::tm test_date;
+		std::istringstream date_stream(date_str);
+		date_stream >> std::get_time(&date, "%Y-%m-%d");
+		test_date = date;
+		std::mktime(&test_date);
+		if (test_date.tm_year != date.tm_year
+			|| test_date.tm_mon != date.tm_mon
+			|| test_date.tm_mday != date.tm_mday) {
+			std::cout << "bad date validatioon: "  << date_str << std::endl;
+		} else {
+			std::cout << "OK: " << std::put_time(&date, "%c") << std::endl;
+		}
 	}
 	file.close();
 }
