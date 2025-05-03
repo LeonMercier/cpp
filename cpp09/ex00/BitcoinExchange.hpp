@@ -20,5 +20,4 @@
 #include <ctime>
 #include <sstream>
 
-typedef typename std::chrono::time_point<std::chrono::system_clock> timepoint;
 void	btc(std::string filename_account);

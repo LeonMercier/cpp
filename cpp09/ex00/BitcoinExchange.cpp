@@ -12,10 +12,28 @@
 
 #include "BitcoinExchange.hpp"
 
+// IDEA: rates can be a map, account can be just parsed line by line
+//
+
+// safer for this to get passed by value as mktime() modifies its argument
+bool isValidDate(std::tm date) {
+	// curly brances are needed to initialize std::tm
+	struct std::tm test_date{};
+	test_date = date;
+	std::mktime(&test_date);
+	if (test_date.tm_year != date.tm_year
+		|| test_date.tm_mon != date.tm_mon
+		|| test_date.tm_mday != date.tm_mday) {
+		// std::cout << "bad date validation"  << std::endl;
+		return false;
+	} 
+	// std::cout << "OK: " << std::put_time(&date, "%c") << std::endl;
+	return true;
+}
+
 // mktime() modifies its argument on succesful conversion
-void readAccount(
-	std::map<timepoint, double> & db, std::string filename) {
-	(void) db;
+void readRates(
+	std::map<std::time_t, double> &rates, std::string filename) {
 
 	std::ifstream file(filename);
 	if (!file.is_open()) {
@@ -24,31 +42,109 @@ void readAccount(
 	std::string line;
 	std::string delim = ",";
 	getline(file, line);
+	if (line != "date,exchange_rate") {
+		throw (std::runtime_error("wrong csv format"));
+	}
 	while (getline(file, line)) {
 		std::string date_str(line.substr(0, line.find(delim)));
-		std::tm date;
-		std::tm test_date;
+		std::string value_str(line.substr(
+			date_str.length() + delim.length(),
+			line.length() - date_str.length() ));
+		// std::cout << "val: " << value_str << std::endl;
+		// curly brances are needed to initialize std::tm
+		struct std::tm date{};
 		std::istringstream date_stream(date_str);
 		date_stream >> std::get_time(&date, "%Y-%m-%d");
-		test_date = date;
-		std::mktime(&test_date);
-		if (test_date.tm_year != date.tm_year
-			|| test_date.tm_mon != date.tm_mon
-			|| test_date.tm_mday != date.tm_mday) {
-			std::cout << "bad date validatioon: "  << date_str << std::endl;
+		if (isValidDate(date)) {
+			double rate = std::stod(value_str);
+			if (rate < 0) {
+				throw (std::runtime_error("bad rate in csv file"));
+			}
+			rates.insert({std::mktime(&date), rate});
 		} else {
-			std::cout << "OK: " << std::put_time(&date, "%c") << std::endl;
+			throw (std::runtime_error("bad date in csv file for rates"));
+		}
+		// map keys need to be comparable (with <) and std::tm is not, but
+		// std::time_t is
+	}
+	// for (auto iter = rates.begin(); iter != rates.end(); iter++) {
+	// 	std::cout << iter->first << ": " << iter->second << std::endl;
+	// }
+	file.close();
+}
+
+double getRate(std::map<std::time_t, double> &rates, std::time_t time) {
+	auto rate = rates.find(time);
+	if (rate != rates.end()) {
+		return rate->second;
+	}
+	auto iter = rates.lower_bound(time);
+	if (iter == rates.begin()) {
+		return 0;
+	}
+	if (iter != rates.end()) {
+		iter--;
+		return iter->second;
+	}
+	return 0;
+}
+
+void	processAcc(std::map<std::time_t, double> &rates, std::string filename) {
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		throw (std::runtime_error("could not open file: " + filename));
+	}
+	std::string line;
+	std::string delim = " | ";
+	getline(file, line);
+	if (line != "date | value") {
+		throw (std::runtime_error("wrong input format"));
+	}
+	while (getline(file, line)) {
+		std::string date_str(line.substr(0, line.find(delim)));
+		if (date_str.length() + delim.length() >= line.length()) {
+			std::cerr << "Error: bad input => " << date_str << std::endl;
+			continue ;
+		}
+		std::string value_str(line.substr(
+			date_str.length() + delim.length(),
+			line.length() - date_str.length() ));
+		if (value_str.length() == 0) {
+			std::cerr << "Error: bad input => " << date_str << std::endl;
+			continue ;
+		}
+	//	 std::cout << "val: " << value_str << std::endl;
+		// curly braces are needed to initialize std::tm
+		struct std::tm date{};
+		std::istringstream date_stream(date_str);
+		date_stream >> std::get_time(&date, "%Y-%m-%d");
+		if (isValidDate(date)) {
+			double value;
+			try {
+				value = std::stod(value_str);
+			} catch (...) {
+				std::cerr << "Error: bad input => " << date_str << std::endl;
+				continue ;
+			}
+			if (value < 0) {
+				std::cerr << "Error: not a positive number." << std::endl;
+			} else if (value > 1000) {
+				std::cerr << "Error: too large a number." << std::endl;
+			} else {
+				double rate = getRate(rates, std::mktime(&date));
+				std::cout << std::put_time(&date, "%c")
+					<< " => " << value << " = " << value * rate << std::endl;
+			}
+		} else {
+			std::cerr << "Error: bad input => " << date_str << std::endl;
 		}
 	}
-	file.close();
 }
 
 // account: date | value
 // rates: date,value
 void	btc(std::string filename_account) {
-	std::map<timepoint, double> account;
-	readAccount(account, filename_account);
-	//std::map account = read account
-	//std::map rates = read rates
-
+	std::map<std::time_t, double> rates;
+	readRates(rates, "data.csv");
+	processAcc(rates, filename_account);
 }
