@@ -28,19 +28,32 @@ static void	doCalc(std::stack<int> &stack, char oper) {
 
 	switch (oper) {
 		case '+':
+			if ((num_b > 0 && num_a > std::numeric_limits<int>::max() - num_b) ||
+				(num_b < 0 && num_a < std::numeric_limits<int>::min() - num_b)) {
+				throw (std::runtime_error("integer overflow detected"));
+			}
 			stack.push(num_a + num_b);
 			break ;
 		case '-':
+			if ((num_b < 0 && num_a > std::numeric_limits<int>::max() + num_b) ||
+				(num_b > 0 && num_a < std::numeric_limits<int>::min() + num_b)) {
+					throw (std::runtime_error("integer overflow detected"));
+				}
 			stack.push(num_a - num_b);
 			break ;
 		case '*':
+			if (num_b != 0 && num_a > std::numeric_limits<int>::max() / num_b) {
+				throw (std::runtime_error("integer overflow detected"));
+			}
 			stack.push(num_a * num_b);
 			break ;
 		case '/':
+			if (num_b == 0) {
+				throw (std::runtime_error(
+					"division by zero: universe terminated"));
+			}
 			stack.push(num_a / num_b);
 	}
-
-
 }
 
 
@@ -57,9 +70,9 @@ void	RPN(std::string input) {
 			if (std::isdigit(token) != 0) {
 				stack.push(token - '0');
 			} else {
-				throw (std::runtime_error("invalid input"));
+				throw (std::runtime_error("Error"));
 			}
 		}
 	}
-	std::cout << "result: " << stack.top() << std::endl;
+	std::cout << stack.top() << std::endl;
 }
