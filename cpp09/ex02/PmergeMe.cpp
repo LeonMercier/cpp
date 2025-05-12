@@ -12,48 +12,89 @@
 
 #include "PmergeMe.hpp"
 
-static void swapPairs(std::vector<unsigned int> &vec,
-					  std::vector<unsigned int>::iterator iter_a,
-					  std::vector<unsigned int>::iterator iter_b,
-					  unsigned int pairsize) {
-	vec.insert(iter_a, iter_b, iter_b + (pairsize - 1));
-	vec.erase(iter_b, iter_b + (pairsize - 1));
+static void printVec(std::vector<unsigned int> &vec) {
+	for (auto iter = vec.begin(); iter != vec.end(); iter++) {
+		std::cout << *iter << ", ";
+	}
+	std::cout << std::endl;
 }
 
-static void sortPairs(std::vector<unsigned int> &vec, unsigned int pairsize) {
-	auto last_a = vec.begin() + (pairsize - 1);
-	auto last_b = last_a + pairsize;
-	while (last_a != vec.end() && last_b != vec.end()) {
-		if (*last_a > *last_b)
-		{
-			swapPairs(vec, last_a, last_b, pairsize);
-		}
-		last_a += pairsize;
-		last_b += pairsize;
+// TODO: if reallocation of vec takes place, old iterators become invalid
+static void swapPairs(
+	std::vector<unsigned int> &vec,
+	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>>::iterator pair_a,
+	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>>::iterator pair_b,
+	unsigned int pairsize) {
+	std::cout << "Swapping: " << *pair_a->first << "-->" << *pair_a->second << " with " << *pair_b->first << "-->" << *pair_b->second << std::endl;
+	(void) pairsize;
+	std::vector<unsigned int> temp(pair_b->first, pair_b->second);
+	vec.erase(pair_b->first, pair_b->second);
+	for (auto iter = temp.end(); iter >= temp.begin(); iter--) {
+		vec.insert(pair_a->first, *iter);
 	}
+	// vec.insert(pair_a->first, temp.begin(), temp.end());
+	// for (auto iter = pair_b->second; iter >= pair_b->first; iter--) {
+	// 	unsigned int temp = *iter;
+	// 	std::cout << "moving: " << temp << std::endl;
+	// //	vec.erase(iter);
+	// 	vec.insert(pair_a->first, temp);
+	// }
+	// vec.insert(pair_a->first, pair_b->first, pair_b->second);
+	// vec.erase(pair_b->first, pair_b->second);
 }
 
 // comparison of pairs compares the last elements
+static void sortPairs(
+	std::vector<unsigned int> &vec,
+	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>> pairs,
+	unsigned int pairsize) {
+
+	auto pair_a = pairs.begin();
+	auto pair_b = pair_a + 1;
+	while (pair_a != pairs.end() && pair_b != pairs.end()) {
+			std::cout << *(pair_a->second) << ">" <<*(pair_b->second) << std::endl;
+		if (*(pair_a->second) > *(pair_b->second))
+		{
+			// std::cout << *(pair_a->second) << ">" <<*(pair_b->second) << std::endl;
+
+			swapPairs(vec, pair_a, pair_b, pairsize);
+		}
+		if (std::distance(pair_b, pairs.end()) > 2) {
+			pair_a += 2;
+			pair_b += 2;
+		} else {
+			break ;
+		}
+	}
+	std::cout << std::endl;
+}
+
 static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl, unsigned int pairsize) {
+	printVec(vec);
 	if (pairsize > vec.size() / 2) {
 		return ;
 	}
 	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>> pairs;
-	auto iter_a = vec.begin();
-	auto iter_b = iter_a + (pairsize - 1);
-	while (iter_a != vec.end() && iter_b != vec.end()) {
-		pairs.push_back(std::make_pair(iter_a, iter_b));
+	auto first = vec.begin();
+	auto last = first + (pairsize - 1);
+	while (first != vec.end() && last != vec.end()) {
+		pairs.push_back(std::make_pair(first, last));
 		if (reclvl == 0) {
-			if (*iter_a > *iter_b) {
-				std::swap(iter_a, iter_b);
+			if (*first > *last) {
+				std::iter_swap(first, last);
 			}
-		} else {
+		// } else {
 			// TODO: unpaired elements
-			sortPairs(vec, pairsize);
+			// sortPairs(vec, pairs, pairsize);
 		}
-		iter_a += pairsize;
-		iter_b += pairsize;
+		if (std::distance(last, vec.end()) > pairsize) {
+			first += pairsize;
+			last += pairsize;
+		} else {
+			break ;
+		}
 	}
+	sortPairs(vec, pairs, pairsize);
 	miSort(vec, reclvl + 1, pairsize * 2);	
 }
 
