@@ -18,5 +18,9 @@
 #include <cstring> // strcmp()
 #include <limits>
 #include <vector>
+#include <utility>
 
+// TODO: 
+// for final product: 
+// 		keep track of amount of comparisons
 void init(std::string input);
