@@ -19,6 +19,7 @@
 #include <limits>
 #include <vector>
 #include <utility>
+#include <algorithm> // rotate()
 
 // TODO: 
 // for final product: 

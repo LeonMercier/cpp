@@ -20,6 +20,12 @@ static void printVec(std::vector<unsigned int> &vec) {
 }
 
 // TODO: if reallocation of vec takes place, old iterators become invalid
+// rotate() is weird
+ 
+/* template< class ForwardIt >
+    void rotate( ForwardIt first, ForwardIt n_first, ForwardIt last );
+
+    std::rotate swaps the elements in the range [first, last) in such a way that the element n_first becomes the first element of the new range and n_first - 1 becomes the last element. */
 static void swapPairs(
 	std::vector<unsigned int> &vec,
 	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>>::iterator pair_a,
@@ -27,20 +33,12 @@ static void swapPairs(
 	unsigned int pairsize) {
 	std::cout << "Swapping: " << *pair_a->first << "-->" << *pair_a->second << " with " << *pair_b->first << "-->" << *pair_b->second << std::endl;
 	(void) pairsize;
-	std::vector<unsigned int> temp(pair_b->first, pair_b->second);
-	vec.erase(pair_b->first, pair_b->second);
-	for (auto iter = temp.end(); iter >= temp.begin(); iter--) {
-		vec.insert(pair_a->first, *iter);
-	}
-	// vec.insert(pair_a->first, temp.begin(), temp.end());
-	// for (auto iter = pair_b->second; iter >= pair_b->first; iter--) {
-	// 	unsigned int temp = *iter;
-	// 	std::cout << "moving: " << temp << std::endl;
-	// //	vec.erase(iter);
-	// 	vec.insert(pair_a->first, temp);
-	// }
-	// vec.insert(pair_a->first, pair_b->first, pair_b->second);
-	// vec.erase(pair_b->first, pair_b->second);
+
+	std::cout << "SwapPairs before: ";
+	printVec(vec);
+	std::rotate(pair_a->first, pair_b->first, pair_b->second +1);
+	std::cout << "SwapPairs  after: ";
+	printVec(vec);
 }
 
 // comparison of pairs compares the last elements
@@ -48,6 +46,10 @@ static void sortPairs(
 	std::vector<unsigned int> &vec,
 	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>> pairs,
 	unsigned int pairsize) {
+
+	std::cout << "sortpairs: ";
+	printVec(vec);
+	std::cout << std::endl;
 
 	auto pair_a = pairs.begin();
 	auto pair_b = pair_a + 1;
@@ -79,7 +81,7 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl, unsigned
 	auto last = first + (pairsize - 1);
 	while (first != vec.end() && last != vec.end()) {
 		pairs.push_back(std::make_pair(first, last));
-		if (reclvl == 0) {
+		if (reclvl == 1) {
 			if (*first > *last) {
 				std::iter_swap(first, last);
 			}
@@ -94,6 +96,7 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl, unsigned
 			break ;
 		}
 	}
+	// if (reclvl == 1) { return ; }
 	sortPairs(vec, pairs, pairsize);
 	miSort(vec, reclvl + 1, pairsize * 2);	
 }
@@ -115,6 +118,6 @@ void init(std::string input) {
 	}
 	std::cout << std::endl;
 	// we could treat duplicates as errors if we wanted...
-	miSort(vec, 0, 2);
+	miSort(vec, 1, 2);
 
 }
