@@ -71,11 +71,17 @@ static void sortPairs(
 	std::cout << std::endl;
 }
 
+// TODO: unpaired elements
 static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl, unsigned int pairsize) {
+
 	printVec(vec);
+
 	if (pairsize > vec.size() / 2) {
 		return ;
 	}
+
+	std::cout << "miSort(): reclvl: " << reclvl << std::endl;
+
 	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>> pairs;
 	auto first = vec.begin();
 	auto last = first + (pairsize - 1);
@@ -85,9 +91,6 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl, unsigned
 			if (*first > *last) {
 				std::iter_swap(first, last);
 			}
-		// } else {
-			// TODO: unpaired elements
-			// sortPairs(vec, pairs, pairsize);
 		}
 		if (std::distance(last, vec.end()) > pairsize) {
 			first += pairsize;
@@ -96,9 +99,8 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl, unsigned
 			break ;
 		}
 	}
-	// if (reclvl == 1) { return ; }
 	sortPairs(vec, pairs, pairsize);
-	miSort(vec, reclvl + 1, pairsize * 2);	
+	miSort(vec, reclvl + 1, pairsize * 2);
 }
 
 void init(std::string input) {
@@ -119,5 +121,4 @@ void init(std::string input) {
 	std::cout << std::endl;
 	// we could treat duplicates as errors if we wanted...
 	miSort(vec, 1, 2);
-
 }
