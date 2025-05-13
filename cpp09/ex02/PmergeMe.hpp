@@ -18,10 +18,14 @@
 #include <cstring> // strcmp()
 #include <limits>
 #include <vector>
-#include <utility>
 #include <algorithm> // rotate()
 
 // TODO: 
 // for final product: 
 // 		keep track of amount of comparisons
 void init(std::string input);
+
+// a pair of iterators to vector<unsigned int>'s
+typedef typename std::pair<
+	std::vector<unsigned int>::iterator,
+	std::vector<unsigned int>::iterator> pairIter;

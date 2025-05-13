@@ -20,19 +20,22 @@ static void printVec(std::vector<unsigned int> &vec) {
 }
 
 // TODO: if reallocation of vec takes place, old iterators become invalid
+
 // rotate() is weird
- 
-/* template< class ForwardIt >
+/*
+ template< class ForwardIt >
     void rotate( ForwardIt first, ForwardIt n_first, ForwardIt last );
 
-    std::rotate swaps the elements in the range [first, last) in such a way that the element n_first becomes the first element of the new range and n_first - 1 becomes the last element. */
+    std::rotate swaps the elements in the range [first, last) in such a way
+	that the element n_first becomes the first element of the new range and
+	n_first - 1 becomes the last element.
+*/
 static void swapPairs(
 	std::vector<unsigned int> &vec,
-	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>>::iterator pair_a,
-	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>>::iterator pair_b,
-	unsigned int pairsize) {
-	std::cout << "Swapping: " << *pair_a->first << "-->" << *pair_a->second << " with " << *pair_b->first << "-->" << *pair_b->second << std::endl;
-	(void) pairsize;
+	std::vector<pairIter>::iterator pair_a,
+	std::vector<pairIter>::iterator pair_b) {
+	std::cout << "Swapping: " << *pair_a->first << "-->" << *pair_a->second << 
+		" with " << *pair_b->first << "-->" << *pair_b->second << std::endl;
 
 	std::cout << "SwapPairs before: ";
 	printVec(vec);
@@ -42,26 +45,23 @@ static void swapPairs(
 }
 
 // comparison of pairs compares the last elements
-static void sortPairs(
-	std::vector<unsigned int> &vec,
-	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>> pairs,
-	unsigned int pairsize) {
+static void sortPairs(std::vector<unsigned int> &vec,
+					  std::vector<pairIter> elems) {
 
 	std::cout << "sortpairs: ";
 	printVec(vec);
 	std::cout << std::endl;
 
-	auto pair_a = pairs.begin();
+	auto pair_a = elems.begin();
 	auto pair_b = pair_a + 1;
-	while (pair_a != pairs.end() && pair_b != pairs.end()) {
-			std::cout << *(pair_a->second) << ">" <<*(pair_b->second) << std::endl;
+	while (pair_a != elems.end() && pair_b != elems.end()) {
 		if (*(pair_a->second) > *(pair_b->second))
 		{
-			// std::cout << *(pair_a->second) << ">" <<*(pair_b->second) << std::endl;
-
-			swapPairs(vec, pair_a, pair_b, pairsize);
+			std::cout << *(pair_a->second) << ">" << *(pair_b->second) <<
+				std::endl;
+			swapPairs(vec, pair_a, pair_b);
 		}
-		if (std::distance(pair_b, pairs.end()) > 2) {
+		if (std::distance(pair_b, elems.end()) > 2) {
 			pair_a += 2;
 			pair_b += 2;
 		} else {
@@ -72,35 +72,37 @@ static void sortPairs(
 }
 
 // TODO: unpaired elements
-static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl, unsigned int pairsize) {
+// TODO: make a typedef for the ugly std::pair thing
+static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
+				   unsigned int elemsize) {
 
+	std::cout << "starting miSort(): reclvl: " << reclvl << " with vector: " <<
+		std::endl;
 	printVec(vec);
+	std::cout << std::endl;
 
-	if (pairsize > vec.size() / 2) {
+	if (elemsize > vec.size() / 2) {
 		return ;
 	}
 
-	std::cout << "miSort(): reclvl: " << reclvl << std::endl;
+	// just holds iterators to the actual vector where the numbers are
+	std::vector<pairIter> elems;
 
-	std::vector<std::pair<std::vector<unsigned int>::iterator, std::vector<unsigned int>::iterator>> pairs;
+	// first and last are the first and last numbers of an element
+	// on the first recursion level, they point to the same number
 	auto first = vec.begin();
-	auto last = first + (pairsize - 1);
+	auto last = first + (elemsize - 1);
 	while (first != vec.end() && last != vec.end()) {
-		pairs.push_back(std::make_pair(first, last));
-		if (reclvl == 1) {
-			if (*first > *last) {
-				std::iter_swap(first, last);
-			}
-		}
-		if (std::distance(last, vec.end()) > pairsize) {
-			first += pairsize;
-			last += pairsize;
+		elems.push_back(std::make_pair(first, last));
+		if (std::distance(last, vec.end()) > elemsize) {
+			first += elemsize;
+			last += elemsize;
 		} else {
 			break ;
 		}
 	}
-	sortPairs(vec, pairs, pairsize);
-	miSort(vec, reclvl + 1, pairsize * 2);
+	sortPairs(vec, elems);
+	miSort(vec, reclvl + 1, elemsize * 2);
 }
 
 void init(std::string input) {
@@ -120,5 +122,5 @@ void init(std::string input) {
 	}
 	std::cout << std::endl;
 	// we could treat duplicates as errors if we wanted...
-	miSort(vec, 1, 2);
+	miSort(vec, 1, 1);
 }
