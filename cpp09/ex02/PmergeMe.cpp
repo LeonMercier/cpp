@@ -12,17 +12,16 @@
 
 #include "PmergeMe.hpp"
 
-static void printVec(std::vector<unsigned int> &vec) {
-	for (auto iter = vec.begin(); iter != vec.end(); iter++) {
-		std::cout << *iter << ", ";
+static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::iterator iter) {
+	for (auto it = iter; it != vec.end(); it++) {
+		std::cout << *it << ", ";
 	}
 	std::cout << std::endl;
 }
 
 // TODO: if reallocation of vec takes place, old iterators become invalid
-
-// rotate() is weird
 /*
+ rotate() is weird:
  template< class ForwardIt >
     void rotate( ForwardIt first, ForwardIt n_first, ForwardIt last );
 
@@ -38,10 +37,10 @@ static void swapPairs(
 		" with " << *pair_b->first << "-->" << *pair_b->second << std::endl;
 
 	std::cout << "SwapPairs before: ";
-	printVec(vec);
+	printVec(vec, vec.begin());
 	std::rotate(pair_a->first, pair_b->first, pair_b->second +1);
 	std::cout << "SwapPairs  after: ";
-	printVec(vec);
+	printVec(vec, vec.begin());
 }
 
 // comparison of pairs compares the last elements
@@ -49,7 +48,7 @@ static void sortPairs(std::vector<unsigned int> &vec,
 					  std::vector<pairIter> elems) {
 
 	std::cout << "sortpairs: ";
-	printVec(vec);
+	printVec(vec, vec.begin());
 	std::cout << std::endl;
 
 	auto pair_a = elems.begin();
@@ -78,7 +77,7 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
 
 	std::cout << "starting miSort(): reclvl: " << reclvl << " with vector: " <<
 		std::endl;
-	printVec(vec);
+	printVec(vec, vec.begin());
 	std::cout << std::endl;
 
 	if (elemsize > vec.size() / 2) {
@@ -98,6 +97,9 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
 			first += elemsize;
 			last += elemsize;
 		} else {
+			std::cout << "elements: " << elems.size() << std::endl;
+			std::cout << "elems after \"last\": " << std::endl;
+			printVec(vec, last + 1);
 			break ;
 		}
 	}
