@@ -18,7 +18,6 @@ int	main(int argc, char **argv) {
 			std::cout << "Please give at least one argument" << std::endl;
 			return 1;
 		}
-		std::cout << "argc: " << argc << std::endl;
 		init(argc - 1, argv + 1);
 	} catch (std::exception &e) {
 		if (strcmp(e.what(), "stoul") == 0) {
