@@ -19,7 +19,6 @@ static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::
 	std::cout << std::endl;
 }
 
-// TODO: if reallocation of vec takes place, old iterators become invalid
 /*
  rotate() is weird:
  template< class ForwardIt >
@@ -71,7 +70,6 @@ static void sortPairs(std::vector<unsigned int> &vec,
 }
 
 // TODO: unpaired elements
-// TODO: make a typedef for the ugly std::pair thing
 static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
 				   unsigned int elemsize) {
 
@@ -107,18 +105,24 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
 	miSort(vec, reclvl + 1, elemsize * 2);
 }
 
-void init(std::string input) {
-	std::istringstream iss(input);
+// The size of vec does not change after init(), therefore iterators should 
+// remain valid
+void init(int count, char **nums) {
 	std::vector<unsigned int> vec;
-	unsigned long tmp;
-
-	while (iss >> tmp) {
-		if (tmp >= std::numeric_limits<unsigned int>::max()) {
-			throw (std::runtime_error("value out of range"));
+	
+	for (int i = 0; i < count; i++) {
+		std::istringstream iss(*nums);
+		unsigned long tmp;
+		while (iss >> tmp) {
+			if (tmp >= std::numeric_limits<unsigned int>::max()) {
+				throw (std::runtime_error("value out of range"));
+			}
+			unsigned int val = tmp;
+			vec.insert(vec.end(), val);
 		}
-		unsigned int val = tmp;
-		vec.insert(vec.end(), val);
+		nums++;
 	}
+	
 	for (auto iter = vec.begin(); iter != vec.end(); iter++) {
 		std::cout << *iter << "#";
 	}

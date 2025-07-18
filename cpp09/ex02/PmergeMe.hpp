@@ -23,7 +23,7 @@
 // TODO: 
 // for final product: 
 // 		keep track of amount of comparisons
-void init(std::string input);
+void init(int count, char **nums);
 
 // a pair of iterators to vector<unsigned int>'s
 typedef typename std::pair<

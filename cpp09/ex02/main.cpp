@@ -14,11 +14,12 @@
 
 int	main(int argc, char **argv) {
 	try {
-		if (argc != 2) {
-			std::cout << "Please give exactly one argument" << std::endl;
+		if (argc < 2) {
+			std::cout << "Please give at least one argument" << std::endl;
 			return 1;
 		}
-		init(argv[1]);
+		std::cout << "argc: " << argc << std::endl;
+		init(argc - 1, argv + 1);
 	} catch (std::exception &e) {
 		if (strcmp(e.what(), "stoul") == 0) {
 			std::cerr << "Error: could not convert input to integer" << std::endl;
