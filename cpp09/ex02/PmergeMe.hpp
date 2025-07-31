@@ -37,5 +37,6 @@ public:
 
 	void init(int count, char **strs);
 	void miSort(unsigned int reclvl, unsigned int elemsize);
+	bool bigger(unsigned int a, unsigned int b);
 };
 

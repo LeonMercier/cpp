@@ -81,11 +81,39 @@ static void printElems(std::vector<pairIter> elems) {
 	}
 }
 
+// first two elements, then every other element
+//
+// TODO: this currently doesnt modify orig, and elems is specific to only the 
+// current recursion level
+static void makeMain(std::vector<pairIter> &main, std::vector<pairIter> &elems) {
+	main.push_back(elems.front());
+	elems.erase(elems.begin());
+
+	for (size_t i = 0; i < elems.size(); i += 2) 
+	{
+		// TODO: probaly will just have to be a rotate of elems and forget 
+		// about main
+		main.push_back(elems.at(i));
+	}
+
+	// remove the move element from elems => elems is now pend
+	for (auto it = main.begin(); it != main.end(); ++it) {
+		auto found = std::find(elems.begin(), elems.end(), *it);
+		if (found != elems.end()) {
+			elems.erase(found);
+		}
+	}
+}
+
+// static void insertPend(std::vector<pairIter> &main, std::vector<pairIter> &elems) {
+//
+// }
+
 // TODO: unpaired elements
 // elems is specific to each recursion level, therefore a local variable
 void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
-	std::cout << "starting miSort(): reclvl: " << reclvl << " with vector: " <<
+	std::cout << "\nstarting miSort(): reclvl: " << reclvl << " with vector: " <<
 		std::endl;
 	// printVec(vec, vec.begin());
 	// std::cout << std::endl;
@@ -97,7 +125,8 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	}
 
 	// just holds iterators to the actual vector where the numbers are
-	std::vector<pairIter> elems;
+	std::vector<pairIter>	elems;
+	auto					begin_unpaired = orig.end();
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
@@ -111,7 +140,8 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		} else {
 			// std::cout << "elements: " << elems.size() << std::endl;
 			std::cout << "lonely nums: " << std::endl;
-			printVec(orig, last + 1);
+			begin_unpaired = last + 1;
+			printVec(orig, begin_unpaired);
 			break ;
 		}
 	}
@@ -120,9 +150,28 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	sortPairs(elems);
 	std::cout << "sorted elems: " << std::endl;
 	printElems(elems);
+	std::cout << "ORIG: "  << std::endl;
+	printVec(orig, orig.begin());
 
 	// recursive call
 	miSort(reclvl + 1, elemsize * 2);
+	if ( elems.size() == 2) {
+		std::cout << "Penultimate recursion level" << std::endl;
+		return ;
+	}
+	std::cout << "reclvl: " << reclvl << " elemsize: " << elemsize;
+	std::cout << " number of elems: " << elems.size() << std::endl;
+	std::vector<pairIter> main;
+	makeMain(main, elems);
+	std::cout << "main: " << std::endl;
+	printElems(main);
+	std::cout << "pend: " << std::endl;
+	printElems(elems);
+	std::cout << "ORIG: "  << std::endl;
+	printVec(orig, orig.begin());
+	// insertPend(main, elems);
+
+
 	// returning from recursion
 	
 }
@@ -149,4 +198,9 @@ void PMergeMe::init(int count, char **strs) {
 	// }
 	// std::cout << std::endl;
 	miSort(1, 1);
+}
+
+bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
+	comparisons++;
+	return (a > b);
 }
