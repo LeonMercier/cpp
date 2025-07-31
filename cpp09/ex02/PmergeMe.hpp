@@ -23,9 +23,19 @@
 // TODO: 
 // for final product: 
 // 		keep track of amount of comparisons
-void init(int count, char **strs);
+
 
 // a pair of iterators to vector<unsigned int>'s
 typedef typename std::pair<
 	std::vector<unsigned int>::iterator,
 	std::vector<unsigned int>::iterator> pairIter;
+
+class PMergeMe {
+public: 
+	int comparisons = 0;
+	std::vector<unsigned int> orig;
+
+	void init(int count, char **strs);
+	void miSort(unsigned int reclvl, unsigned int elemsize);
+};
+

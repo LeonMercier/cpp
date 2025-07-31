@@ -45,7 +45,7 @@ static void swapPairs(
 // comparison of pairs compares the last elements
 // sorts pairs of elements, not pairs of numbers, hence always advancing 
 // by += 2
-static void sortPairs(std::vector<pairIter> elems) {
+static void sortPairs(std::vector<pairIter> &elems) {
 
 	// std::cout << "sortpairs: ";
 	// printVec(vec, vec.begin());
@@ -82,8 +82,8 @@ static void printElems(std::vector<pairIter> elems) {
 }
 
 // TODO: unpaired elements
-static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
-				   unsigned int elemsize) {
+// elems is specific to each recursion level, therefore a local variable
+void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
 	std::cout << "starting miSort(): reclvl: " << reclvl << " with vector: " <<
 		std::endl;
@@ -91,7 +91,7 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
 	// std::cout << std::endl;
 
 	// terminate recursion
-	if (elemsize > vec.size() / 2) {
+	if (elemsize > orig.size() / 2) {
 		std::cout << "Reached end of recursion" << std::endl;
 		return ;
 	}
@@ -101,17 +101,17 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
-	auto first = vec.begin();
+	auto first = orig.begin();
 	auto last = first + (elemsize - 1);
-	while (first != vec.end() && last != vec.end()) {
+	while (first != orig.end() && last != orig.end()) {
 		elems.push_back(std::make_pair(first, last));
-		if (std::distance(last, vec.end()) > elemsize) {
+		if (std::distance(last, orig.end()) > elemsize) {
 			first += elemsize;
 			last += elemsize;
 		} else {
 			// std::cout << "elements: " << elems.size() << std::endl;
 			std::cout << "lonely nums: " << std::endl;
-			printVec(vec, last + 1);
+			printVec(orig, last + 1);
 			break ;
 		}
 	}
@@ -122,16 +122,14 @@ static void miSort(std::vector<unsigned int> &vec, unsigned int reclvl,
 	printElems(elems);
 
 	// recursive call
-	miSort(vec, reclvl + 1, elemsize * 2);
-
+	miSort(reclvl + 1, elemsize * 2);
 	// returning from recursion
 	
 }
 
 // The size of vec does not change after init(), therefore iterators should 
 // remain valid
-void init(int count, char **strs) {
-	std::vector<unsigned int> vec;
+void PMergeMe::init(int count, char **strs) {
 	
 	for (int i = 0; i < count; i++) {
 		std::istringstream iss(*strs);
@@ -141,7 +139,7 @@ void init(int count, char **strs) {
 				throw (std::runtime_error("value out of range"));
 			}
 			unsigned int val = tmp;
-			vec.insert(vec.end(), val);
+			orig.insert(orig.end(), val);
 		}
 		strs++;
 	}
@@ -150,5 +148,5 @@ void init(int count, char **strs) {
 	// 	std::cout << *iter << "#";
 	// }
 	// std::cout << std::endl;
-	miSort(vec, 1, 1);
+	miSort(1, 1);
 }
