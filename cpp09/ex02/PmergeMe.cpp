@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <vector>
 
 static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::iterator iter) {
 	for (auto it = iter; it != vec.end(); it++) {
@@ -81,33 +82,25 @@ static void printElems(std::vector<pairIter> elems) {
 	}
 }
 
-// first two elements, then every other element
-//
-// TODO: this currently doesnt modify orig, and elems is specific to only the 
-// current recursion level
-static void makeMain(std::vector<pairIter> &main, std::vector<pairIter> &elems) {
-	main.push_back(elems.front());
-	elems.erase(elems.begin());
-
-	for (size_t i = 0; i < elems.size(); i += 2) 
-	{
-		// TODO: probaly will just have to be a rotate of elems and forget 
-		// about main
-		main.push_back(elems.at(i));
+void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
+	if (elems.size() < 4) {
+		return ;
 	}
-
-	// remove the move element from elems => elems is now pend
-	for (auto it = main.begin(); it != main.end(); ++it) {
-		auto found = std::find(elems.begin(), elems.end(), *it);
-		if (found != elems.end()) {
-			elems.erase(found);
-		}
+	std::cout << "before makemain:" << std::endl;
+	// printElems(elems);
+	printVec(orig, orig.begin());
+	std::vector<int> as_to_move;
+	auto tail = elems.begin() + 2;
+	for (size_t i = 3; i < elems.size(); i += 2) {
+		std::rotate(orig.begin() + tail->first, orig.begin() + elems.at(i).first,
+			  orig.begin() + elems.at(i + 1).first);
 	}
+	std::cout << "after makemain:" << std::endl;
+	// printElems(elems);
+	printVec(orig, orig.begin());
+
 }
 
-// static void insertPend(std::vector<pairIter> &main, std::vector<pairIter> &elems) {
-//
-// }
 
 // TODO: unpaired elements
 // elems is specific to each recursion level, therefore a local variable
@@ -125,23 +118,22 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	}
 
 	// just holds iterators to the actual vector where the numbers are
-	std::vector<pairIter>	elems;
-	auto					begin_unpaired = orig.end();
+	std::vector<std::pair<int, int>> ranges;
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
-	auto first = orig.begin();
-	auto last = first + (elemsize - 1);
-	while (first != orig.end() && last != orig.end()) {
-		elems.push_back(std::make_pair(first, last));
-		if (std::distance(last, orig.end()) > elemsize) {
+	size_t first = 0;
+	size_t last = first + (elemsize - 1);
+	while (last < orig.size()) {
+		ranges.push_back(std::make_pair(first, last));
+		if (orig.size() - last > elemsize) {
 			first += elemsize;
 			last += elemsize;
 		} else {
 			// std::cout << "elements: " << elems.size() << std::endl;
 			std::cout << "lonely nums: " << std::endl;
-			begin_unpaired = last + 1;
-			printVec(orig, begin_unpaired);
+			// begin_unpaired = last + 1;
+			// printVec(orig, begin_unpaired);
 			break ;
 		}
 	}
@@ -161,12 +153,14 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	}
 	std::cout << "reclvl: " << reclvl << " elemsize: " << elemsize;
 	std::cout << " number of elems: " << elems.size() << std::endl;
-	std::vector<pairIter> main;
-	makeMain(main, elems);
-	std::cout << "main: " << std::endl;
-	printElems(main);
-	std::cout << "pend: " << std::endl;
-	printElems(elems);
+	// std::vector<pairIter> main;
+	// makeMain(main, elems);
+	// makeMain2(elems);
+	makeMain(ranges);
+	// std::cout << "main: " << std::endl;
+	// printElems(main);
+	// std::cout << "pend: " << std::endl;
+	// printElems(elems);
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
 	// insertPend(main, elems);
@@ -197,6 +191,14 @@ void PMergeMe::init(int count, char **strs) {
 	// 	std::cout << *iter << "#";
 	// }
 	// std::cout << std::endl;
+/* 	
+	printVec(orig, orig.begin());
+	auto a = orig.begin() + 3;
+	auto b = orig.begin() + 9;
+	auto c = orig.begin() + 11;
+	std::rotate(a, b, c);
+	printVec(orig, orig.begin());
+ */
 	miSort(1, 1);
 }
 
