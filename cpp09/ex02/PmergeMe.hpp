@@ -26,9 +26,9 @@
 
 
 // a pair of iterators to vector<unsigned int>'s
-typedef typename std::pair<
-	std::vector<unsigned int>::iterator,
-	std::vector<unsigned int>::iterator> pairIter;
+// typedef typename std::pair<
+// 	std::vector<unsigned int>::iterator,
+// 	std::vector<unsigned int>::iterator> pairIter;
 
 class PMergeMe {
 public: 
@@ -39,5 +39,10 @@ public:
 	void miSort(unsigned int reclvl, unsigned int elemsize);
 	bool bigger(unsigned int a, unsigned int b);
 	void makeMain(std::vector<std::pair<int, int>> &elems);
+	void sortPairs(std::vector<std::pair<int, int>> &elems);
+	void swapPairs(
+		std::pair<int, int> pair_a,
+		std::pair<int, int> pair_b);
+	void printElems(std::vector<std::pair<int, int>> elems);
 };
 
