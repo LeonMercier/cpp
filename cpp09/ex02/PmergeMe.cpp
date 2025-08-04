@@ -88,6 +88,15 @@ void	PMergeMe::moveElem(std::vector<std::pair<int, int>> &elems,
 	}
 }
 
+void	PMergeMe::moveElem(pairIter put_after, pairIter to_move)
+{
+	if (std::next(to_move.second, 1) == orig.end()) {
+		std::rotate(put_after.first, to_move.first, orig.end());
+	} else {
+		std::rotate(put_after.first, to_move.first, to_move.second + 1);
+	}
+}
+
 void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	if (elems.size() < 4) {
 		return ;
@@ -123,11 +132,16 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	printVec(orig, orig.begin());
 }
 
-// TODO: abstract manipulation of orig based on indices of elems
+pairIter binarySearch(pairIter bound, pairIter to_move)
+{
+}
 
-
-void PMergeMe::insertPend(std::vector<std::pair<int, int>> &elems,
-						  unsigned int reclvl, unsigned int elemsize)
+void PMergeMe::insertPend(
+	std::vector<std::pair<int, int>> &elems,
+	unsigned int reclvl,
+	unsigned int elemsize,
+	std::vector<pairIter> a_iters,
+	std::vector<pairIter> b_iters)
 {
 	(void) elems;
 	(void) reclvl;
@@ -143,6 +157,17 @@ void PMergeMe::insertPend(std::vector<std::pair<int, int>> &elems,
 	// a2 is now the 3rd element 
 	// newxt round inser a3 which is 4th element now, but will be 5th element
 	// because of the previous insertion
+	
+	//b1 is already part of main
+	size_t	b_index = 1;
+	while (b_index < b_iters.size()) {
+		auto put_after = binarySearch(a_iters.at(b_index),
+								b_iters.at(b_index));
+
+		moveElem(put_after, b_iters.at(b_index));
+
+		b_index++;
+	}
 }
 
 // TODO: unpaired elements
@@ -160,15 +185,27 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		return ;
 	}
 
-	// just holds iterators to the actual vector where the numbers are
+	// just holds indices of the actual vector where the numbers are
 	std::vector<std::pair<int, int>> elems;
+	std::vector<pairIter> a_iters;
+	std::vector<pairIter> b_iters;
+
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
 	size_t first = 0;
 	size_t last = first + (elemsize - 1);
+	int i = 0;
 	while (last < orig.size()) {
 		elems.push_back(std::make_pair(first, last));
+		if (i % 2 == 0) {
+			b_iters.push_back(
+				std::make_pair(orig.begin() + first, orig.begin() + last));
+		} else {
+			a_iters.push_back(
+				std::make_pair(orig.begin() + first, orig.begin() + last));
+		}
+		i++;
 		if (orig.size() - last > elemsize) {
 			first += elemsize;
 			last += elemsize;
@@ -198,7 +235,7 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	std::cout << " number of elems: " << elems.size() << std::endl;
 	makeMain(elems);
 	// where does main end?
-	insertPend(elems, reclvl, elemsize);
+	insertPend(elems, reclvl, elemsize, a_iters, b_iters);
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
 	// insertPend(main, elems);

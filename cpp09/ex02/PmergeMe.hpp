@@ -26,9 +26,9 @@
 
 
 // a pair of iterators to vector<unsigned int>'s
-// typedef typename std::pair<
-// 	std::vector<unsigned int>::iterator,
-// 	std::vector<unsigned int>::iterator> pairIter;
+typedef typename std::pair<
+	std::vector<unsigned int>::iterator,
+	std::vector<unsigned int>::iterator> pairIter;
 
 class PMergeMe {
 public: 
@@ -40,8 +40,12 @@ public:
 	void miSort(unsigned int reclvl, unsigned int elemsize);
 	bool bigger(unsigned int a, unsigned int b);
 	void makeMain(std::vector<std::pair<int, int>> &elems);
-	void insertPend(std::vector<std::pair<int, int>> &elems,
-						  unsigned int reclvl, unsigned int elemsize);
+	void insertPend(
+		std::vector<std::pair<int, int>> &elems,
+		unsigned int reclvl,
+		unsigned int elemsize,
+		std::vector<pairIter> a_iters,
+		std::vector<pairIter> b_iters);
 	void sortPairs(std::vector<std::pair<int, int>> &elems);
 	void swapPairs(
 		std::pair<int, int> pair_a,
@@ -50,5 +54,7 @@ public:
 	void	moveElem(std::vector<std::pair<int, int>> &elems,
 			   std::vector<std::pair<int,int>>::iterator put_after,
 			   std::vector<std::pair<int,int>>::iterator to_move);
+	void	moveElem(pairIter put_after, pairIter to_move);
+	pairIter binarySearch(pairIter bound, pairIter to_move);
 };
 
