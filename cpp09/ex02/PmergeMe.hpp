@@ -55,6 +55,8 @@ public:
 			   std::vector<std::pair<int,int>>::iterator put_after,
 			   std::vector<std::pair<int,int>>::iterator to_move);
 	void	moveElem(pairIter put_after, pairIter to_move);
-	pairIter binarySearch(pairIter bound, pairIter to_move);
+	pairIter binarySearch(
+		std::vector<std::pair<int, int>> &elems,
+		pairIter bound, pairIter to_move);
 };
 
