@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <vector>
 
 static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::iterator iter) {
 	for (auto it = iter; it != vec.end(); it++) {
@@ -74,6 +73,21 @@ void PMergeMe::printElems(std::vector<std::pair<int, int>> elems) {
 	}
 }
 
+void	PMergeMe::moveElem(std::vector<std::pair<int, int>> &elems,
+						std::vector<std::pair<int,int>>::iterator put_after,
+						std::vector<std::pair<int,int>>::iterator to_move)
+{
+	if (std::next(to_move, 1) == elems.end()) {
+		std::rotate(orig.begin() + put_after->first,
+			 	orig.begin() + to_move->first,
+				orig.end());
+	} else {
+		std::rotate(orig.begin() + put_after->first,
+			 	orig.begin() + to_move->first,
+				orig.begin() + (to_move + 1)->first);
+	}
+}
+
 void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	if (elems.size() < 4) {
 		return ;
@@ -81,27 +95,55 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	std::cout << "before makemain:" << std::endl;
 	printElems(elems);
 	printVec(orig, orig.begin());
-	std::vector<int> as_to_move;
 	auto tail = elems.begin() + 2;
 	for (size_t i = 3; i < elems.size(); i += 2) {
 		std::cout << "i: " << i << std::endl;
+		std::cout << "moving: " << orig.at(elems.at(i).first) << "-";
+		std::cout << orig.at(elems.at(i).second) << std::endl;
+		moveElem(elems, tail, elems.begin() + i);
 		if (i + 1 < elems.size()) {
+			tail++;
+		}
+		/*  if (i + 1 < elems.size()) {
 			std::rotate(
 				orig.begin() + tail->first,
 				orig.begin() + elems.at(i).first,
 				orig.begin() + elems.at(i + 1).first);
+			tail++;
 		} else {
 			std::rotate(
 				orig.begin() + tail->first,
 				orig.begin() + elems.at(i).first,
 				orig.end());
-		}
+		}  */
 	}
+	first_of_pend = tail;
 	std::cout << "after makemain:" << std::endl;
 	printElems(elems);
 	printVec(orig, orig.begin());
 }
 
+// TODO: abstract manipulation of orig based on indices of elems
+
+
+void PMergeMe::insertPend(std::vector<std::pair<int, int>> &elems,
+						  unsigned int reclvl, unsigned int elemsize)
+{
+	(void) elems;
+	(void) reclvl;
+	(void) elemsize;
+
+	std::cout << "first of pend: " << orig.at(first_of_pend->first) << "-";
+		std::cout << orig.at(first_of_pend->second) << std::endl;
+
+	// take pend
+	// compare elems.second
+	// rotate to insert 
+	// we are starting from b2 and we know it is smaller than a2
+	// a2 is now the 3rd element 
+	// newxt round inser a3 which is 4th element now, but will be 5th element
+	// because of the previous insertion
+}
 
 // TODO: unpaired elements
 // elems is specific to each recursion level, therefore a local variable
@@ -155,6 +197,8 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	std::cout << "reclvl: " << reclvl << " elemsize: " << elemsize;
 	std::cout << " number of elems: " << elems.size() << std::endl;
 	makeMain(elems);
+	// where does main end?
+	insertPend(elems, reclvl, elemsize);
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
 	// insertPend(main, elems);
