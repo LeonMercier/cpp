@@ -26,9 +26,16 @@
 
 
 // a pair of iterators to vector<unsigned int>'s
-typedef typename std::pair<
-	std::vector<unsigned int>::iterator,
-	std::vector<unsigned int>::iterator> pairIter;
+// typedef typename std::pair<
+// 	std::vector<unsigned int>::iterator,
+// 	std::vector<unsigned int>::iterator> pairIter;
+
+// cannot use map anymore because of subject
+typedef struct SElem {
+	std::pair<int, int> indices;
+	char				chain;
+	size_t				chain_index;
+} t_elem;
 
 class PMergeMe {
 public: 
@@ -54,7 +61,7 @@ public:
 	void	moveElem(std::vector<std::pair<int, int>> &elems,
 			   std::vector<std::pair<int,int>>::iterator put_after,
 			   std::vector<std::pair<int,int>>::iterator to_move);
-	void	moveElem(pairIter put_after, pairIter to_move);
+	// void	moveElem(pairIter put_after, pairIter to_move);
 	pairIter binarySearch(
 		std::vector<std::pair<int, int>> &elems,
 		pairIter bound, pairIter to_move);
