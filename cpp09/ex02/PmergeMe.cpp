@@ -11,7 +11,11 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <vector>
+
+bool operator<(const Elem &lhs, const Elem &rhs) {
+	g_comparisons++;
+	return lhs.value < rhs.value;
+}
 
 static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::iterator iter) {
 	for (auto it = iter; it != vec.end(); it++) {
@@ -89,18 +93,8 @@ void	PMergeMe::moveElem(std::vector<std::pair<int, int>> &elems,
 				orig.begin() + (to_move + 1)->first);
 	}
 }
-/* 
-// iterators to orig
-void	PMergeMe::moveElem(pairIter put_after, pairIter to_move)
-{
-	std::cout << "moveElem: " << *to_move.first << "-" << *to_move.second << std::endl;
-	if (std::next(to_move.second, 1) == orig.end()) {
-		std::rotate(put_after.first, to_move.first, orig.end());
-	} else {
-		std::rotate(put_after.first, to_move.first, to_move.second + 1);
-	}
-}
- */
+
+// TODO: do not change main, only shuffle elems, then later apply changes
 void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	if (elems.size() < 4) {
 		return ;
@@ -117,18 +111,6 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 		if (i + 1 < elems.size()) {
 			tail++;
 		}
-		/*  if (i + 1 < elems.size()) {
-			std::rotate(
-				orig.begin() + tail->first,
-				orig.begin() + elems.at(i).first,
-				orig.begin() + elems.at(i + 1).first);
-			tail++;
-		} else {
-			std::rotate(
-				orig.begin() + tail->first,
-				orig.begin() + elems.at(i).first,
-				orig.end());
-		}  */
 	}
 	first_of_pend = tail;
 	std::cout << "after makemain:" << std::endl;
@@ -136,72 +118,14 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	printVec(orig, orig.begin());
 }
 
-pairIter PMergeMe::binarySearch(std::vector<std::pair<int, int>> &elems,
-					  pairIter bound, pairIter to_move)
-{
-	auto bound_elem = elems.begin();
-	for (; bound_elem != elems.end(); ++bound_elem) {
-		if (orig.begin() + bound_elem->second == bound.second) {
-			break ;
-		}
-	}
-	// comparison
-	while (bound_elem <= elems.begin()) {
-		if (*to_move.second > orig.at(bound_elem->second)) {
-			return std::make_pair(orig.begin() + bound_elem->first,
-									orig.begin() + bound_elem->second);
-		}
-		bound_elem--;
-	}
-	return std::make_pair(orig.begin() + bound_elem->first,
-							orig.begin() + bound_elem->second);
-}
-
-void PMergeMe::insertPend(
-	std::vector<std::pair<int, int>> &elems,
-	unsigned int reclvl,
-	unsigned int elemsize,
-	std::vector<pairIter> a_iters,
-	std::vector<pairIter> b_iters)
-{
-	(void) elems;
-	(void) reclvl;
-	(void) elemsize;
-
-	std::cout << "first of pend: " << orig.at(first_of_pend->first) << "-";
-		std::cout << orig.at(first_of_pend->second) << std::endl;
-
-	// take pend
-	// compare elems.second
-	// rotate to insert 
-	// we are starting from b2 and we know it is smaller than a2
-	// a2 is now the 3rd element 
-	// newxt round inser a3 which is 4th element now, but will be 5th element
-	// because of the previous insertion
-	
-	//b1 (index 0) is already part of main
-	pairIter put_after;
-	for (size_t b_index = 1; b_index < b_iters.size(); ++b_index) {
-		if (b_index < a_iters.size()) {
-			put_after = binarySearch(
-				elems, a_iters.at(b_index), b_iters.at(b_index));
-		} else {
-			put_after = binarySearch(
-				elems, *b_iters.begin(), b_iters.at(b_index));
-		}
-
-		moveElem(put_after, b_iters.at(b_index));
-	}
-}
-
 // TODO: unpaired elements
 // elems is specific to each recursion level, therefore a local variable
 void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
-	std::cout << "\nstarting miSort(): reclvl: " << reclvl << " with vector: " <<
-		std::endl;
+	std::cout << "\nstarting miSort(): reclvl: " << reclvl;
+	std::cout << " with vector: ";
 	// printVec(vec, vec.begin());
-	// std::cout << std::endl;
+	std::cout << std::endl;
 
 	// terminate recursion
 	if (elemsize > orig.size() / 2) {
@@ -249,62 +173,7 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
 	// TODO: use t_elem for everything
 	// moveElem() will have to update the indices after move
-	
-/* 
-	std::vector<pairIter> a_iters;
-	std::vector<pairIter> b_iters;
-	int odd = 0;
-	for (auto iter = elems.begin(); iter != elems.end(); ++iter) {
-		if (odd % 2 == 0) {
-			b_iters.push_back(std::make_pair(
-				orig.begin() + iter->first, orig.begin() + iter->second));
-		} else {
-			a_iters.push_back(std::make_pair(
-				orig.begin() + iter->first, orig.begin() + iter->second));
-		}
-		odd++;
-	}
-	std::cout << "b-elems" << std::endl;
-	for (auto it = b_iters.begin(); it != b_iters.end(); ++it) {
-		std::cout << *it->first << "--" << *it->second << "; ";
-	}
-	std::cout << std::endl;
- */
 
-
-	std::cout << "reclvl: " << reclvl << " elemsize: " << elemsize;
-	std::cout << " number of elems: " << elems.size() << std::endl;
-	makeMain(elems);
-
-	std::vector<std::pair<int,int>> a_chain;
-	std::vector<std::pair<int,int>> b_chain;
-	int odd = 0;
-	for (auto iter = elems.begin(); iter != elems.end(); ++iter) {
-		if (odd % 2 == 0) {
-			b_chain.push_back(*iter);
-		} else {
-			a_chain.push_back(*iter);
-		}
-		odd++;
-	}
-	// where does main end?
-	
-	// iterators are needed for binary sort but dont hold element boundaries 
-	// across recursion levels
-	
-	std::cout << "b-elems" << std::endl;
-	for (auto it = b_iters.begin(); it != b_iters.end(); ++it) {
-		std::cout << *it->first << "--" << *it->second << "; ";
-	}
-	std::cout << std::endl;
-	insertPend(elems, reclvl, elemsize, a_iters, b_iters);
-	std::cout << "ORIG: "  << std::endl;
-	printVec(orig, orig.begin());
-	// insertPend(main, elems);
-
-
-	// returning from recursion
-	
 }
 
 // The size of vec does not change after init(), therefore iterators should 
@@ -342,6 +211,6 @@ void PMergeMe::init(int count, char **strs) {
 }
 
 bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
-	comparisons++;
+	g_comparisons++;
 	return (a > b);
 }
