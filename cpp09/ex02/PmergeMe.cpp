@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <vector>
 
-bool operator<(const Elem &lhs, const Elem &rhs) {
-	g_comparisons++;
-	return lhs.value < rhs.value;
-}
 
 static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::iterator iter) {
 	for (auto it = iter; it != vec.end(); it++) {
@@ -47,6 +44,12 @@ void PMergeMe::swapPairs(
 	// printVec(vec, vec.begin());
 }
 
+void PMergeMe::swapPairs2(Elem &pair_a, Elem &pair_b) {
+	std::rotate(orig.begin() + pair_a.indices.first,
+				orig.begin() + pair_b.indices.first,
+				orig.begin() + pair_b.indices.second + 1);
+}
+
 // comparison of pairs compares the last elements
 // sorts pairs of elements, not pairs of numbers, hence always advancing 
 // by += 2
@@ -67,10 +70,39 @@ void PMergeMe::sortPairs(std::vector<std::pair<int, int>> &elems) {
 	}
 }
 
+void PMergeMe::sortPairs2(std::vector<Elem> &elems) {
+	auto pair_a = elems.begin();
+	auto pair_b = pair_a + 1;
+	while (pair_a != elems.end() && pair_b != elems.end()) {
+		if (pair_a->value > pair_b->value)
+		{
+			std::swap(pair_a, pair_b);
+			// swapPairs2(*pair_a, *pair_b);
+		}
+		if (std::distance(pair_b, elems.end()) > 2) {
+			pair_a += 2;
+			pair_b += 2;
+		} else {
+			break ;
+		}
+	}
+}
+
 void PMergeMe::printElems(std::vector<std::pair<int, int>> elems) {
 	for (auto iter = elems.begin(); iter != elems.end(); iter++) {
 		for (int elem_iter = iter->first; elem_iter <= iter->second;
 				elem_iter++)
+		{
+			std::cout << orig.at(elem_iter) << ", ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+void PMergeMe::printElems2(std::vector<Elem> &elems) {
+	for (auto iter = elems.begin(); iter != elems.end(); iter++) {
+		for (int elem_iter = iter->indices.first;
+			elem_iter <= iter->indices.second; elem_iter++)
 		{
 			std::cout << orig.at(elem_iter) << ", ";
 		}
@@ -118,6 +150,20 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	printVec(orig, orig.begin());
 }
 
+// could be made to only move numbers inside the original vector to be more in
+// the spirit of hte exercise, where the items could be very large
+// proobably dooable with std::rotate()
+void	PMergeMe::writeOrig(std::vector<Elem> &elems) {
+	std::vector<unsigned int> new_orig;
+	for (auto it = elems.begin(); it != elems.end(); ++it) {
+		for (int i = it->indices.first; i <= it->indices.second; ++i) {
+			new_orig.push_back(orig.at(i));
+		}
+	}
+	orig = new_orig;
+}
+
+
 // TODO: unpaired elements
 // elems is specific to each recursion level, therefore a local variable
 void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
@@ -135,15 +181,17 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
 	// just holds indices of the actual vector where the numbers are
 	// this will be useful across recursion levels
-	std::vector<std::pair<int, int>> elems;
+	// std::vector<std::pair<int, int>> elems;
 
+	std::vector<Elem> celems;
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
 	size_t first = 0;
 	size_t last = first + (elemsize - 1);
 	while (last < orig.size()) {
-		elems.push_back(std::make_pair(first, last));
+		celems.push_back(Elem(first, last, orig.at(last), comparisons));
+		// elems.push_back(std::make_pair(first, last));
 		if (orig.size() - last > elemsize) {
 			first += elemsize;
 			last += elemsize;
@@ -156,17 +204,25 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		}
 	}
 	std::cout << "elems: " << std::endl;
-	printElems(elems);
-	sortPairs(elems);
+	// printElems(elems);
+	printElems2(celems);
+	// sortPairs(elems);
+	sortPairs2(celems);
 	std::cout << "sorted elems: " << std::endl;
-	printElems(elems);
+	// printElems(elems);
+	printElems2(celems);
+	std::cout << "ORIG: "  << std::endl;
+	printVec(orig, orig.begin());
+	// reflect changes in main before recursing
+	writeOrig(celems);
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
 
 	// recursive call
 	miSort(reclvl + 1, elemsize * 2);
 	std::cout << "\n#####\n";
-	if ( elems.size() == 2) {
+	// if ( elems.size() == 2) {
+	if (celems.size() == 2) {
 		std::cout << "Penultimate recursion level" << std::endl;
 		return ;
 	}
@@ -211,6 +267,6 @@ void PMergeMe::init(int count, char **strs) {
 }
 
 bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
-	g_comparisons++;
+	comparisons++;
 	return (a > b);
 }
