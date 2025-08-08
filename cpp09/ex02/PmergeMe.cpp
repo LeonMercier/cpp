@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:40:49 by lemercie          #+#    #+#             */
-/*   Updated: 2025/08/08 15:24:01 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/08/08 19:19:58 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include <vector>
 
 
-static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::iterator iter) {
+static void printVec(std::vector<unsigned int> &vec,
+					 std::vector<unsigned int>::iterator iter)
+{
 	for (auto it = iter; it != vec.end(); it++) {
 		std::cout << *it << ", ";
 	}
@@ -30,21 +32,7 @@ static void printVec(std::vector<unsigned int> &vec, std::vector<unsigned int>::
 	that the element n_first becomes the first element of the new range and
 	n_first - 1 becomes the last element.
 */
-void PMergeMe::swapPairs(
-	std::pair<int, int> pair_a,
-	std::pair<int, int> pair_b) {
-	// std::cout << "Swapping: " << *pair_a->first << "-->" << *pair_a->second << 
-		// " with " << *pair_b->first << "-->" << *pair_b->second << std::endl;
-
-	// std::cout << "SwapPairs before: ";
-	// printVec(vec, vec.begin());
-	std::rotate(orig.begin() + pair_a.first, orig.begin() + pair_b.first,
-			 orig.begin() + pair_b.second + 1);
-	// std::cout << "SwapPairs  after: ";
-	// printVec(vec, vec.begin());
-}
-
-void PMergeMe::swapPairs2(Elem &pair_a, Elem &pair_b) {
+void PMergeMe::swapPairs(Elem &pair_a, Elem &pair_b) {
 	std::rotate(orig.begin() + pair_a.indices.first,
 				orig.begin() + pair_b.indices.first,
 				orig.begin() + pair_b.indices.second + 1);
@@ -53,24 +41,7 @@ void PMergeMe::swapPairs2(Elem &pair_a, Elem &pair_b) {
 // comparison of pairs compares the last elements
 // sorts pairs of elements, not pairs of numbers, hence always advancing 
 // by += 2
-void PMergeMe::sortPairs(std::vector<std::pair<int, int>> &elems) {
-	auto pair_a = elems.begin();
-	auto pair_b = pair_a + 1;
-	while (pair_a != elems.end() && pair_b != elems.end()) {
-		if (orig.at(pair_a->second) > orig.at(pair_b->second))
-		{
-			swapPairs(*pair_a, *pair_b);
-		}
-		if (std::distance(pair_b, elems.end()) > 2) {
-			pair_a += 2;
-			pair_b += 2;
-		} else {
-			break ;
-		}
-	}
-}
-
-void PMergeMe::sortPairs2(std::vector<Elem> &elems) {
+static void sortPairs(std::vector<Elem> &elems) {
 	auto pair_a = elems.begin();
 	auto pair_b = pair_a + 1;
 	while (pair_a != elems.end() && pair_b != elems.end()) {
@@ -89,18 +60,7 @@ void PMergeMe::sortPairs2(std::vector<Elem> &elems) {
 	}
 }
 
-void PMergeMe::printElems(std::vector<std::pair<int, int>> elems) {
-	for (auto iter = elems.begin(); iter != elems.end(); iter++) {
-		for (int elem_iter = iter->first; elem_iter <= iter->second;
-				elem_iter++)
-		{
-			std::cout << orig.at(elem_iter) << ", ";
-		}
-		std::cout << std::endl;
-	}
-}
-
-void PMergeMe::printElems2(std::vector<Elem> &elems) {
+void PMergeMe::printElems(std::vector<Elem> &elems) {
 	for (auto iter = elems.begin(); iter != elems.end(); iter++) {
 		for (int elem_iter = iter->indices.first;
 			elem_iter <= iter->indices.second; elem_iter++)
@@ -133,7 +93,6 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 		return ;
 	}
 	std::cout << "before makemain:" << std::endl;
-	printElems(elems);
 	printVec(orig, orig.begin());
 	auto tail = elems.begin() + 2;
 	for (size_t i = 3; i < elems.size(); i += 2) {
@@ -147,23 +106,24 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	}
 	first_of_pend = tail;
 	std::cout << "after makemain:" << std::endl;
-	printElems(elems);
 	printVec(orig, orig.begin());
 }
 
 // could be made to only move numbers inside the original vector to be more in
 // the spirit of hte exercise, where the items could be very large
 // proobably dooable with std::rotate()
-void	PMergeMe::writeOrig(std::vector<Elem> &elems) {
+void	PMergeMe::writeOrig(std::vector<Elem> &elems, size_t first_unpaired) {
 	std::vector<unsigned int> new_orig;
 	for (auto it = elems.begin(); it != elems.end(); ++it) {
 		for (int i = it->indices.first; i <= it->indices.second; ++i) {
 			new_orig.push_back(orig.at(i));
 		}
 	}
+	for (size_t i = first_unpaired; i < orig.size(); ++i) {
+		new_orig.push_back(orig.at(i));
+	}
 	orig = new_orig;
 }
-
 
 // TODO: unpaired elements
 // elems is specific to each recursion level, therefore a local variable
@@ -182,48 +142,45 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
 	// just holds indices of the actual vector where the numbers are
 	// this will be useful across recursion levels
-	// std::vector<std::pair<int, int>> elems;
 
-	std::vector<Elem> celems;
+	std::vector<Elem> elems;
+	int	first_unpaired = 0;
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
 	size_t first = 0;
 	size_t last = first + (elemsize - 1);
 	while (last < orig.size()) {
-		celems.push_back(Elem(first, last, orig.at(last), &comparisons));
+		elems.push_back(Elem(first, last, orig.at(last), &comparisons));
 		// elems.push_back(std::make_pair(first, last));
 		if (orig.size() - last > elemsize) {
 			first += elemsize;
 			last += elemsize;
 		} else {
-			// std::cout << "elements: " << elems.size() << std::endl;
-			// std::cout << "lonely nums: " << std::endl;
-			// begin_unpaired = last + 1;
-			// printVec(orig, begin_unpaired);
+			first_unpaired = last + 1;
 			break ;
 		}
 	}
 	std::cout << "elems: " << std::endl;
-	// printElems(elems);
-	printElems2(celems);
-	// sortPairs(elems);
-	sortPairs2(celems);
+	printElems(elems);
+
+	sortPairs(elems);
+
 	std::cout << "sorted elems: " << std::endl;
-	// printElems(elems);
-	printElems2(celems);
+	printElems(elems);
+
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
+
 	// reflect changes in main before recursing
-	writeOrig(celems);
+	writeOrig(elems, first_unpaired);
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
 
 	// recursive call
 	miSort(reclvl + 1, elemsize * 2);
 	std::cout << "\n#####\n";
-	// if ( elems.size() == 2) {
-	if (celems.size() == 2) {
+	if (elems.size() == 2) {
 		std::cout << "Penultimate recursion level" << std::endl;
 		return ;
 	}
@@ -233,8 +190,6 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
 }
 
-// The size of vec does not change after init(), therefore iterators should 
-// remain valid
 void PMergeMe::init(int count, char **strs) {
 	
 	for (int i = 0; i < count; i++) {

@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:36:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/08/08 15:23:06 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/08/08 19:17:06 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,15 @@ public:
 	// 	unsigned int elemsize,
 	// 	std::vector<pairIter> a_iters,
 	// 	std::vector<pairIter> b_iters);
-	void sortPairs(std::vector<std::pair<int, int>> &elems);
-	void sortPairs2(std::vector<Elem> &elems);
 	void swapPairs(
 		std::pair<int, int> pair_a,
 		std::pair<int, int> pair_b);
-	void swapPairs2(Elem &pair_a, Elem &pair_b);
-	void printElems(std::vector<std::pair<int, int>> elems);
-	void printElems2(std::vector<Elem> &elems);
+	void swapPairs(Elem &pair_a, Elem &pair_b);
+	void printElems(std::vector<Elem> &elems);
 	void	moveElem(std::vector<std::pair<int, int>> &elems,
 			   std::vector<std::pair<int,int>>::iterator put_after,
 			   std::vector<std::pair<int,int>>::iterator to_move);
-	void	writeOrig(std::vector<Elem> &elems);
+	void	writeOrig(std::vector<Elem> &elems, size_t first_unpaired);
 	// void	moveElem(pairIter put_after, pairIter to_move);
 	// pairIter binarySearch(
 	// 	std::vector<std::pair<int, int>> &elems,
