@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:40:49 by lemercie          #+#    #+#             */
-/*   Updated: 2025/08/08 19:19:58 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/08/08 19:55:20 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,18 @@ void	PMergeMe::moveElem(std::vector<std::pair<int, int>> &elems,
 	}
 }
 
+// iterators to elems
+static void	moveElem2(std::vector<Elem> &elems,
+						std::vector<Elem>::iterator put_after,
+						std::vector<Elem>::iterator to_move)
+{
+	if (std::next(to_move, 1) == elems.end()) {
+		std::rotate(put_after, to_move, elems.end());
+	} else {
+		std::rotate(put_after, to_move, to_move + 1);
+	}
+}
+
 // TODO: do not change main, only shuffle elems, then later apply changes
 void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	if (elems.size() < 4) {
@@ -109,6 +121,27 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	printVec(orig, orig.begin());
 }
 
+// TODO: here we can sort all Elems into main and pend, then insert from pend
+// to main and only after that, write main
+// non participating will chill at the same index at the end all the time
+static void makeMain2(std::vector<Elem> &elems) {
+	if (elems.size() < 4) {
+		return ;
+	}
+	auto tail = elems.begin() + 2;
+	for (size_t i = 3; i < elems.size(); i += 2) {
+		std::cout << "i: " << i << std::endl;
+		std::cout << "moving: " << orig.at(elems.at(i).first) << "-";
+		std::cout << orig.at(elems.at(i).second) << std::endl;
+		moveElem2(elems, tail, elems.begin() + i);
+		if (i + 1 < elems.size()) {
+			tail++;
+		}
+	}
+	first_of_pend = tail;
+	std::cout << "after makemain:" << std::endl;
+	printVec(orig, orig.begin());
+}
 // could be made to only move numbers inside the original vector to be more in
 // the spirit of hte exercise, where the items could be very large
 // proobably dooable with std::rotate()
@@ -184,6 +217,8 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		std::cout << "Penultimate recursion level" << std::endl;
 		return ;
 	}
+	makeMain2(elems);
+	writeOrig(elems, first_unpaired);
 
 	// TODO: use t_elem for everything
 	// moveElem() will have to update the indices after move

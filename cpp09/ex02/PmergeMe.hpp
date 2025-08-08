@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:36:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/08/08 19:17:06 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/08/08 19:56:18 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@
 // for final product: 
 // 		- keep track of amount of comparisons
 // 		- canonical orthodox form
-
-
-// a pair of iterators to vector<unsigned int>'s
-// typedef typename std::pair<
-// 	std::vector<unsigned int>::iterator,
-// 	std::vector<unsigned int>::iterator> pairIter;
 
 
 // TODO: split class into its own file
@@ -50,7 +44,6 @@ public:
 		comparisons(src.comparisons) {
 	}
 	bool operator<(const Elem &rhs) {
-	// lhs.comparisons and rhs.comparisons should refer to the same underlying
 		comparisons++;
 		return value < rhs.value;
 	}
@@ -66,12 +59,6 @@ public:
 	void miSort(unsigned int reclvl, unsigned int elemsize);
 	bool bigger(unsigned int a, unsigned int b);
 	void makeMain(std::vector<std::pair<int, int>> &elems);
-	// void insertPend(
-	// 	std::vector<std::pair<int, int>> &elems,
-	// 	unsigned int reclvl,
-	// 	unsigned int elemsize,
-	// 	std::vector<pairIter> a_iters,
-	// 	std::vector<pairIter> b_iters);
 	void swapPairs(
 		std::pair<int, int> pair_a,
 		std::pair<int, int> pair_b);
@@ -81,9 +68,5 @@ public:
 			   std::vector<std::pair<int,int>>::iterator put_after,
 			   std::vector<std::pair<int,int>>::iterator to_move);
 	void	writeOrig(std::vector<Elem> &elems, size_t first_unpaired);
-	// void	moveElem(pairIter put_after, pairIter to_move);
-	// pairIter binarySearch(
-	// 	std::vector<std::pair<int, int>> &elems,
-	// 	pairIter bound, pairIter to_move);
 };
 
