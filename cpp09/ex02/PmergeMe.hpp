@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:36:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/05/08 17:03:21 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:23:06 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,14 @@ public:
 	char				chain;
 	size_t				chain_index;
 	unsigned int		value;
-	int					&comparisons;
-	Elem(int first, int last, unsigned int value, int &comparisons) :
+	int					*comparisons;
+	Elem(int first, int last, unsigned int value, int *comparisons) :
 		indices({first, last}), value(value), comparisons(comparisons) {
 
+	}
+	Elem(const Elem &src) : indices(src.indices), chain(src.chain),
+		chain_index(src.chain_index), value(src.value),
+		comparisons(src.comparisons) {
 	}
 	bool operator<(const Elem &rhs) {
 	// lhs.comparisons and rhs.comparisons should refer to the same underlying

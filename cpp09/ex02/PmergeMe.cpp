@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:40:49 by lemercie          #+#    #+#             */
-/*   Updated: 2025/05/08 17:06:53 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:24:01 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void PMergeMe::sortPairs2(std::vector<Elem> &elems) {
 	while (pair_a != elems.end() && pair_b != elems.end()) {
 		if (pair_a->value > pair_b->value)
 		{
-			std::swap(pair_a, pair_b);
+			std::cout << "swapping: " << pair_a->value << "-" << pair_b->value << std::endl;
+			std::iter_swap(pair_a, pair_b);
 			// swapPairs2(*pair_a, *pair_b);
 		}
 		if (std::distance(pair_b, elems.end()) > 2) {
@@ -190,7 +191,7 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	size_t first = 0;
 	size_t last = first + (elemsize - 1);
 	while (last < orig.size()) {
-		celems.push_back(Elem(first, last, orig.at(last), comparisons));
+		celems.push_back(Elem(first, last, orig.at(last), &comparisons));
 		// elems.push_back(std::make_pair(first, last));
 		if (orig.size() - last > elemsize) {
 			first += elemsize;
