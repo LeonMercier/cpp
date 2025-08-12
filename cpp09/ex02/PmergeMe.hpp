@@ -43,6 +43,14 @@ public:
 		chain_index(src.chain_index), value(src.value),
 		comparisons(src.comparisons) {
 	}
+	Elem &operator=(const Elem &src) {
+		indices = src.indices;
+		chain = src.chain;
+		chain_index = src.chain_index;
+		value = src.value;
+		comparisons = src.comparisons;
+		return *this;
+	}
 	bool operator<(const Elem &rhs) {
 		comparisons++;
 		return value < rhs.value;
@@ -68,5 +76,9 @@ public:
 			   std::vector<std::pair<int,int>>::iterator put_after,
 			   std::vector<std::pair<int,int>>::iterator to_move);
 	void	writeOrig(std::vector<Elem> &elems, size_t first_unpaired);
+	void	writeOrigFromTwoChains(
+		std::vector<Elem> &a_chain,
+		std::vector<Elem> &b_chain,
+		size_t first_unpaired);
 };
 

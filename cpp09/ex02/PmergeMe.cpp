@@ -41,6 +41,8 @@ void PMergeMe::swapPairs(Elem &pair_a, Elem &pair_b) {
 // comparison of pairs compares the last elements
 // sorts pairs of elements, not pairs of numbers, hence always advancing 
 // by += 2
+// TODO: maybe write a/b indices here?
+/* 
 static void sortPairs(std::vector<Elem> &elems) {
 	auto pair_a = elems.begin();
 	auto pair_b = pair_a + 1;
@@ -59,13 +61,19 @@ static void sortPairs(std::vector<Elem> &elems) {
 		}
 	}
 }
-
+ */
 void PMergeMe::printElems(std::vector<Elem> &elems) {
+	std::cout << "printElems()" << std::endl;
 	for (auto iter = elems.begin(); iter != elems.end(); iter++) {
 		for (int elem_iter = iter->indices.first;
 			elem_iter <= iter->indices.second; elem_iter++)
 		{
-			std::cout << orig.at(elem_iter) << ", ";
+			// std::cout << elem_iter << "-";
+			try {
+				std::cout << orig.at(elem_iter) << ", ";
+			} catch (...) {
+				std::cout << "printElems(): no element at: " << elem_iter << std::endl;
+			}
 		}
 		std::cout << std::endl;
 	}
@@ -98,7 +106,7 @@ static void	moveElem2(std::vector<Elem> &elems,
 		std::rotate(put_after, to_move, to_move + 1);
 	}
 }
-
+/* 
 // TODO: do not change main, only shuffle elems, then later apply changes
 void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	if (elems.size() < 4) {
@@ -120,31 +128,30 @@ void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
 	std::cout << "after makemain:" << std::endl;
 	printVec(orig, orig.begin());
 }
-
+ */
 // TODO: here we can sort all Elems into main and pend, then insert from pend
 // to main and only after that, write main
-// non participating will chill at the same index at the end all the time
+// non participating numbers will chill at the same index at the end all the
+// time
 static void makeMain2(std::vector<Elem> &elems) {
 	if (elems.size() < 4) {
 		return ;
 	}
 	auto tail = elems.begin() + 2;
-	for (size_t i = 3; i < elems.size(); i += 2) {
-		std::cout << "i: " << i << std::endl;
-		std::cout << "moving: " << orig.at(elems.at(i).first) << "-";
-		std::cout << orig.at(elems.at(i).second) << std::endl;
-		moveElem2(elems, tail, elems.begin() + i);
-		if (i + 1 < elems.size()) {
+	for (auto it = elems.begin() + 3; it < elems.end(); it += 2) {
+		moveElem2(elems, tail, it);
+		if (it + 1 < elems.end()) {
 			tail++;
 		}
 	}
-	first_of_pend = tail;
-	std::cout << "after makemain:" << std::endl;
-	printVec(orig, orig.begin());
+	// first_of_pend = tail;
+	// std::cout << "after makemain:" << std::endl;
+	// printVec(orig, orig.begin());
 }
+
 // could be made to only move numbers inside the original vector to be more in
-// the spirit of hte exercise, where the items could be very large
-// proobably dooable with std::rotate()
+// the spirit of the exercise, where the items could be very large
+// probably doable with std::rotate()
 void	PMergeMe::writeOrig(std::vector<Elem> &elems, size_t first_unpaired) {
 	std::vector<unsigned int> new_orig;
 	for (auto it = elems.begin(); it != elems.end(); ++it) {
@@ -156,6 +163,82 @@ void	PMergeMe::writeOrig(std::vector<Elem> &elems, size_t first_unpaired) {
 		new_orig.push_back(orig.at(i));
 	}
 	orig = new_orig;
+}
+
+// could be made to only move numbers inside the original vector to be more in
+// the spirit of the exercise, where the items could be very large
+// probably doable with std::rotate()
+void	PMergeMe::writeOrigFromTwoChains(
+	std::vector<Elem> &a_chain,
+	std::vector<Elem> &b_chain,
+	size_t first_unpaired)
+{
+
+	std::cout << "writeOrigTo" << a_chain.size() << "+" << b_chain.size();
+	std::cout << "first unpaired: " << first_unpaired << std::endl;
+	std::vector<unsigned int> new_orig;
+	auto iter_a = a_chain.begin();
+	auto iter_b = b_chain.begin();
+	while (true) {
+		if (iter_b < b_chain.end()) {
+			for (int i = iter_b->indices.first; i <= iter_b->indices.second;
+				++i)
+			{
+				new_orig.push_back(orig.at(i));
+			}
+		}
+		if (iter_a < a_chain.end()) {
+			for (int i = iter_a->indices.first; i <= iter_a->indices.second;
+				++i)
+			{
+				new_orig.push_back(orig.at(i));
+			}
+		}
+		if (iter_a < a_chain.end()) {iter_a++;}
+		if (iter_b < b_chain.end()) {iter_b++;}
+		if (iter_a == a_chain.end() && iter_b == b_chain.end()) {
+			break ;
+		}
+	}
+
+	for (size_t i = first_unpaired; i < orig.size(); ++i) {
+		std::cout << "writeOrigTwo(): pushing unpaired" << std::endl;
+		new_orig.push_back(orig.at(i));
+	}
+	orig = new_orig;
+	std::cout << "SIZE: " << orig.size() << std::endl;
+}
+
+static void sortPairs2(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
+					   std::vector<Elem> &elems)
+{
+	auto pair_a = elems.begin();
+	auto pair_b = pair_a + 1;
+	while (pair_a != elems.end() && pair_b != elems.end()) {
+		if (pair_a->value > pair_b->value)
+		{
+			std::cout << "swapping: " << pair_a->value << "-" << pair_b->value << std::endl;
+			Elem new_a(*pair_a);
+			Elem new_b(*pair_b);
+			// TODO: do we need to chain and chain index in the end?
+			a_chain.push_back(new_a);
+			b_chain.push_back(new_b);
+			// std::iter_swap(pair_a, pair_b);
+			// swapPairs2(*pair_a, *pair_b);
+		} else {
+			Elem new_a(*pair_b);
+			Elem new_b(*pair_a);
+			// TODO: do we need to chain and chain index in the end?
+			a_chain.push_back(new_a);
+			b_chain.push_back(new_b);
+		}
+		if (std::distance(pair_b, elems.end()) > 2) {
+			pair_a += 2;
+			pair_b += 2;
+		} else {
+			break ;
+		}
+	}
 }
 
 // TODO: unpaired elements
@@ -177,7 +260,7 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	// this will be useful across recursion levels
 
 	std::vector<Elem> elems;
-	int	first_unpaired = 0;
+	int	first_unpaired = orig.size();
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
@@ -190,23 +273,36 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 			first += elemsize;
 			last += elemsize;
 		} else {
-			first_unpaired = last + 1;
+			// first_unpaired = last + 1;
+			// first_unpaired = last;
 			break ;
 		}
 	}
+	first_unpaired = last + 1;
+	first_unpaired = last;
 	std::cout << "elems: " << std::endl;
 	printElems(elems);
 
-	sortPairs(elems);
 
-	std::cout << "sorted elems: " << std::endl;
-	printElems(elems);
+	// NOTE: we are not regenerating elems after this, so the first Elem will
+	// not be index 0 of main
+	// only after sortPairs() are a/b indices relevant though
+	// maybe combine creation of elems with sortPairs
+	//
+	std::vector<Elem> a_chain;
+	std::vector<Elem> b_chain;
+	sortPairs2(a_chain, b_chain, elems);
+	// sortPairs(elems);
+
+	// std::cout << "sorted elems: " << std::endl;
+	// printElems(elems);
 
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
 
 	// reflect changes in main before recursing
-	writeOrig(elems, first_unpaired);
+	writeOrigFromTwoChains(a_chain, b_chain, first_unpaired);
+	// writeOrig(elems, first_unpaired);
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
 
@@ -217,14 +313,19 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		std::cout << "Penultimate recursion level" << std::endl;
 		return ;
 	}
+	std::cout << "after recursion" << std::endl;
+	std::cout << "first indices" << elems.begin()->indices.first << "-";
+	std::cout << elems.begin()->indices.second << std::endl;
+	printElems(elems);
 	makeMain2(elems);
 	writeOrig(elems, first_unpaired);
+	std::cout << "ORIG: "  << std::endl;
+	printVec(orig, orig.begin());
 
-	// TODO: use t_elem for everything
-	// moveElem() will have to update the indices after move
 
 }
 
+// TODO: give error on non integer arguments
 void PMergeMe::init(int count, char **strs) {
 	
 	for (int i = 0; i < count; i++) {
@@ -238,6 +339,9 @@ void PMergeMe::init(int count, char **strs) {
 			orig.insert(orig.end(), val);
 		}
 		strs++;
+	}
+	if (orig.size() == 0) {
+		return ;
 	}
 	
 	// for (auto iter = vec.begin(); iter != vec.end(); iter++) {
