@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <vector>
-
 
 static void printVec(std::vector<unsigned int> &vec,
 					 std::vector<unsigned int>::iterator iter)
@@ -63,7 +61,7 @@ static void sortPairs(std::vector<Elem> &elems) {
 }
  */
 void PMergeMe::printElems(std::vector<Elem> &elems) {
-	std::cout << "printElems()" << std::endl;
+	// std::cout << "printElems()" << std::endl;
 	for (auto iter = elems.begin(); iter != elems.end(); iter++) {
 		for (int elem_iter = iter->indices.first;
 			elem_iter <= iter->indices.second; elem_iter++)
@@ -174,39 +172,46 @@ void	PMergeMe::writeOrigFromTwoChains(
 	size_t first_unpaired)
 {
 
-	std::cout << "writeOrigTo" << a_chain.size() << "+" << b_chain.size();
+	std::cout << "writeOrigTo: " << a_chain.size() << "+" << b_chain.size() << std::endl;
 	std::cout << "first unpaired: " << first_unpaired << std::endl;
+	// return ;
 	std::vector<unsigned int> new_orig;
 	auto iter_a = a_chain.begin();
 	auto iter_b = b_chain.begin();
 	while (true) {
-		if (iter_b < b_chain.end()) {
+		if (iter_b != b_chain.end()) {
 			for (int i = iter_b->indices.first; i <= iter_b->indices.second;
 				++i)
-			{
+			{	
+				std::cout << "WO(): push index: " << i << std::endl;
 				new_orig.push_back(orig.at(i));
 			}
+			iter_b++;
 		}
-		if (iter_a < a_chain.end()) {
+		if (iter_a != a_chain.end()) {
 			for (int i = iter_a->indices.first; i <= iter_a->indices.second;
 				++i)
 			{
+				std::cout << "WO(): push index: " << i << std::endl;
 				new_orig.push_back(orig.at(i));
 			}
+			iter_a++;
 		}
-		if (iter_a < a_chain.end()) {iter_a++;}
-		if (iter_b < b_chain.end()) {iter_b++;}
 		if (iter_a == a_chain.end() && iter_b == b_chain.end()) {
 			break ;
 		}
 	}
 
+	std::cout << "NEW ORIG before unpaired: " << std::endl;
+	printVec(new_orig, new_orig.begin());
+	std::cout << "SIZE before unpaired: " << new_orig.size() << std::endl;
 	for (size_t i = first_unpaired; i < orig.size(); ++i) {
-		std::cout << "writeOrigTwo(): pushing unpaired" << std::endl;
+		std::cout << "writeOrigTwo(): pushing unpaired: ";
+		std::cout << "index: " << i << ", value: " << orig.at(i) << std::endl;
 		new_orig.push_back(orig.at(i));
 	}
 	orig = new_orig;
-	std::cout << "SIZE: " << orig.size() << std::endl;
+	std::cout << "SIZE after unpaired: " << orig.size() << std::endl;
 }
 
 static void sortPairs2(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
@@ -239,6 +244,15 @@ static void sortPairs2(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 			break ;
 		}
 	}
+	// odd pair
+	// TODO: missing odd pair on reclvl 3
+	if (pair_a != elems.end() && pair_b == elems.end()) {
+		std::cout << "sortPairs2(): pushing odd pair: " ;
+		std::cout << pair_a->indices.first << "-" << pair_a->indices.second << std::endl;
+		Elem new_b(*pair_a);
+		b_chain.push_back(new_b);
+	}
+	std::cout << "sortPairs2() end sizes: " << a_chain.size() << "+" << b_chain.size() << std::endl;
 }
 
 // TODO: unpaired elements
@@ -266,6 +280,9 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	// on the first recursion level, they point to the same number
 	size_t first = 0;
 	size_t last = first + (elemsize - 1);
+
+	// if the while condition evaluates false, then all elements are paired,
+	// if break is reached then there are unpaired elements
 	while (last < orig.size()) {
 		elems.push_back(Elem(first, last, orig.at(last), &comparisons));
 		// elems.push_back(std::make_pair(first, last));
@@ -273,15 +290,14 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 			first += elemsize;
 			last += elemsize;
 		} else {
-			// first_unpaired = last + 1;
-			// first_unpaired = last;
+			first_unpaired = last + 1;
 			break ;
 		}
 	}
-	first_unpaired = last + 1;
-	first_unpaired = last;
-	std::cout << "elems: " << std::endl;
+	std::cout << "elems after creation: " << std::endl;
 	printElems(elems);
+	std::cout << "last: " << last << std::endl;
+	std::cout << "unpaired: " << first_unpaired << std::endl;
 
 
 	// NOTE: we are not regenerating elems after this, so the first Elem will
@@ -297,13 +313,13 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	// std::cout << "sorted elems: " << std::endl;
 	// printElems(elems);
 
-	std::cout << "ORIG: "  << std::endl;
+	std::cout << "ORIG before write: "  << std::endl;
 	printVec(orig, orig.begin());
 
 	// reflect changes in main before recursing
 	writeOrigFromTwoChains(a_chain, b_chain, first_unpaired);
 	// writeOrig(elems, first_unpaired);
-	std::cout << "ORIG: "  << std::endl;
+	std::cout << "ORIG after write: "  << std::endl;
 	printVec(orig, orig.begin());
 
 	// recursive call
@@ -314,7 +330,7 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		return ;
 	}
 	std::cout << "after recursion" << std::endl;
-	std::cout << "first indices" << elems.begin()->indices.first << "-";
+	std::cout << "first indices " << elems.begin()->indices.first << "-";
 	std::cout << elems.begin()->indices.second << std::endl;
 	printElems(elems);
 	makeMain2(elems);
