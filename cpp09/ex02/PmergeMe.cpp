@@ -38,29 +38,15 @@ void PMergeMe::init(int count, char **strs) {
 	std::vector<unsigned int> test = orig;
 	std::sort(test.begin(), test.end());
 	
-	// for (auto iter = vec.begin(); iter != vec.end(); iter++) {
-	// 	std::cout << *iter << "#";
-	// }
-	// std::cout << std::endl;
-	
-// test for rotate()
-/* 	
-	printVec(orig, orig.begin());
-	auto a = orig.begin() + 3;
-	auto b = orig.begin() + 9;
-	auto c = orig.begin() + 11;
-	std::rotate(a, b, c);
-	printVec(orig, orig.begin());
- */
 	miSort(1, 1);
 
 	// TESTING
 	if (orig == test) {
-		std::cout << "init(): SUCCESSful sort" << std::endl;
+		std::cout << "init(): SUCCESSful sort: ";
+		std::cout << comparisons << " comps" << std::endl;
 	} else {
 		std::cout << "init(): FAILed sort" << std::endl;
 	}
-
 }
 
 // elems is specific to each recursion level, therefore a local variable
@@ -77,11 +63,10 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		return ;
 	}
 
-	// just holds indices of the actual vector where the numbers are
+	// elems just holds indices of the actual vector where the numbers are
 	// this will be useful across recursion levels
-
-	std::vector<Elem> elems;
-	int	first_unpaired = orig.size();
+	std::vector<Elem>	elems;
+	int					first_unpaired = orig.size();
 
 	// first and last are the first and last numbers of an element
 	// on the first recursion level, they point to the same number
@@ -92,7 +77,6 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	// if break is reached then there are unpaired elements
 	while (last < orig.size()) {
 		elems.push_back(Elem(first, last, orig.at(last), &comparisons));
-		// elems.push_back(std::make_pair(first, last));
 		if (orig.size() - last > elemsize) {
 			first += elemsize;
 			last += elemsize;
@@ -106,16 +90,9 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	// std::cout << "last: " << last << std::endl;
 	// std::cout << "unpaired: " << first_unpaired << std::endl;
 
-
-	// NOTE: we are not regenerating elems after this, so the first Elem will
-	// not be index 0 of main
-	// only after sortPairs() are a/b indices relevant though
-	// maybe combine creation of elems with sortPairs
-	//
 	std::vector<Elem> a_chain;
 	std::vector<Elem> b_chain;
 	sortPairs(a_chain, b_chain, elems);
-	// sortPairs(elems);
 
 	// std::cout << "sorted elems: " << std::endl;
 	// printElems(elems);
@@ -147,8 +124,6 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	writeOrig(elems, first_unpaired);
 	// std::cout << "ORIG: "  << std::endl;
 	// printVec(orig, orig.begin());
-
-
 }
 
 // comparison of pairs compares the last numbers of each element
@@ -160,13 +135,13 @@ static void sortPairs(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 		auto cur = elems.begin() + i;
 		auto next = cur + 1;
 		
-		//odd element
+		// unpaired element at end
 		if (next == elems.end()) {
 			b_chain.push_back(*cur);
 			break;
 		}
 		// comparison
-		if (cur->value < next->value) {
+		if (*cur < *next) {
 			b_chain.push_back(*cur);
 			a_chain.push_back(*next);
 		} else {
@@ -250,7 +225,6 @@ void	PMergeMe::regenElemValues(std::vector<Elem> &elems) {
 	}
 }
 
-
 // here we can sort all Elems into main and pend, then insert from pend
 // to main and only after that, in miSort(), write orig
 // non participating numbers will chill at the same index at the end all the
@@ -264,13 +238,14 @@ void PMergeMe::makeMain(std::vector<Elem> &elems) {
 	std::vector<Elem> pend;
 
 	// main starts as b1 and all of 'a's; that is: first elem, second elem, 
-	// then evey other elem
+	// then every other elem
 	main.push_back(elems.at(0));
 	main.back().chain = 'b';
 	main.back().chain_index = 1;
 	main.push_back(elems.at(1));
 	main.back().chain = 'a';
 	main.back().chain_index = 1;
+
 	for (size_t i = 2; i < elems.size(); ++i) {
 		if (i % 2 == 0) {
 			pend.push_back(elems.at(i));
@@ -302,29 +277,23 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 	// printElems(main);
 }
 
+// TODO: actually implement binary search
 std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 	std::vector<Elem> &main,
 	Elem &to_insert)
 {
-	// bx is always smaller than ax
-	auto insert_before = main.end();
 	for (auto it = main.begin(); it != main.end(); ++it) {
 		// comparison
-		if (it->value > to_insert.value) {
+		if (*it > to_insert) {
 			return it;
 		}
+		// bx is always smaller than ax, so that is the upper bound
 		if (it->chain == 'a' && it->chain_index == to_insert.chain_index) {
-			return it; // found the bound element
+			return it;
 		}
 	}
-	return insert_before;
+	return main.end();
 }
-
-bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
-	comparisons++;
-	return (a > b);
-}
-
 
 void PMergeMe::printElems(std::vector<Elem> &elems) {
 	// std::cout << "printElems()" << std::endl;
@@ -343,8 +312,13 @@ void PMergeMe::printElems(std::vector<Elem> &elems) {
 	}
 }
 
+/* 
+bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
+	comparisons++;
+	return (a > b);
+}
+ */
 
-	
 /* 
 static void printVec(std::vector<unsigned int> &vec,
 					 std::vector<unsigned int>::iterator iter)

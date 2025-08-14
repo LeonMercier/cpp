@@ -52,8 +52,12 @@ public:
 		return *this;
 	}
 	bool operator<(const Elem &rhs) {
-		comparisons++;
+		(*comparisons)++;
 		return value < rhs.value;
+	}
+	bool operator>(const Elem &rhs) {
+		(*comparisons)++;
+		return value > rhs.value;
 	}
 };
 
@@ -65,7 +69,6 @@ public:
 
 	void init(int count, char **strs);
 	void miSort(unsigned int reclvl, unsigned int elemsize);
-	bool bigger(unsigned int a, unsigned int b);
 	void swapPairs(Elem &pair_a, Elem &pair_b);
 	void printElems(std::vector<Elem> &elems);
 	void	writeOrig(std::vector<Elem> &elems, size_t first_unpaired);
@@ -78,5 +81,6 @@ public:
 	void insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend);
 	std::vector<Elem>::const_iterator binarySearch(
 		std::vector<Elem> &main, Elem &to_insert);
+	// bool bigger(unsigned int a, unsigned int b);
 };
 
