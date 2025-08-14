@@ -52,11 +52,11 @@ public:
 		return *this;
 	}
 	bool operator<(const Elem &rhs) {
-		(*comparisons)++;
+		// (*comparisons)++;
 		return value < rhs.value;
 	}
 	bool operator>(const Elem &rhs) {
-		(*comparisons)++;
+		// (*comparisons)++;
 		return value > rhs.value;
 	}
 };

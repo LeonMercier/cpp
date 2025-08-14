@@ -14,6 +14,8 @@
 
 static void sortPairs(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 					   std::vector<Elem> &elems);
+static void printVec(std::vector<unsigned int> &vec,
+					 std::vector<unsigned int>::iterator iter);
 
 // TODO: give error on non integer arguments
 void PMergeMe::init(int count, char **strs) {
@@ -34,6 +36,7 @@ void PMergeMe::init(int count, char **strs) {
 		return ;
 	}
 
+	printVec(orig, orig.begin());
 	// TESTING
 	std::vector<unsigned int> test = orig;
 	std::sort(test.begin(), test.end());
@@ -231,6 +234,14 @@ void	PMergeMe::regenElemValues(std::vector<Elem> &elems) {
 // time
 void PMergeMe::makeMain(std::vector<Elem> &elems) {
 	if (elems.size() <= 2) {
+		if (elems.size() >= 1) {
+			elems.at(0).chain= 'b';
+			elems.at(0).chain_index = 1;
+		}
+		if (elems.size() == 2) {
+			elems.at(1).chain = 'a';
+			elems.at(1).chain_index = 1;
+		}
 		return ;
 	}
 
@@ -282,6 +293,44 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 	std::vector<Elem> &main,
 	Elem &to_insert)
 {
+	if (main.size() == 0) {
+		return main.end();
+	}
+
+	auto upper_bound = main.end() -1;
+	// compares indices, not values
+	for (auto it = main.begin(); it != main.end(); ++it) {
+		if (it->chain == 'a' && it->chain_index == to_insert.chain_index) {
+			upper_bound = it;
+		}
+	}
+
+	int	right = upper_bound - main.begin();
+	int	left = 0;
+	while (left  <= right) {
+		size_t mid = (left + right) / 2;
+		std::cout << "mid: " << mid << std::endl;
+		// comparison
+		try {
+			if (main.at(mid) < to_insert) {
+				left = mid + 1;
+			} else {
+				right = mid - 1;
+			}
+		} catch (...) {
+			std::cout <<"no element in main at: " << mid << std::endl;
+		}
+	}
+	// TODO : right becomes -1
+	std::cout << "left: " << left << std::endl;
+	std::cout << "right: " << right << std::endl;
+	if (right < 1) {
+		return main.begin() + 1;
+	}
+	return main.begin() + right;
+
+
+/* 
 	for (auto it = main.begin(); it != main.end(); ++it) {
 		// comparison
 		if (*it > to_insert) {
@@ -292,7 +341,7 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 			return it;
 		}
 	}
-	return main.end();
+	return main.end(); */
 }
 
 void PMergeMe::printElems(std::vector<Elem> &elems) {
@@ -319,7 +368,7 @@ bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
 }
  */
 
-/* 
+
 static void printVec(std::vector<unsigned int> &vec,
 					 std::vector<unsigned int>::iterator iter)
 {
@@ -328,7 +377,7 @@ static void printVec(std::vector<unsigned int> &vec,
 	}
 	std::cout << std::endl;
 }
- */
+
 /*
  rotate() is weird:
  template< class ForwardIt >
