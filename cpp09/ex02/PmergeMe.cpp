@@ -122,7 +122,7 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 	Elem &to_insert)
 {
 	// bx is always smaller than ax
-	auto insert_before = main.end() -1;
+	auto insert_before = main.end();
 	for (auto it = main.begin(); it != main.end(); ++it) {
 		// comparison
 		if (it->value > to_insert.value) {
