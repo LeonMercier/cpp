@@ -36,30 +36,7 @@ void PMergeMe::swapPairs(Elem &pair_a, Elem &pair_b) {
 				orig.begin() + pair_b.indices.second + 1);
 }
 
-// comparison of pairs compares the last elements
-// sorts pairs of elements, not pairs of numbers, hence always advancing 
-// by += 2
-// TODO: maybe write a/b indices here?
-/* 
-static void sortPairs(std::vector<Elem> &elems) {
-	auto pair_a = elems.begin();
-	auto pair_b = pair_a + 1;
-	while (pair_a != elems.end() && pair_b != elems.end()) {
-		if (pair_a->value > pair_b->value)
-		{
-			std::cout << "swapping: " << pair_a->value << "-" << pair_b->value << std::endl;
-			std::iter_swap(pair_a, pair_b);
-			// swapPairs2(*pair_a, *pair_b);
-		}
-		if (std::distance(pair_b, elems.end()) > 2) {
-			pair_a += 2;
-			pair_b += 2;
-		} else {
-			break ;
-		}
-	}
-}
- */
+
 void PMergeMe::printElems(std::vector<Elem> &elems) {
 	// std::cout << "printElems()" << std::endl;
 	for (auto iter = elems.begin(); iter != elems.end(); iter++) {
@@ -78,22 +55,6 @@ void PMergeMe::printElems(std::vector<Elem> &elems) {
 }
 
 // iterators to elems
-void	PMergeMe::moveElem(std::vector<std::pair<int, int>> &elems,
-						std::vector<std::pair<int,int>>::iterator put_after,
-						std::vector<std::pair<int,int>>::iterator to_move)
-{
-	if (std::next(to_move, 1) == elems.end()) {
-		std::rotate(orig.begin() + put_after->first,
-			 	orig.begin() + to_move->first,
-				orig.end());
-	} else {
-		std::rotate(orig.begin() + put_after->first,
-			 	orig.begin() + to_move->first,
-				orig.begin() + (to_move + 1)->first);
-	}
-}
-
-// iterators to elems
 static void	moveElem2(std::vector<Elem> &elems,
 						std::vector<Elem>::iterator put_after,
 						std::vector<Elem>::iterator to_move)
@@ -104,29 +65,7 @@ static void	moveElem2(std::vector<Elem> &elems,
 		std::rotate(put_after, to_move, to_move + 1);
 	}
 }
-/* 
-// TODO: do not change main, only shuffle elems, then later apply changes
-void PMergeMe::makeMain(std::vector<std::pair<int, int>> &elems) {
-	if (elems.size() < 4) {
-		return ;
-	}
-	std::cout << "before makemain:" << std::endl;
-	printVec(orig, orig.begin());
-	auto tail = elems.begin() + 2;
-	for (size_t i = 3; i < elems.size(); i += 2) {
-		std::cout << "i: " << i << std::endl;
-		std::cout << "moving: " << orig.at(elems.at(i).first) << "-";
-		std::cout << orig.at(elems.at(i).second) << std::endl;
-		moveElem(elems, tail, elems.begin() + i);
-		if (i + 1 < elems.size()) {
-			tail++;
-		}
-	}
-	first_of_pend = tail;
-	std::cout << "after makemain:" << std::endl;
-	printVec(orig, orig.begin());
-}
- */
+
 // TODO: here we can sort all Elems into main and pend, then insert from pend
 // to main and only after that, write main
 // non participating numbers will chill at the same index at the end all the
@@ -183,7 +122,7 @@ void	PMergeMe::writeOrigFromTwoChains(
 			for (int i = iter_b->indices.first; i <= iter_b->indices.second;
 				++i)
 			{	
-				std::cout << "WO(): push index: " << i << std::endl;
+				// std::cout << "WO(): push index: " << i << std::endl;
 				new_orig.push_back(orig.at(i));
 			}
 			iter_b++;
@@ -214,10 +153,11 @@ void	PMergeMe::writeOrigFromTwoChains(
 	std::cout << "SIZE after unpaired: " << orig.size() << std::endl;
 }
 
-static void sortPairs3(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
+// comparison of pairs compares the last numbers of each element
+static void sortPairs(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 					   std::vector<Elem> &elems)
 {
-	std::cout << "sortpairs3() starting with: " << elems.size() << std::endl;
+	std::cout << "sortpairs() starting with: " << elems.size() << std::endl;
 	for (size_t i = 0; i < elems.size(); i += 2) {
 		auto cur = elems.begin() + i;
 		auto next = cur + 1;
@@ -227,7 +167,7 @@ static void sortPairs3(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 			b_chain.push_back(*cur);
 			break;
 		}
-
+		// comparison
 		if (cur->value < next->value) {
 			b_chain.push_back(*cur);
 			a_chain.push_back(*next);
@@ -236,7 +176,7 @@ static void sortPairs3(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 			a_chain.push_back(*cur);
 		}
 	}
-	std::cout << "sortPairs3() end sizes: " << a_chain.size() << "+" << b_chain.size() << std::endl;
+	std::cout << "sortPairs() end sizes: " << a_chain.size() << "+" << b_chain.size() << std::endl;
 }
 
 // TODO: unpaired elements
@@ -291,7 +231,7 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	//
 	std::vector<Elem> a_chain;
 	std::vector<Elem> b_chain;
-	sortPairs3(a_chain, b_chain, elems);
+	sortPairs(a_chain, b_chain, elems);
 	// sortPairs(elems);
 
 	// std::cout << "sorted elems: " << std::endl;
