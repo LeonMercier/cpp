@@ -81,12 +81,20 @@ void PMergeMe::makeMain(std::vector<Elem> &elems) {
 	// main starts as b1 and all of 'a's; that is: first elem, second elem, 
 	// then evey other elem
 	main.push_back(elems.at(0));
+	main.back().chain = 'b';
+	main.back().chain_index = 1;
 	main.push_back(elems.at(1));
+	main.back().chain = 'a';
+	main.back().chain_index = 1;
 	for (size_t i = 2; i < elems.size(); ++i) {
 		if (i % 2 == 0) {
 			pend.push_back(elems.at(i));
+			pend.back().chain = 'b';
+			pend.back().chain_index = i;
 		} else {
 			main.push_back(elems.at(i));
+			main.back().chain = 'a';
+			main.back().chain_index = i;
 		}
 	}
 	std::cout << "makeMain(): main: " << std::endl;
@@ -100,9 +108,33 @@ void PMergeMe::makeMain(std::vector<Elem> &elems) {
 }
 
 void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend) {
-	(void) main;
-	(void) pend;
+	// TODO: do this in order of Jacobsthal numbers
+	for (auto it = pend.begin(); it != pend.end(); ++it) {
+		auto insert_before = binarySearch(main, *it);
+		main.insert(insert_before, *it);
+	}
+	std::cout <<"insertPendToMain() after: " << std::endl;
+	printElems(main);
 }
+
+std::vector<Elem>::const_iterator PMergeMe::binarySearch(
+	std::vector<Elem> &main,
+	Elem &to_insert)
+{
+	// bx is always smaller than ax
+	auto insert_before = main.end() -1;
+	for (auto it = main.begin(); it != main.end(); ++it) {
+		// comparison
+		if (it->value > to_insert.value) {
+			return it;
+		}
+		if (it->chain == 'a' && it->chain_index == to_insert.chain_index) {
+			return it; // found the bound element
+		}
+	}
+	return insert_before;
+}
+
 
 // could be made to only move numbers inside the original vector to be more in
 // the spirit of the exercise, where the items could be very large
@@ -304,6 +336,10 @@ void PMergeMe::init(int count, char **strs) {
 	if (orig.size() == 0) {
 		return ;
 	}
+
+	// TESTING
+	std::vector<unsigned int> test = orig;
+	std::sort(test.begin(), test.end());
 	
 	// for (auto iter = vec.begin(); iter != vec.end(); iter++) {
 	// 	std::cout << *iter << "#";
@@ -320,6 +356,14 @@ void PMergeMe::init(int count, char **strs) {
 	printVec(orig, orig.begin());
  */
 	miSort(1, 1);
+
+	// TESTING
+	if (orig == test) {
+		std::cout << "init(): SUCCESSful sort" << std::endl;
+	} else {
+		std::cout << "init(): FAILed sort" << std::endl;
+	}
+
 }
 
 bool	PMergeMe::bigger(unsigned int a, unsigned int b) {

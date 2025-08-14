@@ -76,5 +76,7 @@ public:
 	void	regenElemValues(std::vector<Elem> &elems);
 	void makeMain(std::vector<Elem> &elems);
 	void insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend);
+	std::vector<Elem>::const_iterator binarySearch(
+		std::vector<Elem> &main, Elem &to_insert);
 };
 
