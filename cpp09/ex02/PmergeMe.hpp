@@ -73,5 +73,8 @@ public:
 		std::vector<Elem> &a_chain,
 		std::vector<Elem> &b_chain,
 		size_t first_unpaired);
+	void	regenElemValues(std::vector<Elem> &elems);
+	void makeMain(std::vector<Elem> &elems);
+	void insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend);
 };
 

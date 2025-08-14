@@ -53,7 +53,7 @@ void PMergeMe::printElems(std::vector<Elem> &elems) {
 		std::cout << std::endl;
 	}
 }
-
+/* 
 // iterators to elems
 static void	moveElem2(std::vector<Elem> &elems,
 						std::vector<Elem>::iterator put_after,
@@ -65,25 +65,43 @@ static void	moveElem2(std::vector<Elem> &elems,
 		std::rotate(put_after, to_move, to_move + 1);
 	}
 }
-
+ */
 // TODO: here we can sort all Elems into main and pend, then insert from pend
 // to main and only after that, write main
 // non participating numbers will chill at the same index at the end all the
 // time
-static void makeMain2(std::vector<Elem> &elems) {
+void PMergeMe::makeMain(std::vector<Elem> &elems) {
 	if (elems.size() < 4) {
 		return ;
 	}
-	auto tail = elems.begin() + 2;
-	for (auto it = elems.begin() + 3; it < elems.end(); it += 2) {
-		moveElem2(elems, tail, it);
-		if (it + 1 < elems.end()) {
-			tail++;
+
+	std::vector<Elem> main;
+	std::vector<Elem> pend;
+
+	// main starts as b1 and all of 'a's; that is: first elem, second elem, 
+	// then evey other elem
+	main.push_back(elems.at(0));
+	main.push_back(elems.at(1));
+	for (size_t i = 2; i < elems.size(); ++i) {
+		if (i % 2 == 0) {
+			pend.push_back(elems.at(i));
+		} else {
+			main.push_back(elems.at(i));
 		}
 	}
-	// first_of_pend = tail;
+	std::cout << "makeMain(): main: " << std::endl;
+	printElems(main);
+	std::cout << "makeMain(): pend: " << std::endl;
+	printElems(pend);
 	// std::cout << "after makemain:" << std::endl;
 	// printVec(orig, orig.begin());
+	insertPendToMain(main, pend);
+	elems = main;
+}
+
+void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend) {
+	(void) main;
+	(void) pend;
 }
 
 // could be made to only move numbers inside the original vector to be more in
@@ -131,7 +149,7 @@ void	PMergeMe::writeOrigFromTwoChains(
 			for (int i = iter_a->indices.first; i <= iter_a->indices.second;
 				++i)
 			{
-				std::cout << "WO(): push index: " << i << std::endl;
+				// std::cout << "WO(): push index: " << i << std::endl;
 				new_orig.push_back(orig.at(i));
 			}
 			iter_a++;
@@ -242,9 +260,11 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
 	// reflect changes in main before recursing
 	writeOrigFromTwoChains(a_chain, b_chain, first_unpaired);
-	// writeOrig(elems, first_unpaired);
 	std::cout << "ORIG after write: "  << std::endl;
 	printVec(orig, orig.begin());
+
+	// at this point 'elems' can be seen as holding indices to first, second, 
+	// third element and so on
 
 	// recursive call
 	miSort(reclvl + 1, elemsize * 2);
@@ -253,11 +273,12 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 		std::cout << "Penultimate recursion level" << std::endl;
 		return ;
 	}
+	regenElemValues(elems);
 	std::cout << "after recursion" << std::endl;
 	std::cout << "first indices " << elems.begin()->indices.first << "-";
 	std::cout << elems.begin()->indices.second << std::endl;
 	printElems(elems);
-	makeMain2(elems);
+	makeMain(elems);
 	writeOrig(elems, first_unpaired);
 	std::cout << "ORIG: "  << std::endl;
 	printVec(orig, orig.begin());
@@ -304,4 +325,10 @@ void PMergeMe::init(int count, char **strs) {
 bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
 	comparisons++;
 	return (a > b);
+}
+	
+void	PMergeMe::regenElemValues(std::vector<Elem> &elems) {
+	for (auto it = elems.begin(); it != elems.end(); ++it) {
+		it->value = orig.at(it->indices.second);
+	}
 }
