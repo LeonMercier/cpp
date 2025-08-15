@@ -57,13 +57,13 @@ void PMergeMe::init(int count, char **strs) {
 }
 
 // Jacobstahl numbers are used to select from the pend and pend is always
-// smaller than main, therefore we generte only main.size / 2 numbers
+// smaller than main, therefore we generate only main.size / 2 numbers
 void PMergeMe::calcJnums() {
 	unsigned int	to_generate = orig.size() / 2;
 	jnums.push_back(0);
 	jnums.push_back(1);
-	unsigned int	generated = 2;
-	for (; generated <= to_generate; ++generated) {
+	
+	for (unsigned int generated = 2; generated <= to_generate; ++generated) {
 		jnums.push_back(*(jnums.end() -1) + (2 * *(jnums.end() -2)) );
 	}
 }
@@ -294,6 +294,10 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 	// printElems(main);
 	// std::cout << "-----" << std::endl;
 	// printElems(pend);
+	auto cur_jnum = jnums.begin() + 3;
+	auto next_jnum= cur_jnum + 1;
+
+
 	for (auto it = pend.begin(); it != pend.end(); ++it) {
 		auto insert_before = binarySearch(main, *it);
 		// std::cout << "insertPendToMain(): " << it->value << " before " << insert_before->value << std::endl;
