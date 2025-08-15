@@ -36,14 +36,14 @@ void PMergeMe::init(int count, char **strs) {
 		return ;
 	}
 
-	printVec(orig, orig.begin());
+	// printVec(orig, orig.begin());
 	// TESTING
 	std::vector<unsigned int> test = orig;
 	std::sort(test.begin(), test.end());
 
 	calcJnums();
 
-	printVec(jnums, jnums.begin());
+	// printVec(jnums, jnums.begin());
 	
 	miSort(1, 1);
 
@@ -296,6 +296,7 @@ static std::vector<Elem>::iterator findFromPend(size_t i, std::vector<Elem> &pen
 			return it;
 		}
 	}
+	// std::cout << "not found" << std::endl;
 	return pend.end();
 }
 
@@ -305,27 +306,42 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 	// std::cout << "-----" << std::endl;
 	// printElems(pend);
 	
+	// std::cout << "insertPendToMain(): early: " << pend[0].value << std::endl;
+	if (pend.size() == 0) {
+		// std::cout << "early return" << std::endl;
+		return ;
+	}
 	for (auto cur_jnum = jnums.begin() + 3; cur_jnum != jnums.end(); ++cur_jnum) {
-		std::cout << "loop" << std::endl;
+		// std::cout << "loop" << std::endl;
 		auto prev_jnum = cur_jnum -1;
 		for (size_t i = *cur_jnum; i >= *prev_jnum; --i) {
-			std::cout << "loop2" << std::endl;
+			// std::cout << "loop2" << std::endl;
 			auto to_insert = findFromPend(i, pend);
 			if (to_insert != pend.end()) {
+				// std::cout << "insertPendToMain(): " << to_insert->value << std::endl;
 				auto insert_before = binarySearch(main, *to_insert);
 				// std::cout << "insertPendToMain(): " << it->value << " before " << insert_before->value << std::endl;
 				main.insert(insert_before, *to_insert);
 				pend.erase(to_insert);
 				if (pend.size() == 0) {
-					std::cout << "early return" << std::endl;
+					// std::cout << "early return" << std::endl;
 					return ;
 				}
+			} else {
+				break ;
 			}
 		}
 	}
 
-	// std::cout <<"insertPendToMain() after: " << std::endl;
-	// printElems(main);
+	// stuff remaining in pend after Jacostahl insertion
+	// std::cout << "terminal" << std::endl;
+	if (pend.size() > 0) {
+		for (auto to_insert = pend.begin(); to_insert != pend.end(); ++to_insert) {
+			auto insert_before = binarySearch(main, *to_insert);
+			// std::cout << "insertPendToMain(): " << to_insert->value << " before " << insert_before->value << std::endl;
+			main.insert(insert_before, *to_insert);
+		}
+	}
 	// std::cout << "insertPendtoMain(): after" << std::endl;
 	// printElems(main);
 	// std::cout << "-----" << std::endl;
@@ -336,6 +352,7 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 	std::vector<Elem> &main,
 	Elem &to_insert)
 {
+	// std::cout << "binarySearch(): to_insert: " << to_insert.value << std::endl;
 	if (main.size() == 0) {
 		return main.end();
 	}
