@@ -288,21 +288,42 @@ void PMergeMe::makeMain(std::vector<Elem> &elems) {
 	elems = main;
 }
 
+// compares indices, not values
+static std::vector<Elem>::iterator findFromPend(size_t i, std::vector<Elem> &pend)
+{
+	for (auto it = pend.begin(); it != pend.end(); ++it) {
+		if (it->chain_index == i) {
+			return it;
+		}
+	}
+	return pend.end();
+}
+
 void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend) {
-	// TODO: do this in order of Jacobsthal numbers
 	// std::cout << "insertPendtoMain(): before" << std::endl;
 	// printElems(main);
 	// std::cout << "-----" << std::endl;
 	// printElems(pend);
-	auto cur_jnum = jnums.begin() + 3;
-	auto next_jnum= cur_jnum + 1;
-
-
-	for (auto it = pend.begin(); it != pend.end(); ++it) {
-		auto insert_before = binarySearch(main, *it);
-		// std::cout << "insertPendToMain(): " << it->value << " before " << insert_before->value << std::endl;
-		main.insert(insert_before, *it);
+	
+	for (auto cur_jnum = jnums.begin() + 3; cur_jnum != jnums.end(); ++cur_jnum) {
+		std::cout << "loop" << std::endl;
+		auto prev_jnum = cur_jnum -1;
+		for (size_t i = *cur_jnum; i >= *prev_jnum; --i) {
+			std::cout << "loop2" << std::endl;
+			auto to_insert = findFromPend(i, pend);
+			if (to_insert != pend.end()) {
+				auto insert_before = binarySearch(main, *to_insert);
+				// std::cout << "insertPendToMain(): " << it->value << " before " << insert_before->value << std::endl;
+				main.insert(insert_before, *to_insert);
+				pend.erase(to_insert);
+				if (pend.size() == 0) {
+					std::cout << "early return" << std::endl;
+					return ;
+				}
+			}
+		}
 	}
+
 	// std::cout <<"insertPendToMain() after: " << std::endl;
 	// printElems(main);
 	// std::cout << "insertPendtoMain(): after" << std::endl;
