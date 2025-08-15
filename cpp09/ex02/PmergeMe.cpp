@@ -40,6 +40,10 @@ void PMergeMe::init(int count, char **strs) {
 	// TESTING
 	std::vector<unsigned int> test = orig;
 	std::sort(test.begin(), test.end());
+
+	calcJnums();
+
+	printVec(jnums, jnums.begin());
 	
 	miSort(1, 1);
 
@@ -49,6 +53,18 @@ void PMergeMe::init(int count, char **strs) {
 		std::cout << comparisons << " comps" << std::endl;
 	} else {
 		std::cout << "init(): FAILed sort" << std::endl;
+	}
+}
+
+// Jacobstahl numbers are used to select from the pend and pend is always
+// smaller than main, therefore we generte only main.size / 2 numbers
+void PMergeMe::calcJnums() {
+	unsigned int	to_generate = orig.size() / 2;
+	jnums.push_back(0);
+	jnums.push_back(1);
+	unsigned int	generated = 2;
+	for (; generated <= to_generate; ++generated) {
+		jnums.push_back(*(jnums.end() -1) + (2 * *(jnums.end() -2)) );
 	}
 }
 
@@ -354,12 +370,12 @@ static void printVec(std::vector<unsigned int> &vec,
 					 std::vector<unsigned int>::iterator iter)
 {
 
-	(void) vec;
-	(void) iter;
-	// for (auto it = iter; it != vec.end(); it++) {
-	// 	std::cout << *it << ", ";
-	// }
-	// std::cout << std::endl;
+	// (void) vec;
+	// (void) iter;
+	for (auto it = iter; it != vec.end(); it++) {
+		std::cout << *it << ", ";
+	}
+	std::cout << std::endl;
 }
 
 /*

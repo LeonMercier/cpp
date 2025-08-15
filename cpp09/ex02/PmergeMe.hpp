@@ -66,8 +66,10 @@ public:
 	int comparisons = 0;
 	std::vector<unsigned int> orig;
 	std::vector<std::pair<int, int>>::iterator first_of_pend;
+	std::vector<unsigned int> jnums;
 
 	void init(int count, char **strs);
+	void calcJnums();
 	void miSort(unsigned int reclvl, unsigned int elemsize);
 	void swapPairs(Elem &pair_a, Elem &pair_b);
 	void printElems(std::vector<Elem> &elems);
