@@ -12,6 +12,9 @@
 
 #include "PmergeMe.hpp"
 
+constexpr bool PRINTS = false;
+constexpr bool COMPS = true;
+
 static void sortPairs(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 					   std::vector<Elem> &elems);
 static void printVec(std::vector<unsigned int> &vec,
@@ -36,10 +39,9 @@ void PMergeMe::init(int count, char **strs) {
 		return ;
 	}
 
-	// printVec(orig, orig.begin());
+	printVec(orig, orig.begin());
 	// TESTING
 	std::vector<unsigned int> test = orig;
-	std::sort(test.begin(), test.end());
 
 	calcJnums();
 
@@ -48,11 +50,14 @@ void PMergeMe::init(int count, char **strs) {
 	miSort(1, 1);
 
 	// TESTING
-	if (orig == test) {
-		std::cout << "init(): SUCCESSful sort: ";
-		std::cout << comparisons << " comps" << std::endl;
-	} else {
-		std::cout << "init(): FAILed sort" << std::endl;
+	if (COMPS) {
+		std::sort(test.begin(), test.end());
+		if (orig == test) {
+			std::cout << "init(): SUCCESSful sort: ";
+			std::cout << comparisons << " comps" << std::endl;
+		} else {
+			std::cout << "init(): FAILed sort" << std::endl;
+		}
 	}
 }
 
@@ -400,24 +405,15 @@ void PMergeMe::printElems(std::vector<Elem> &elems) {
 	}
 }
 
-/* 
-bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
-	comparisons++;
-	return (a > b);
-}
- */
-
-
 static void printVec(std::vector<unsigned int> &vec,
 					 std::vector<unsigned int>::iterator iter)
 {
-
-	// (void) vec;
-	// (void) iter;
-	for (auto it = iter; it != vec.end(); it++) {
-		std::cout << *it << ", ";
+	if (PRINTS) {
+		for (auto it = iter; it != vec.end(); it++) {
+			std::cout << *it << ", ";
+		}
+		std::cout << std::endl;
 	}
-	std::cout << std::endl;
 }
 
 /*
