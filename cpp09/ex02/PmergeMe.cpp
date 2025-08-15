@@ -268,27 +268,29 @@ void PMergeMe::makeMain(std::vector<Elem> &elems) {
 			main.back().chain_index = i;
 		}
 	}
-	// std::cout << "makeMain(): main: " << std::endl;
-	// printElems(main);
-	// std::cout << "makeMain(): pend: " << std::endl;
-	// printElems(pend);
-	// std::cout << "after makemain:" << std::endl;
-	// printVec(orig, orig.begin());
 	insertPendToMain(main, pend);
 	elems = main;
 }
 
 void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend) {
 	// TODO: do this in order of Jacobsthal numbers
+	// std::cout << "insertPendtoMain(): before" << std::endl;
+	// printElems(main);
+	// std::cout << "-----" << std::endl;
+	// printElems(pend);
 	for (auto it = pend.begin(); it != pend.end(); ++it) {
 		auto insert_before = binarySearch(main, *it);
+		// std::cout << "insertPendToMain(): " << it->value << " before " << insert_before->value << std::endl;
 		main.insert(insert_before, *it);
 	}
 	// std::cout <<"insertPendToMain() after: " << std::endl;
 	// printElems(main);
+	// std::cout << "insertPendtoMain(): after" << std::endl;
+	// printElems(main);
+	// std::cout << "-----" << std::endl;
+	// printElems(pend);
 }
 
-// TODO: actually implement binary search
 std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 	std::vector<Elem> &main,
 	Elem &to_insert)
@@ -297,7 +299,7 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 		return main.end();
 	}
 
-	auto upper_bound = main.end() -1;
+	auto upper_bound = main.end();
 	// compares indices, not values
 	for (auto it = main.begin(); it != main.end(); ++it) {
 		if (it->chain == 'a' && it->chain_index == to_insert.chain_index) {
@@ -307,41 +309,20 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 
 	int	right = upper_bound - main.begin();
 	int	left = 0;
-	while (left  <= right) {
-		size_t mid = (left + right) / 2;
-		std::cout << "mid: " << mid << std::endl;
+	while (left  < right) {
+		size_t mid = left + ((right - left) / 2);
 		// comparison
 		try {
-			if (main.at(mid) < to_insert) {
-				left = mid + 1;
+			if (to_insert < main.at(mid)) {
+				right = mid;
 			} else {
-				right = mid - 1;
+				left = mid + 1;
 			}
 		} catch (...) {
 			std::cout <<"no element in main at: " << mid << std::endl;
 		}
 	}
-	// TODO : right becomes -1
-	std::cout << "left: " << left << std::endl;
-	std::cout << "right: " << right << std::endl;
-	if (right < 1) {
-		return main.begin() + 1;
-	}
-	return main.begin() + right;
-
-
-/* 
-	for (auto it = main.begin(); it != main.end(); ++it) {
-		// comparison
-		if (*it > to_insert) {
-			return it;
-		}
-		// bx is always smaller than ax, so that is the upper bound
-		if (it->chain == 'a' && it->chain_index == to_insert.chain_index) {
-			return it;
-		}
-	}
-	return main.end(); */
+	return main.begin() + left;
 }
 
 void PMergeMe::printElems(std::vector<Elem> &elems) {
@@ -372,10 +353,13 @@ bool	PMergeMe::bigger(unsigned int a, unsigned int b) {
 static void printVec(std::vector<unsigned int> &vec,
 					 std::vector<unsigned int>::iterator iter)
 {
-	for (auto it = iter; it != vec.end(); it++) {
-		std::cout << *it << ", ";
-	}
-	std::cout << std::endl;
+
+	(void) vec;
+	(void) iter;
+	// for (auto it = iter; it != vec.end(); it++) {
+	// 	std::cout << *it << ", ";
+	// }
+	// std::cout << std::endl;
 }
 
 /*
