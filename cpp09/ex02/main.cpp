@@ -18,8 +18,10 @@ int	main(int argc, char **argv) {
 			std::cout << "Please give at least one argument" << std::endl;
 			return 1;
 		}
-		PMergeMe a;
-		a.init(argc - 1, argv + 1);
+		PMergeMe<std::vector<unsigned int>> vector_run;
+		PMergeMe<std::deque<unsigned int>> deque_run;
+		vector_run.init(argc - 1, argv + 1);
+		deque_run.init(argc - 1, argv + 1);
 	} catch (std::exception &e) {
 		if (strcmp(e.what(), "stoul") == 0) {
 			std::cerr << "Error: could not convert input to integer" << std::endl;
