@@ -12,7 +12,7 @@
 
 #include "PmergeMe.hpp"
 
-constexpr bool PRINTS = true;
+constexpr bool PRINTS = false;
 constexpr bool COMPS = true;
 
 static void sortPairs(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
@@ -46,6 +46,7 @@ void PMergeMe::init(int count, char **strs) {
 
 	calcJnums();
 
+	// printVec(jnums, jnums.begin());
 	// printVec(jnums, jnums.begin());
 	
 	miSort(1, 1);
@@ -350,7 +351,9 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 			auto to_insert = findFromPend(i, pend);
 			if (to_insert != pend.end()) {
 				// std::cout << "insertPendToMain(): " << to_insert->value << std::endl;
+				// int old_comps = comparisons;
 				auto insert_before = binarySearch(main, *to_insert);
+				// std::cout << "insertPendToMain() used " << comparisons - old_comps << " comps" << std::endl;
 				// std::cout << "insertPendToMain(): " << to_insert->value << " before " << insert_before->value << std::endl;
 				main.insert(insert_before, *to_insert);
 				pend.erase(to_insert);
@@ -367,9 +370,14 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 
 	// stuff remaining in pend after Jacostahl insertion
 	// std::cout << "terminal" << std::endl;
+	// std::cout << "insertPendToMain() remaining in pend after jthal: " << pend.size() << std::endl;
 	if (pend.size() > 0) {
-		for (auto to_insert = pend.begin(); to_insert != pend.end(); ++to_insert) {
+		// TODO: is this safe use of iterators?
+		for (auto to_insert = pend.end() -1; to_insert >= pend.begin(); --to_insert) {
+		// for (auto to_insert = pend.begin(); to_insert != pend.end(); ++to_insert) {
+			// int old_comps = comparisons;
 			auto insert_before = binarySearch(main, *to_insert);
+			// std::cout << "insertPendToMain() used " << comparisons - old_comps << " comps after Jthal" << std::endl;
 			// std::cout << "insertPendToMain(): " << to_insert->value << " before " << insert_before->value << std::endl;
 			main.insert(insert_before, *to_insert);
 		}
