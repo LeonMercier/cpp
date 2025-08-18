@@ -12,13 +12,14 @@
 
 #include "PmergeMe.hpp"
 
-constexpr bool PRINTS = false;
+constexpr bool PRINTS = true;
 constexpr bool COMPS = true;
 
 static void sortPairs(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
 					   std::vector<Elem> &elems);
 static void printVec(std::vector<unsigned int> &vec,
 					 std::vector<unsigned int>::iterator iter);
+static size_t	calcAllowedComps(size_t nums);
 
 // TODO: give error on non integer arguments
 void PMergeMe::init(int count, char **strs) {
@@ -52,9 +53,17 @@ void PMergeMe::init(int count, char **strs) {
 	// TESTING
 	if (COMPS) {
 		std::sort(test.begin(), test.end());
+		int allowed_comps = calcAllowedComps(orig.size());
 		if (orig == test) {
 			std::cout << "init(): SUCCESSful sort: ";
-			std::cout << comparisons << " comps" << std::endl;
+			std::cout << comparisons << " comps";
+			std::cout << " of " << allowed_comps << " allowed ";
+			if (comparisons <= allowed_comps) {
+				std::cout << "OK";
+			} else {
+				std::cout << "FAIL";
+			}
+			std::cout << std::endl;			
 		} else {
 			std::cout << "init(): FAILed sort" << std::endl;
 		}
@@ -66,7 +75,9 @@ void PMergeMe::init(int count, char **strs) {
 // TODO: probably should generate even fewer numbers and check for overflows,
 // eg. stop when number is bigger than pend size?
 void PMergeMe::calcJnums() {
-	unsigned int	to_generate = orig.size() / 2;
+	// unsigned int	to_generate = orig.size() / 2;
+	// to_generate++;
+	unsigned int to_generate = orig.size();
 	jnums.push_back(0);
 	jnums.push_back(1);
 	
@@ -340,7 +351,7 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 			if (to_insert != pend.end()) {
 				// std::cout << "insertPendToMain(): " << to_insert->value << std::endl;
 				auto insert_before = binarySearch(main, *to_insert);
-				// std::cout << "insertPendToMain(): " << it->value << " before " << insert_before->value << std::endl;
+				// std::cout << "insertPendToMain(): " << to_insert->value << " before " << insert_before->value << std::endl;
 				main.insert(insert_before, *to_insert);
 				pend.erase(to_insert);
 				if (pend.size() == 0) {
@@ -348,6 +359,7 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 					return ;
 				}
 			} else {
+				// std::cout << "findFromPend(): fail" << std::endl;
 				break ;
 			}
 		}
@@ -403,6 +415,14 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 		}
 	}
 	return main.begin() + left;
+}
+
+static size_t	calcAllowedComps(size_t nums) {
+	size_t comps = 0;
+	for (size_t i = 1; i <= nums; ++i) {
+		comps += std::ceil(std::log2((3.0 / 4.0) * i));
+	}
+	return comps;
 }
 
 void PMergeMe::printElems(std::vector<Elem> &elems) {
