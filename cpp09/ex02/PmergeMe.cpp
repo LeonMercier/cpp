@@ -372,8 +372,8 @@ void PMergeMe::insertPendToMain(std::vector<Elem> &main, std::vector<Elem> &pend
 	// std::cout << "terminal" << std::endl;
 	// std::cout << "insertPendToMain() remaining in pend after jthal: " << pend.size() << std::endl;
 	if (pend.size() > 0) {
-		// TODO: is this safe use of iterators?
-		for (auto to_insert = pend.end() -1; to_insert >= pend.begin(); --to_insert) {
+		// iterate in reverse 
+		for (auto to_insert = pend.rbegin(); to_insert != pend.rend(); ++to_insert) {
 		// for (auto to_insert = pend.begin(); to_insert != pend.end(); ++to_insert) {
 			// int old_comps = comparisons;
 			auto insert_before = binarySearch(main, *to_insert);
