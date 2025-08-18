@@ -6,7 +6,7 @@
 /*   By: lemercie <lemercie@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:36:32 by lemercie          #+#    #+#             */
-/*   Updated: 2025/08/08 19:56:18 by lemercie         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:31:33 by lemercie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,109 +21,65 @@
 #include <deque>
 #include <algorithm> // rotate()
 #include <cmath> // for allowedComps()
+#include <chrono>
+
+#include "Elem.hpp"
 
 // TODO: 
 // for final product: 
 // 		- canonical orthodox form
 
+constexpr bool PRINTS = true;
+constexpr bool COMPS = false;
 
-constexpr bool PRINTS = false;
-constexpr bool COMPS = true;
-
-// TODO: split class into its own file
-// holds value so that we can do comparison overload
-template <typename T>
-class Elem {
-public:
-	std::pair<int, int> indices;
-	char				chain;
-	size_t				chain_index;
-	// unsigned int		value;
-	T		value;
-	int					*comparisons;
-	Elem(int first, int last, T value, int *comparisons) :
-		indices({first, last}), value(value), comparisons(comparisons) {
-
-	}
-	Elem(const Elem &src) : indices(src.indices), chain(src.chain),
-		chain_index(src.chain_index), value(src.value),
-		comparisons(src.comparisons) {
-	}
-	Elem &operator=(const Elem &src) {
-		indices = src.indices;
-		chain = src.chain;
-		chain_index = src.chain_index;
-		value = src.value;
-		comparisons = src.comparisons;
-		return *this;
-	}
-	bool operator<(const Elem &rhs) {
-		(*comparisons)++;
-		// std::cout << "Comparing" << std::endl; // for Milad tester
-		return value < rhs.value;
-	}
-	bool operator>(const Elem &rhs) {
-		(*comparisons)++;
-		// std::cout << "Comparing" << std::endl; // for Milad tester
-		return value > rhs.value;
-	}
-};
-
-void sortPairs(std::vector<Elem<unsigned int>> &a_chain, std::vector<Elem<unsigned int>> &b_chain,
-					   std::vector<Elem<unsigned int>> &elems);
-	// void printVec(std::vector<unsigned int> &vec,
-	// 				 std::vector<unsigned int>::iterator iter);
+// non class functions
 template <typename Container>
-void printVec(Container &vec,
-					 typename Container::iterator iter)
+void printVec(Container &vec, typename Container::iterator iter)
 {
 	if (PRINTS) {
 		for (auto it = iter; it != vec.end(); it++) {
-			std::cout << *it << ", ";
+			std::cout << *it << " ";
 		}
 		std::cout << std::endl;
 	}
 }
 
-	size_t	calcAllowedComps(size_t nums);
-	void calcJnums(size_t orig_size, std::vector<unsigned int> &jnums);
-	std::vector<Elem<unsigned int>>::iterator findFromPend(size_t i, std::vector<Elem<unsigned int>> &pend);
-	std::vector<Elem<unsigned int>>::const_iterator binarySearch(
-		std::vector<Elem<unsigned int>> &main, Elem<unsigned int> &to_insert);
+void	sortPairs(std::vector<Elem<unsigned int>> &a_chain,
+			   std::vector<Elem<unsigned int>> &b_chain,
+			   std::vector<Elem<unsigned int>> &elems);
+size_t	calcAllowedComps(size_t nums);
+void	calcJnums(size_t orig_size, std::vector<unsigned int> &jnums);
+std::vector<Elem<unsigned int>>::iterator findFromPend(
+	size_t i, std::vector<Elem<unsigned int>> &pend);
+std::vector<Elem<unsigned int>>::const_iterator binarySearch(
+	std::vector<Elem<unsigned int>> &main, Elem<unsigned int> &to_insert);
 
-// template<template<typename, typename> class Container> 
+
 template <class Container>
 class PMergeMe {
 public: 
 	int comparisons = 0;
-	// Container<unsigned int, std::allocator<unsigned int>> orig;
 	Container orig;
-	// std::vector<unsigned int> orig;
-	std::vector<std::pair<int, int>>::iterator first_of_pend;
 	std::vector<unsigned int> jnums;
-	void init(int count, char **strs);
 
-	// void calcJnums();
-	void miSort(unsigned int reclvl, unsigned int elemsize);
-	void swapPairs(Elem<unsigned int> &pair_a, Elem<unsigned int> &pair_b);
-	void printElems(std::vector<Elem<unsigned int>> &elems);
-	void	writeOrig(std::vector<Elem<unsigned int>> &elems, size_t first_unpaired);
-	void	writeOrigFromTwoChains(
-		std::vector<Elem<unsigned int>> &a_chain,
-		std::vector<Elem<unsigned int>> &b_chain,
-		size_t first_unpaired);
+	void	init(int count, char **strs, bool print);
+	void	miSort(unsigned int reclvl, unsigned int elemsize);
+	void	swapPairs(Elem<unsigned int> &pair_a, Elem<unsigned int> &pair_b);
+	void	printElems(std::vector<Elem<unsigned int>> &elems);
+	void	writeOrig(std::vector<Elem<unsigned int>> &elems,
+				size_t first_unpaired);
+	void	writeOrigFromTwoChains(std::vector<Elem<unsigned int>> &a_chain,
+							 std::vector<Elem<unsigned int>> &b_chain,
+							 size_t first_unpaired);
 	void	regenElemValues(std::vector<Elem<unsigned int>> &elems);
-	void makeMain(std::vector<Elem<unsigned int>> &elems);
-	void insertPendToMain(std::vector<Elem<unsigned int>> &main, std::vector<Elem<unsigned int>> &pend);
-	// std::vector<Elem>::const_iterator binarySearch(
-	// 	std::vector<Elem> &main, Elem &to_insert);
-	
-	// bool bigger(unsigned int a, unsigned int b);
+	void	makeMain(std::vector<Elem<unsigned int>> &elems);
+	void	insertPendToMain(std::vector<Elem<unsigned int>> &main,
+					   std::vector<Elem<unsigned int>> &pend);
 };
 
 // TODO: give error on non integer argument
 template <class Container>
-void PMergeMe<Container>::init(int count, char **strs) {
+void PMergeMe<Container>::init(int count, char **strs, bool print) {
 	
 	for (int i = 0; i < count; i++) {
 		std::istringstream iss(*strs);
@@ -141,7 +97,10 @@ void PMergeMe<Container>::init(int count, char **strs) {
 		return ;
 	}
 
-	printVec(orig, orig.begin());
+	if (print) {
+		std::cout << "Before:\t";
+		printVec(orig, orig.begin());
+	}
 	// TESTING
 	// std::vector<unsigned int> test = orig;
 	auto test = orig;
@@ -152,6 +111,11 @@ void PMergeMe<Container>::init(int count, char **strs) {
 	// printVec(jnums, jnums.begin());
 	
 	miSort(1, 1);
+
+	if (print) {
+		std::cout << "After:\t";
+		printVec(orig, orig.begin());
+	}
 
 	// TESTING
 	if (COMPS) {
