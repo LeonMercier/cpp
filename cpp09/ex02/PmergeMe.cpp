@@ -63,6 +63,8 @@ void PMergeMe::init(int count, char **strs) {
 
 // Jacobstahl numbers are used to select from the pend and pend is always
 // smaller than main, therefore we generate only main.size / 2 numbers
+// TODO: probably should generate even fewer numbers and check for overflows,
+// eg. stop when number is bigger than pend size?
 void PMergeMe::calcJnums() {
 	unsigned int	to_generate = orig.size() / 2;
 	jnums.push_back(0);
@@ -116,7 +118,12 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 
 	std::vector<Elem> a_chain;
 	std::vector<Elem> b_chain;
+
+	// std::cout << "miSort(), reclvl: " << reclvl << " before sortPairs() ";
+	// std::cout << comparisons << " comps" << std::endl;
 	sortPairs(a_chain, b_chain, elems);
+	// std::cout << "miSort(), reclvl: " << reclvl << " after sortPairs() ";
+	// std::cout << comparisons << " comps" << std::endl;
 
 	// std::cout << "sorted elems: " << std::endl;
 	// printElems(elems);
@@ -144,7 +151,11 @@ void PMergeMe::miSort(unsigned int reclvl, unsigned int elemsize) {
 	// std::cout << "first indices " << elems.begin()->indices.first << "-";
 	// std::cout << elems.begin()->indices.second << std::endl;
 	// printElems(elems);
+	// std::cout << "miSort(), reclvl: " << reclvl << " before makeMain() ";
+	// std::cout << comparisons << " comps" << std::endl;
 	makeMain(elems);
+	// std::cout << "miSort(), reclvl: " << reclvl << " after makeMain() ";
+	// std::cout << comparisons << " comps" << std::endl;
 	writeOrig(elems, first_unpaired);
 	// std::cout << "ORIG: "  << std::endl;
 	// printVec(orig, orig.begin());
@@ -278,15 +289,19 @@ void PMergeMe::makeMain(std::vector<Elem> &elems) {
 	main.back().chain = 'a';
 	main.back().chain_index = 1;
 
+	size_t index_b = 2;
+	size_t index_a = 2;
 	for (size_t i = 2; i < elems.size(); ++i) {
 		if (i % 2 == 0) {
+			// std::cout << "makeMain(): push: " << "b-" << i << " to pend" << std::endl;
 			pend.push_back(elems.at(i));
 			pend.back().chain = 'b';
-			pend.back().chain_index = i;
+			pend.back().chain_index = index_b++;
 		} else {
+			// std::cout << "makeMain(): push: " << "a-" << i << " to main" << std::endl;
 			main.push_back(elems.at(i));
 			main.back().chain = 'a';
-			main.back().chain_index = i;
+			main.back().chain_index = index_a++;
 		}
 	}
 	insertPendToMain(main, pend);
@@ -365,7 +380,9 @@ std::vector<Elem>::const_iterator PMergeMe::binarySearch(
 	auto upper_bound = main.end();
 	// compares indices, not values
 	for (auto it = main.begin(); it != main.end(); ++it) {
+		// std::cout << "binarySearch(): " << it->chain << "-" << it->chain_index << "==" << to_insert.chain_index << std::endl;
 		if (it->chain == 'a' && it->chain_index == to_insert.chain_index) {
+			// std::cout << "binarySearch(): found upper bound" << std::endl;
 			upper_bound = it;
 		}
 	}
