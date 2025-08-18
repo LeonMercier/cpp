@@ -118,14 +118,4 @@ size_t	calcAllowedComps(size_t nums) {
 	return comps;
 }
 
-void printVec(std::vector<unsigned int> &vec,
-					 std::vector<unsigned int>::iterator iter)
-{
-	if (PRINTS) {
-		for (auto it = iter; it != vec.end(); it++) {
-			std::cout << *it << ", ";
-		}
-		std::cout << std::endl;
-	}
-}
 
