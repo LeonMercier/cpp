@@ -34,12 +34,10 @@ public:
 
 	bool operator<(const Elem &rhs) {
 		(*comparisons)++;
-		// std::cout << "Comparing" << std::endl; // for Milad tester
 		return value < rhs.value;
 	}
 	bool operator>(const Elem &rhs) {
 		(*comparisons)++;
-		// std::cout << "Comparing" << std::endl; // for Milad tester
 		return value > rhs.value;
 	}
 };
