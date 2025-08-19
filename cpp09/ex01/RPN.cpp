@@ -26,31 +26,33 @@ static void	doCalc(std::stack<int> &stack, char oper) {
 	int num_a = stack.top();
 	stack.pop();
 
+	using intlims = std::numeric_limits<int>;
+
 	switch (oper) {
 		case '+':
-			if ((num_b > 0 && num_a > std::numeric_limits<int>::max() - num_b) ||
-				(num_b < 0 && num_a < std::numeric_limits<int>::min() - num_b)) {
-				throw (std::runtime_error("integer overflow detected"));
+			if ((num_b > 0 && num_a > intlims::max() - num_b) ||
+				(num_b < 0 && num_a < intlims::min() - num_b)) {
+				throw (std::runtime_error("integer under/overflow detected"));
 			}
 			stack.push(num_a + num_b);
 			break ;
 		case '-':
-			if ((num_b < 0 && num_a > std::numeric_limits<int>::max() + num_b) ||
-				(num_b > 0 && num_a < std::numeric_limits<int>::min() + num_b)) {
-					throw (std::runtime_error("integer overflow detected"));
-				}
+			if ((num_b < 0 && num_a > intlims::max() + num_b) ||
+				(num_b > 0 && num_a < intlims::min() + num_b)) {
+				throw (std::runtime_error("integer under/overflow detected"));
+			}
 			stack.push(num_a - num_b);
 			break ;
 		case '*':
-			if (num_b != 0 && num_a > std::numeric_limits<int>::max() / num_b) {
-				throw (std::runtime_error("integer overflow detected"));
+			if (num_b != 0 && num_a > intlims::max() / num_b) {
+				throw (std::runtime_error("integer under/overflow detected"));
 			}
 			stack.push(num_a * num_b);
 			break ;
 		case '/':
 			if (num_b == 0) {
 				throw (std::runtime_error(
-					"division by zero: universe terminated"));
+					"division by zero: universe terminating in: 3..2..1."));
 			}
 			stack.push(num_a / num_b);
 	}
@@ -65,18 +67,22 @@ void	RPN(std::string input) {
 	// the >> operator skips whitespace by default
 	while (iss >> token) {
 		if (isOperator(token)) {
+			// without this check, '-1' would be interpreted as an operator
+			if (std::isdigit(iss.peek()) != 0) {
+				throw (std::runtime_error(
+					"Error: input error (negative numbers are not supported)"));
+			}
 			doCalc(stack, token);
 		} else {
 			if (std::isdigit(token) != 0) {
 				stack.push(token - '0');
 			} else {
-				throw (std::runtime_error("Error"));
+				throw (std::runtime_error("Error: non-numeric input"));
 			}
 		}
 	}
 	if (stack.size() == 0) {
-		throw (std::runtime_error("Error"));
+		throw (std::runtime_error("Error: empty input"));
 	} 
 	std::cout << stack.top() << std::endl;
-
 }
