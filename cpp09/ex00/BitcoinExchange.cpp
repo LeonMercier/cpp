@@ -12,21 +12,15 @@
 
 #include "BitcoinExchange.hpp"
 
-// IDEA: rates can be a map, account can be just parsed line by line
-//
-
-// safer for this to get passed by value as mktime() modifies its argument
+// date passed by value as mktime() modifies its argument
 bool isValidDate(std::tm date) {
 	// curly brances are needed to initialize std::tm
 	struct std::tm test_date{};
 	test_date = date;
 	std::mktime(&test_date);
-	if (test_date.tm_year != date.tm_year
-		|| test_date.tm_mon != date.tm_mon
-		|| test_date.tm_mday != date.tm_mday) {
-		return false;
-	} 
-	return true;
+	return test_date.tm_year == date.tm_year
+		&& test_date.tm_mon == date.tm_mon
+		&& test_date.tm_mday == date.tm_mday;
 }
 
 // mktime() modifies its argument on succesful conversion
@@ -42,7 +36,7 @@ void readRates(
 	std::string delim = ",";
 	getline(file, line);
 	if (line != "date,exchange_rate") {
-		throw (std::runtime_error("wrong csv format"));
+		throw (std::runtime_error("bad csv heeader"));
 	}
 
 	while (getline(file, line)) {
@@ -55,6 +49,7 @@ void readRates(
 		std::istringstream date_stream(date_str);
 		date_stream >> std::get_time(&date, "%Y-%m-%d");
 		if (isValidDate(date)) {
+			// throws will propagate to main
 			double rate = std::stod(value_str);
 			if (rate < 0) {
 				throw (std::runtime_error("bad rate in csv file"));
@@ -72,9 +67,13 @@ void readRates(
 
 double getRate(std::map<std::time_t, double> &rates, std::time_t time) {
 	auto rate = rates.find(time);
+
+	// exact match
 	if (rate != rates.end()) {
 		return rate->second;
 	}
+
+	// nearest date
 	auto iter = rates.lower_bound(time);
 	if (iter == rates.begin()) {
 		return 0;
@@ -128,7 +127,7 @@ void	processAcc(std::map<std::time_t, double> &rates, std::string filename) {
 				std::cerr << "Error: too large a number." << std::endl;
 			} else {
 				double rate = getRate(rates, std::mktime(&date));
-				std::cout << std::put_time(&date, "%c")
+				std::cout << std::put_time(&date, "%Y-%m-%d")
 					<< " => " << value << " = " << value * rate << std::endl;
 			}
 		} else {

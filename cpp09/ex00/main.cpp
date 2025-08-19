@@ -17,13 +17,16 @@ int	main(int argc, char **argv) {
 		if (argc >= 2) {
 			btc(argv[1]);
 		} else {
+			// this is silly, but subject has it like this
 			std::cout << "Error: could not open file" << std::endl;
 			return 1;
 		}
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
+			return 1;
 	} catch (...) {
 		std::cerr << "Error: unhandled exception" << std::endl;
+			return 1;
 	}
-
+	return 0;
 }
