@@ -12,26 +12,16 @@
 
 #include "PmergeMe.hpp"
 
-
-// static void sortPairs(std::vector<Elem> &a_chain, std::vector<Elem> &b_chain,
-// 					   std::vector<Elem> &elems);
-// static void printVec(std::vector<unsigned int> &vec,
-// 					 std::vector<unsigned int>::iterator iter);
-// static size_t	calcAllowedComps(size_t nums);
-
 // Jacobstahl numbers are used to select from the pend and pend is always
 // smaller than main, therefore we generate only main.size / 2 numbers
-// TODO: probably should generate even fewer numbers and check for overflows,
-// eg. stop when number is bigger than pend size?
 void calcJnums(size_t orig_size, std::vector<unsigned int> &jnums) {
-	// unsigned int	to_generate = orig.size() / 2;
-	// to_generate++;
-	unsigned int to_generate = orig_size;
 	jnums.push_back(0);
 	jnums.push_back(1);
 	
-	for (unsigned int generated = 2; generated <= to_generate; ++generated) {
-		jnums.push_back(*(jnums.end() -1) + (2 * *(jnums.end() -2)) );
+	unsigned int new_num = 0;
+	while (new_num < (orig_size / 2 ) + 3) {
+		new_num = *(jnums.end() -1) + (2 * *(jnums.end() -2));
+		jnums.push_back(new_num);
 	}
 }
 
@@ -39,7 +29,6 @@ void calcJnums(size_t orig_size, std::vector<unsigned int> &jnums) {
 void sortPairs(std::vector<Elem<unsigned int>> &a_chain, std::vector<Elem<unsigned int>> &b_chain,
 					   std::vector<Elem<unsigned int>> &elems)
 {
-	// std::cout << "sortpairs() starting with: " << elems.size() << std::endl;
 	for (size_t i = 0; i < elems.size(); i += 2) {
 		auto cur = elems.begin() + i;
 		auto next = cur + 1;
@@ -58,7 +47,6 @@ void sortPairs(std::vector<Elem<unsigned int>> &a_chain, std::vector<Elem<unsign
 			a_chain.push_back(*cur);
 		}
 	}
-	// std::cout << "sortPairs() end sizes: " << a_chain.size() << "+" << b_chain.size() << std::endl;
 }
 
 // compares indices, not values
@@ -69,7 +57,6 @@ std::vector<Elem<unsigned int>>::iterator findFromPend(size_t i, std::vector<Ele
 			return it;
 		}
 	}
-	// std::cout << "not found" << std::endl;
 	return pend.end();
 }
 
@@ -77,7 +64,6 @@ std::vector<Elem<unsigned int>>::const_iterator binarySearch(
 	std::vector<Elem<unsigned int>> &main,
 	Elem<unsigned int> &to_insert)
 {
-	// std::cout << "binarySearch(): to_insert: " << to_insert.value << std::endl;
 	if (main.size() == 0) {
 		return main.end();
 	}
@@ -85,9 +71,7 @@ std::vector<Elem<unsigned int>>::const_iterator binarySearch(
 	auto upper_bound = main.end();
 	// compares indices, not values
 	for (auto it = main.begin(); it != main.end(); ++it) {
-		// std::cout << "binarySearch(): " << it->chain << "-" << it->chain_index << "==" << to_insert.chain_index << std::endl;
 		if (it->chain == 'a' && it->chain_index == to_insert.chain_index) {
-			// std::cout << "binarySearch(): found upper bound" << std::endl;
 			upper_bound = it;
 		}
 	}
@@ -117,5 +101,3 @@ size_t	calcAllowedComps(size_t nums) {
 	}
 	return comps;
 }
-
-

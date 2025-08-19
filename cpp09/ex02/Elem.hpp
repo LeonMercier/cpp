@@ -25,22 +25,13 @@ public:
 	T					value;
 	int					*comparisons;
 
+	Elem() = delete;
 	Elem(int first, int last, T value, int *comparisons) :
-		indices({first, last}), value(value), comparisons(comparisons) {
+		indices({first, last}), value(value), comparisons(comparisons) {}
+	Elem(const Elem &src) = default;
+	Elem &operator=(const Elem &src) = default;
+	~Elem() = default;
 
-	}
-	Elem(const Elem &src) : indices(src.indices), chain(src.chain),
-		chain_index(src.chain_index), value(src.value),
-		comparisons(src.comparisons) {
-	}
-	Elem &operator=(const Elem &src) {
-		indices = src.indices;
-		chain = src.chain;
-		chain_index = src.chain_index;
-		value = src.value;
-		comparisons = src.comparisons;
-		return *this;
-	}
 	bool operator<(const Elem &rhs) {
 		(*comparisons)++;
 		// std::cout << "Comparing" << std::endl; // for Milad tester

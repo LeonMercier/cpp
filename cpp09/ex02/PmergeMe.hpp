@@ -25,10 +25,6 @@
 
 #include "Elem.hpp"
 
-// TODO: 
-// for final product: 
-// 		- canonical orthodox form
-
 constexpr bool PRINTS = true;
 constexpr bool COMPS = false;
 
@@ -61,6 +57,11 @@ public:
 	int comparisons = 0;
 	Container orig;
 	std::vector<unsigned int> jnums;
+
+	PMergeMe<Container>() = default;
+	PMergeMe<Container>(const PMergeMe<Container> &source) = default;
+	PMergeMe<Container> &operator=(const PMergeMe<Container> &source) = default;
+	~PMergeMe<Container>() = default;
 
 	void	init(int count, char **strs, bool print);
 	void	miSort(unsigned int reclvl, unsigned int elemsize);
