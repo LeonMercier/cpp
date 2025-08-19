@@ -48,7 +48,8 @@ int	main(int argc, char **argv) {
 
 	} catch (std::exception &e) {
 		if (strcmp(e.what(), "stoul") == 0) {
-			std::cerr << "Error: could not convert input to integer" << std::endl;
+			std::cerr << "Error: could not convert input to integer";
+			std::cerr << std::endl;
 		} else {
 			std::cerr << e.what() << std::endl;
 		}
