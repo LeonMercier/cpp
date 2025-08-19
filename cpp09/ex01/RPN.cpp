@@ -74,5 +74,9 @@ void	RPN(std::string input) {
 			}
 		}
 	}
+	if (stack.size() == 0) {
+		throw (std::runtime_error("Error"));
+	} 
 	std::cout << stack.top() << std::endl;
+
 }
