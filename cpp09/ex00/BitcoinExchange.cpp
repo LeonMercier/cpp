@@ -60,14 +60,19 @@ void readRates(
 		}
 	}
 	// for (auto iter = rates.begin(); iter != rates.end(); iter++) {
-	// 	std::cout << iter->first << ": " << iter->second << std::endl;
+	// 	std::cout << std::put_time(std::localtime(&iter->first), "%Y-%m-%d") << ": " << iter->second << std::endl;
 	// }
 	file.close();
 }
 
 double getRate(std::map<std::time_t, double> &rates, std::time_t time) {
-	auto rate = rates.find(time);
 
+	// time is older than anything in DB
+	if (time < rates.begin()->first) {
+		return 0;
+	}
+
+	auto rate = rates.find(time);
 	// exact match
 	if (rate != rates.end()) {
 		return rate->second;
@@ -75,14 +80,10 @@ double getRate(std::map<std::time_t, double> &rates, std::time_t time) {
 
 	// nearest date
 	auto iter = rates.lower_bound(time);
-	if (iter == rates.begin()) {
-		return 0;
-	}
-	if (iter != rates.end()) {
+	if (iter != rates.begin()) { // probably never goes here
 		iter--;
-		return iter->second;
 	}
-	return 0;
+	return iter->second;
 }
 
 void	processAcc(std::map<std::time_t, double> &rates, std::string filename) {
