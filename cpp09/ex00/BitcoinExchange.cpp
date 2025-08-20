@@ -59,9 +59,6 @@ void readRates(
 			throw (std::runtime_error("bad date in csv file"));
 		}
 	}
-	// for (auto iter = rates.begin(); iter != rates.end(); iter++) {
-	// 	std::cout << std::put_time(std::localtime(&iter->first), "%Y-%m-%d") << ": " << iter->second << std::endl;
-	// }
 	file.close();
 }
 
